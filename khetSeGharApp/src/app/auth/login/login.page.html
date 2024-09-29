@@ -1,0 +1,159 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="background-container">
+    <div class="card border-0 align-items-center">
+      <img src="assets/sapiens%20(1).png" class="card-img-top w-75" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">Sign in to your account</h4>
+      </div>
+    </div>
+
+    <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Email</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Phone</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+        <form [formGroup]="loginData" class="ion-padding">
+          <ion-grid>
+            <ion-card class="signup-card" style="margin:-25px;border-radius: 25px ">
+              <ion-row>
+                <ion-col size="12">
+                  <label for="email" class="form-label" *ngIf="!validInput">Email or Contact number</label>
+                  <label for="email" class="form-label" *ngIf="validInput">Contact</label>
+                  <div class="input-group flex-nowrap">
+                    <span class="input-group-text"><ion-icon name="mail-outline" *ngIf="!validInput"></ion-icon> <ion-icon name="call-outline" *ngIf="validInput"></ion-icon></span>
+                    <input (keyup)="checkNumber()" type="text" class="form-control shadow-none" id="email" placeholder="name@domain.com" aria-label="Username" aria-describedby="addon-wrapping" formControlName="email" required>
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="loginData.get('email')?.invalid && loginData.get('email')?.touched && !validInput">
+                    Please enter a valid email
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="loginData.get('contact')?.invalid && loginData.get('contact')?.touched && validInput">
+                    Please enter a valid contact
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+                  <!--              <ion-input shape="round" fill="outline" labelPlacement="stacked" label="Password" color="favourite" placeholder="enter password" formControlName="password"  class="custom-input"></ion-input>-->
+                  <!--              <ion-note *ngIf="loginData.get('Password')?.invalid && loginData.get('Password')?.touched">-->
+                  <!--                <ion-note color="danger">Please enter a valid password</ion-note>-->
+                  <!--              </ion-note>-->
+                  <label for="password-login" class="form-label">Password</label>
+                  <div class="input-group flex-nowrap">
+                    <span class="input-group-text"><ion-icon name="key-outline"></ion-icon></span>
+                    <input class="form-control shadow-none" type="password" id="password-login" placeholder="••••••••" aria-label="password" aria-describedby="addon-wrapping" formControlName="password" required>
+                    <span id="icon-password-login" class="input-group-text" (click)="showHidePassword()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                  </svg>
+                </span>
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="loginData.get('password')?.invalid && loginData.get('password')?.touched">
+                    Please enter a valid password
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                      Remember
+                    </label>
+                    <div class="invalid-feedback">
+                      You must agree before submitting.
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col class="text-end">
+                  <a href="http://localhost:8100">
+                    Forgot Password?
+                  </a>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="12">
+                  <ion-button  (click)="emailLogin()" fill="solid" shape="round" expand="block" size="large" class="create custom-button" >
+                    sign in
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+
+              <p class="login-link"> Don’t have an account yet? <a routerLink="/signup">SignUp Here</a></p>
+            </ion-card>
+          </ion-grid>
+        </form>
+      </div>
+
+
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+        <form [formGroup]="loginData" class="ion-padding">
+          <ion-grid>
+            <ion-card class="signup-card" style="margin:-25px;border-radius: 25px ">
+              <ion-row>
+                <ion-col size="12">
+                  <label for="email" class="form-label">Contact</label>
+                  <div class="input-group flex-nowrap">
+                    <span class="input-group-text"><ion-icon name="call-outline"></ion-icon></span>
+                    <input (keyup)="sendOTPLogin()" type="text" class="form-control shadow-none" id="contact" placeholder="+91 xxxxxxxxxx" aria-label="Username" aria-describedby="addon-wrapping" formControlName="contact" required>
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="loginData.get('contact')?.invalid && loginData.get('contact')?.touched && validInput">
+                    Please enter a valid contact
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+                <label for="otp" class="form-label">OTP</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text"><ion-icon name="phone-portrait-outline"></ion-icon></span>
+                  <input type="text" class="form-control shadow-none" formControlName="otp" id="otp" placeholder="xxxxxx" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                      Remember
+                    </label>
+                    <div class="invalid-feedback">
+                      You must agree before submitting.
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col class="text-end">
+                  <a href="http://localhost:8100">
+                    Forgot Password?
+                  </a>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="12">
+                  <ion-button (click)="verifyOTP()" fill="solid" shape="round" expand="block" size="large" class="create custom-button" >
+                    sign in
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+
+              <p class="login-link"> Don’t have an account yet? <a routerLink="/signup">SignUp Here</a></p>
+            </ion-card>
+          </ion-grid>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

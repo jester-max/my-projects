@@ -1,0 +1,102 @@
+<!--<app-custome-dashboard></app-custome-dashboard>
+<nav>
+  <div class="logo">
+    <img src="assets/logo2_result-removebg-preview.png">
+  </div>
+  <div class="d-flex justify-content-center align-items-center w-50">
+    <div class="col-md-12">
+      <div class="form">
+        <input type="text" class="form-control form-input" placeholder="Search anything...">
+        <span class="left-pan">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div id="navbarNav">
+    <ul class="navbar-nav">
+&lt;!&ndash;      <li class="nav-item active">&ndash;&gt;
+&lt;!&ndash;        <a class="nav-link" href="#">Programs</a>&ndash;&gt;
+&lt;!&ndash;      </li>&ndash;&gt;
+&lt;!&ndash;      <li class="nav-item">&ndash;&gt;
+&lt;!&ndash;        <a class="nav-link" href="#">Users</a>&ndash;&gt;
+&lt;!&ndash;      </li>&ndash;&gt;
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact US</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link signIn" href="#">Sign-In</a>
+      </li>
+    </ul>
+  </div>
+  <span class="v-line"></span>
+  <button class="continue-services">Sign-Up</button>
+</nav>
+
+<section class="banner">
+  <div class="container hero-section">
+    <div class="hero-text">
+      <h1>A platform built for a<br>
+        new way of working</h1>
+      <p>What would you like to manage with monday.com Work OS?</p>
+      <button class="free-services">Try For Free</button>
+    </div>
+  </div>
+</section>
+
+
+<div class="container service-section">
+  <div class="row">
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" (change)="toggle($event)" id="erp" class="checkbox-input">
+      <label for="erp" class="card erp">
+        <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >
+        <h3 class="card-title">Monitoring</h3>
+        <p class="card-text">Collect metrics on visibility, monitor Droplet performance and receive alerts when problems arise in your infrastructure–at no additional cost.</p>
+        <a class="card-link" href="#">Learn more</a>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" (change)="toggle($event)" id="crm" class="checkbox-input">
+      <label for="crm" class="card crm">
+        <img class="card-icon" src="https://image.ibb.co/jfmg6R/cloud_firewalls.png" alt="monitoring" >
+        <h3 class="card-title">Cloud Firewalls</h3>
+        <p class="card-text">Perfect for both staging and production deployments, cloud firewalls let you easily secure your infrastructure and define what services are visible on your Droplets–at no additional cost.</p>
+        <a class="card-link" href="#">Learn more</a>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" (change)="toggle($event)" id="payroll" class="checkbox-input">
+      <label for="payroll" class="card payroll">
+        <img class="card-icon" src="https://image.ibb.co/fcnzt6/team_management.png" alt="team management" >
+        <h3 class="card-title">Team Management</h3>
+        <p class="card-text">With Digital Teams you can invite and manage users, ensure security with two-factor authentication, and control your resource spend with centralized billing–at no additional cost.</p>
+        <a class="card-link" href="#">Learn more</a>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" (change)="toggle($event)" id="benefits" class="checkbox-input">
+      <label for="benefits" class="card benefits">
+        <img class="card-icon" src="https://image.ibb.co/evyiLm/backups.png" alt="monitoring" >
+        <h3 class="card-title">Backups</h3>
+        <p class="card-text">Backups run automatically on your Droplets each week and are stored for four weeks–add 20% of monthly Droplet cost.</p>
+        <a class="card-link" href="#">Learn more</a>
+      </label>
+    </div>
+  </div>
+  <button [class.continue-services-active]="isChecheck" class="continue-services erp crm payroll benefits">Continue
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+    </svg>
+  </button>
+</div>
+
+<section class="banner">
+  <img alt="HP asset white bg" class="jsx-4212101279 main-image regular-asset-image" src="https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP_tests/HP_asset_white_bg.png" style="width: 100%;">
+</section>-->
+
+
+<router-outlet></router-outlet>
+<ng-toast></ng-toast>

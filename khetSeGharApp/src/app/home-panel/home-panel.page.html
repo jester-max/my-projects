@@ -1,0 +1,145 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+  <div class="p-3 d-flex gap-5 align-items-center justify-content-between position-relative z-1">
+    <div class="zip-status w-75">
+      <p class="m-0 rounded-pill text-center px-2" [ngClass]="zipCodeDetails.available ? 'link-success' : 'link-un-success'">{{zipCodeDetails.verify}}</p>
+      <div class="m-0 d-flex align-items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+          <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+          <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+        </svg>
+        <p class="m-0 zip-address" id="open-modal">
+          <span class="fw-bold fs-6">
+            {{zipCodeDetails.zipCode}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+          </span>
+          <br>
+          {{zipCodeDetails.block}}, {{zipCodeDetails.district}}, {{zipCodeDetails.state}}
+        </p>
+      </div>
+    </div>
+    <div class="profile" routerLink="/user-profile">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+      </svg>
+    </div>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <div class="bg"></div>
+  <swiper-container [slidesPerView]="1.2"
+                    [loop]="true"
+                    [centeredSlides]="true"
+                    [spaceBetween]="1"
+                    initial-slide="1"
+                    autoplay="true"
+                    pager="true"
+                    lazyLoading="true"
+                    [pagination]="{clickable:true, dynamicBullets:true}">
+    <swiper-slide>
+      <div class="card border-0 m-2 mb-5 z-1 slider">
+        <img src="assets/green_fruits.jpeg" class="slider-img img-fluid rounded-start" width="200">
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="card border-0 m-2 mb-5 z-1 slider">
+        <img src="assets/no-cooking.png" class="slider-img img-fluid rounded-start" width="200">
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="card border-0 m-2 mb-5 z-1 slider">
+        <img src="assets/seasonal-fruits.png" class="slider-img img-fluid rounded-start" width="200">
+      </div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="card border-0 m-2 mb-5 z-1 slider">
+        <img src="assets/vegetable.png" class="slider-img img-fluid rounded-start" width="200">
+      </div>
+    </swiper-slide>
+  </swiper-container>
+
+  <ion-modal #modal [isOpen]="!zipCodeDetails.available" trigger="open-modal" [initialBreakpoint]="0.4"
+             [backdropDismiss]="false" [breakpoints]="[0.5, 0.5, 0.7]"
+             handleBehavior="cycle">
+    <ng-template>
+      <ion-content>
+        <ul class="circles">
+          <li></li>
+          <li></li>
+        </ul>
+        <div class="row g-3 text-center p-3 modal-contant">
+          <div class="col-md-12 mb-1 modal-head ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-mailbox2-flag" viewBox="0 0 16 16">
+              <path d="M10.5 8.5V3.707l.854-.853A.5.5 0 0 0 11.5 2.5v-2A.5.5 0 0 0 11 0H9.5a.5.5 0 0 0-.5.5v8z"/>
+              <path d="M4 3h4v1H6.646A4 4 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3V3a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4m.585 4.157C4.836 7.264 5 7.334 5 7a1 1 0 0 0-2 0c0 .334.164.264.415.157C3.58 7.087 3.782 7 4 7s.42.086.585.157"/>
+            </svg>
+            <h2 class="m-0">Check Whether We Deliver To You</h2>
+          </div>
+          <div class="col-md-12">
+            <div class="input-group has-validation">
+              <span class="input-group-text"><ion-icon name="search-outline"></ion-icon></span>
+              <input placeholder="Enter Your Zip Code" id="zip" type="number" min="6" max="6" class="form-control shadow-none" [(ngModel)]="pinCode" #pinCodeInput="ngModel" required>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button (click)="checkLocation()" class="btn btn-primary w-75 rounded-pill position-relative" type="submit">Check</button>
+          </div>
+          <div *ngIf="pinCodeInput.invalid && (pinCodeInput.dirty || pinCodeInput.touched)" class="text-black text-sm mt-2">
+            <div *ngIf="pinCodeInput.errors?.['required']">
+              ZipCode is required to search.
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <div class="card border-0 m-3" style="max-width: 540px;">
+    <div class="d-flex align-items-center justify-content-evenly w-100">
+      <div class="bucket-img">
+        <img src="assets/wicker-basket-with-vegetables-isolated-white-background-vector-illustration_338371-901-Photoroom.png" width="180" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="bucket-body">
+        <div class="card-body">
+          <h5 class="card-title mt-0 fw-bold">Shop Organic</h5>
+          <p class="card-text mb-2">Nourish your body with nature's finest!</p>
+          <button class="btn btn-primary w-75 rounded-pill" type="submit">Shop Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="bucket-head pb-0 pt-0 p-3 text-center">
+    <h4 class="m-0 fw-bold">Boxes</h4>
+  </div>
+  <div class="overflow-auto table-container">
+    <main class="main bd-grid p-0 row p-0 m-3">
+
+      <div *ngFor="let box of cardsData; let i = index" class="col-md-3 p-0 w-100">
+        <article class="card h-100" [routerLink]="['/product-details']" [queryParams]="{id:i}">
+          <div class="card__img card__precis">
+            <img [src]="box.image" width="75px" class="card-img mt-2" alt="...">
+          </div>
+          <div class="card__precis p-2">
+            <div>
+              <span class="card__preci card__preci--before">{{box?.header}}</span>
+              <span class="card__preci card__preci--now">{{box?.description}}</span>
+              <span class="card__preci card__preci--now"></span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </main>
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,209 @@
+<div class="antialiased bg-gray-50 dark:bg-gray-900">
+
+  <main class="p-4 md:ml-64 h-auto pt-20">
+<div class="w-full h-screen bg-cover  rounded-lg" style="background-image: url('assets/images/pattern-background.svg')" *ngIf="(adminDashboardService.adminDetails$ | async) as a ">
+  <div class="absolute w-1/2 top-60 mt-16 flex justify-between">
+    <div class="flex flex-col" >
+    <span >{{a.data.firstName |titlecase}} {{a.data.lastName | titlecase}}</span>
+    <span >{{a.data.address.village | titlecase}}, {{a.data.address.district | titlecase}}, {{a.data.address.zipCode | titlecase}}, {{a.data.address.state | titlecase}}</span>
+
+    </div>
+    <div class="flex w-40">
+      <button type="button" id="updateUserButton" data-modal-target="updateUserModal" data-modal-toggle="updateUserModal" class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z" clip-rule="evenodd"/>
+        </svg>
+
+        Edit Profile
+      </button>
+    </div>
+
+
+    <!--  update profile modal-->
+    <div id="updateUserModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          <!-- Modal header -->
+          <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Update Profile
+            </h3>
+            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="updateUserModal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <form [formGroup]="adminUpdate">
+            <div class="grid gap-4 mb-4 sm:grid-cols-2">
+              <div class="col-span-2">
+                <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                <input type="text" (input)="clearError('firstName')" formControlName="firstName" id="firstName"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('firstName')"
+                >
+                  Please enter a valid first name.
+                </p>
+              </div>
+              <div class="col-span-2" >
+                <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                <input type="text" (input)="clearError('lastName')" formControlName="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('lastName')"
+                >
+                  Please enter a valid last name.
+                </p>
+              </div>
+              <div >
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+                <input type="text" (input)="clearError('city')" formControlName="city" id="city"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p class="mt-2 text-pink-600 text-sm" *ngIf="isFieldInvalid('city')">
+                  Please enter a valid city.
+                </p>
+              </div>
+              <div>
+                <label for="village" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Village</label>
+                <input type="text" (input)="clearError('village')" formControlName="village" id="village"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('village')"
+                >
+                  Please enter a valid village.
+                </p>
+              </div>
+              <div >
+                <label for="region" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region</label>
+                <input type="text" (input)="clearError('region')" formControlName="region" id="region"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('region')"
+                >
+                  Please enter a valid region.
+                </p>
+              </div>
+              <div >
+                <label for="district" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">District</label>
+                <input type="text" (input)="clearError('district')" formControlName="district" id="district"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('district')"
+                >
+                  Please enter a valid district.
+                </p>
+              </div>
+              <div >
+                <label for="state" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">State</label>
+                <input type="text" (input)="clearError('state')" formControlName="state" id="state"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('state')"
+                >
+                  Please enter a valid state.
+                </p>
+              </div>
+              <div >
+                <label for="zipCode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip-Code</label>
+                <input type="text" (input)="clearError('zipCode')" formControlName="zipCode" id="zipCode"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('zipCode')"
+                >
+                  Please enter a valid zipCode.
+                </p>
+              </div>
+              <div class="col-span-4">
+                <label for="streetAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">streetAddress</label>
+                <input type="text" (input)="clearError('streetAddress')" formControlName="streetAddress" id="streetAddress"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('streetAddress')"
+                >
+                  Please enter a valid street address.
+                </p>
+              </div>
+              <div class="col-span-4">
+                <label for="contact" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact</label>
+                <input type="number" (input)="clearError('contact')"  formControlName="contact" id="contact" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                <p
+                  class="mt-2 text-pink-600 text-sm"
+                  *ngIf="isFieldInvalid('contact')"
+                >
+                  Please enter a valid contact.
+                </p>
+              </div>
+
+            </div>
+            <div class="flex items-center space-x-4">
+              <button (click)="update()" type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="bg-gradient-to-r from-cyan-500 to-blue-500 w-1/2 h-32 rounded-md absolute mt-8 p-16">
+
+    <img class="float-left w-24 h-24 rounded-full absolute shadow-xl border-2 border-solid border-cyan-600 ring ring-offset-8 ring-white" onError="this.onerror=null;this.src='assets/images/avatar-1577909_1280.png'" src="{{a.data.imageUrl }}" alt="profile-image">
+
+    <div class="w-full flex flex-col h-36 relative top-56">
+
+      <div class="text-base font-medium w-1/2 flex flex-col gap-y-8">
+        <div class="flex items-center justify-between">
+          <div class="flex">
+            <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z" clip-rule="evenodd"/>
+            </svg>
+
+            <span class="text-gray-400"><b>Status:</b></span>
+          </div>
+         <span class="value">{{a.data.online | titlecase}}</span>
+        </div>
+        <div class="flex  items-center justify-between ">
+          <div class="flex">
+            <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z" clip-rule="evenodd"/>
+            </svg>
+
+            <span class="text-gray-400"><b>Role:</b></span>
+          </div>
+          <span class="value">{{a.data.role | titlecase}}</span>
+        </div>
+        <div class="flex  items-center justify-between">
+          <div class="flex">
+            <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
+              <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
+            </svg>
+
+            <span class="text-gray-400"><b>Email:</b></span>
+          </div>
+          <span class="value">{{a.data.workEmail}}</span>
+        </div>
+        <div class="flex items-center justify-between ">
+          <div class="flex">
+            <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+            </svg>
+
+            <span class="text-gray-400"><b>Contact:</b></span>
+          </div>
+            <span class="value">{{a.data.contact}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+  </main>
+</div>

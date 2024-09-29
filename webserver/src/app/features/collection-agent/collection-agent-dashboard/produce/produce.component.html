@@ -1,0 +1,220 @@
+<!--
+&lt;!&ndash;
+<div class="text-center">
+
+  <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8">
+
+
+    &lt;!&ndash; Serial Number Column &ndash;&gt;
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{ element.createdAt }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productId">
+      <th mat-header-cell *matHeaderCellDef> ProductId </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productId }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef> productName </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.productName }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> description </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.description }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> category </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.category }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> price </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.price }} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.quantity }} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef> unit </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.unit }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="organic">
+      <th mat-header-cell *matHeaderCellDef> organic </th>
+      <td mat-cell *matCellDef="let element"> {{ element.productDetails.organic }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> status </th>
+      <td mat-cell *matCellDef="let element"> {{ element.status }} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+&ndash;&gt;
+
+
+<table class="custom-table">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Category</th>
+    <th>Quantity</th>
+    <th>Unit</th>
+    <th>Price</th>
+    <th>Organic</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of processData; let i = index">
+    <td>{{ item.createdAt }}</td>
+    <td>{{ item.productId }}</td>
+    <td>{{ item.productDetails.productName }}</td>
+    <td>{{ item.productDetails.category }}</td>
+    <td><input type="number" [(ngModel)]="item.productDetails.quantity" [disabled]="!item.editing"></td>
+    <td>{{ item.productDetails.unit }}</td>
+    <td><input type="number" [(ngModel)]="item.productDetails.price" [disabled]="!item.editing"></td>
+    <td>{{ item.productDetails.organic }}</td>
+    <td>
+      <select [(ngModel)]="item.status" [disabled]="!item.editing">
+        <option *ngIf="item.status === 'Rejected'" value="Rejected" selected>Rejected</option>
+        <option *ngIf="item.status === 'Approved'" value="Approved" selected>Approved</option>
+        <option *ngIf="item.status !== 'Rejected' && item.status !== 'Approved'" value="{{ item.status }}" selected>{{ item.status }}</option>
+        <option value="Rejected">Reject</option>
+        <option value="Approved">Approved</option>
+      </select>
+    </td>
+    <td>
+      <button (click)="toggleEdit(i)">
+        <i class="fas fa-edit"></i> &lt;!&ndash; Edit icon &ndash;&gt;
+      </button>
+      <button (click)="deleteItem(i)">
+        <i class="fas fa-trash-alt"></i> &lt;!&ndash; Delete icon &ndash;&gt;
+      </button>
+    </td>
+  </tr>
+  </tbody>
+  <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+
+</table>
+-->
+<div>
+  <ng-template #table >
+    <p class="ProductData">No data available !</p>
+  </ng-template>
+</div>
+
+<table class="custom-table" *ngIf="isTableDisabled; else table">
+
+
+  <thead>
+
+    <tr class="header-section-table">
+    <th  colspan="10">Product Verification Section</th>
+   </tr>
+
+  <tr>
+
+    <th>Date</th>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Category</th>
+    <th>Quantity</th>
+    <th>Unit</th>
+    <th>Price</th>
+    <th>Organic</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of processData; let i = index" >
+    <td>{{ item.createdAt }}</td>
+    <td>{{ item.productId }}</td>
+    <td>{{ item.productDetails.productName }}</td>
+    <td>{{ item.productDetails.category }}</td>
+    <td>{{ item.productDetails.quantity }}</td>
+    <td>{{ item.productDetails.unit }}</td>
+    <td>{{ item.productDetails.price }}</td>
+    <td>{{ item.productDetails.organic }}</td>
+    <td>{{ item.status }}</td>
+    <td>
+      <button (click)="openUpdateForm(item)">
+        <i class="fas fa-edit"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+  <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+
+</table>
+
+
+
+<!-- Update Product Form (Modal-like) -->
+<div *ngIf="isUpdateFormOpen" class="modal-overlay">
+  <div class="modal-content">
+    <span class="modal-close" (click)="closeUpdateForm()">&times;</span>
+    <h3>Update Product</h3>
+
+    <form (submit)="confirmUpdate()">
+      <label for="productName">Name:</label>
+
+      <input type="text" id="productName" name="productName" [(ngModel)]="selectedProduct.productDetails.productName" required readonly>
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" [(ngModel)]="selectedProduct.productDetails.category" required readonly>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" [(ngModel)]="selectedProduct.productDetails.quantity" required>
+      <label for="unit">Unit:</label>
+      <input type="text" id="unit" name="unit" [(ngModel)]="selectedProduct.productDetails.unit" required  readonly>
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" [(ngModel)]="selectedProduct.productDetails.price" required>
+      <label for="organic">Organic:</label>
+      <input type="text" id="organic" name="organic" [(ngModel)]="selectedProduct.productDetails.organic" required readonly>
+
+
+      <label for="status">Status:</label>
+      <select id="status" name="status" [(ngModel)]="selectedProduct.status"   (change)="checkDistributionCenterStatus()" required>
+        <option *ngIf="selectedProduct.status === 'approved'" value="approved" selected>approved</option>
+        <option *ngIf="selectedProduct.status !== 'rejected' && selectedProduct.status !== 'approved'" [value]="selectedProduct.status" selected>{{ selectedProduct.status }}</option>
+        <option value="rejected">rejected</option>
+        <option value="approved">approved</option>
+      </select>
+
+
+      <!-- Dropdown for selecting distribution center -->
+      <label for="distributionCenter">Select Distribution Center:</label>
+      <select id="distributionCenter" name="distributionCenter" [(ngModel)]="selectedDistributionCenter" [disabled]="!isDistributionCenterEnabled">
+        <option value="" disabled>Select Distribution Center</option>
+        <option *ngFor="let center of distributionCenterData" [ngValue]="center">{{ center.centerName }}</option>
+      </select>
+
+      <button class="product" type="submit">Update</button>
+      <button type="button" (click)="closeUpdateForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+

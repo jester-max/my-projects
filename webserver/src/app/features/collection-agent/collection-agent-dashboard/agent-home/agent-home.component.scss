@@ -1,0 +1,103 @@
+.static-card {
+  margin-top: 20px;
+}
+
+.static-card .card-title {
+  text-align: center;
+}
+
+.static-card .card-text {
+  text-align: center;
+}
+#card{
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  padding: 8px;
+  position: fixed;
+  top: 115px;
+  //bottom: 50px;
+  left:30%;
+  //display: flex;
+  //justify-content: flex-start;
+  color: black;
+  z-index: 1000;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+}
+
+#card2{
+
+  width: 100%; /* Set the width to 100% to make the card fill the entire column */
+  max-width: 260px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the card horizontally */
+  padding: 8px;
+  position: fixed;
+  top: 115px;
+  left:55%;
+  //display: flex;
+  //justify-content: flex-start;
+  color: black;
+  z-index: 1000;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+
+}
+
+
+.small-icon {
+  width: 60px; /* Adjust the width as needed */
+  float: left;
+  margin-left: 0px; /* Add margin for spacing */
+}
+
+
+.dates{
+  margin-left: 70px;
+  font-weight: bold;
+}
+
+
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 280px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+  //height: 300px; /* Height of the scrollable area */
+  //overflow-y: auto;
+  //position: relative;
+}
+
+.mat-header-row.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10; /* Ensure the header row is on top */
+  background-color: #ffffff; /* Solid background color */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
+}
+
+.mat-header-cell.sticky {
+  background-color: #ffffff; /* Ensure header cells have a background color */
+  position: sticky;
+  top: 0;
+  z-index: 11; /* Higher than the header row */
+}
+
+.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: bold;
+  font-size: medium;
+  background-color: #ffffff; /* Ensure header cells have a background color */
+  position: sticky; /* Make sure each header cell is sticky */
+  top: 0; /* Stick to the top */
+  z-index: 11; /* Higher than the header row */
+}

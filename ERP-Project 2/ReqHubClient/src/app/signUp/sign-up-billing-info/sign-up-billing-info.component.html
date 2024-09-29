@@ -1,0 +1,134 @@
+<body>
+<div class="login-root">
+  <div class="side-img">
+    <div class="field padding-bottom--24">
+      <!--      <input class="w-50" type="submit" name="submit" value="Sign in existing Account">-->
+      <h2>Secure verification</h2>
+      <img class="O1nZl" src="assets/undraw_mobile_encryption_re_yw3o.svg" alt="Background" data-testid="right-side-asset">
+    </div>
+  </div>
+  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
+            <h3 class="padding-bottom--15">Sign Up For HPU</h3>
+            <h5 class="padding-bottom--15">Billing information</h5>
+            <form id="stripe-login" #signUp="ngForm">
+              <div class="field padding-bottom--24">
+                <label for="cardNumber">Credit or Debit Card Number</label>
+                <span>Used for account recovery and some administrative functions</span>
+                <input ngModel id="cardNumber" type="email" name="cardNumber">
+              </div>
+              <div class="d-flex gap-4">
+              <div class="field padding-bottom--24">
+                <label for="month">Month</label>
+                <span>Enter the month of your card in your card bottom</span>
+                <input ngModel id="month" type="text" name="month">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="year">Year</label>
+                <span>Enter the year of your card in your card bottom</span>
+                <input ngModel id="year" type="text" name="year">
+              </div>
+              </div>
+
+              <div class="d-flex gap-4">
+                <div class="field padding-bottom--24">
+                  <label for="cvv/cvc">CVV / CVC</label>
+                  <span>Enter the CVV/CVC number of your card in your card back</span>
+                  <input ngModel id="cvv/cvc" type="text" name="cvv/cvc">
+                </div>
+                <div class="field padding-bottom--24">
+                  <label for="year">Year</label>
+                  <span>Use your organisation name for the verify your business.</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                    <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-credit-card-2-front ms-2" viewBox="0 0 16 16">
+                    <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+                    <path d="M2 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-wallet ms-2" viewBox="0 0 16 16">
+                    <path d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a1.99 1.99 0 0 1-1-.268M1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="field padding-bottom--24">
+                <label>Billing Address</label>
+                <span>Enter the address of billing info</span>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="isNewAddressFalse" id="flexRadioDefault1" checked>
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Use my contact address
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" [(ngModel)]="isNewAddress" value="{{true}}" type="radio" name="isNewAddressTrue" id="flexRadioDefault2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Use new
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="isNewAddress">
+              <div class="field padding-bottom--24">
+                <label for="fullName">Full Name</label>
+                <span>Use a you full name with middle and last name.</span>
+                <input ngModel id="fullName" type="email" name="fullName">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="organizationName">Organisation Name</label>
+                <span>Use your organisation name for the verify your business.</span>
+                <input ngModel id="organizationName" type="text" name="organizationName">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="organizationGST">Organisation GSTIN</label>
+                <span>Use your organisation GST for the verify your business</span>
+                <input ngModel id="organizationGST" type="text" name="organizationGST">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="mobileNumber">Phone Number</label>
+                <span>Use you mobile and phone number as per your requirement</span>
+                <input ngModel id="mobileNumber" type="email" name="mobileNumber">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="country">Country</label>
+                <span>Give the country name where your organization is established.</span>
+                <input ngModel id="country" type="text" name="country">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="state">State</label>
+                <span>Give the state name where your organization is connected.</span>
+                <input ngModel id="state" type="text" name="state">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="city">City</label>
+                <span>Give the city name where your organization is.</span>
+                <input ngModel id="city" type="email" name="city">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="pin">PIN Code</label>
+                <span>Choose a name for your account. You can change this name in your account settings after you sign up.</span>
+                <input ngModel id="pin" type="text" name="pin">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="landmark">Landmark</label>
+                <span>Fill your full of the address like apartment, unit, building, area etc.</span>
+                <!--                <input ngModel id="landmark" type="text" name="landmark">-->
+                <textarea ngModel type="text" id="landmark" name="landmark"></textarea>
+              </div>
+              </div>
+              <div class="field padding-bottom--24">
+                <input type="submit" name="submit" value="Verify and continue">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+

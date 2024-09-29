@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "623571951502",
+    "project_id": "hp-inventory-72cd3",
+    "storage_bucket": "hp-inventory-72cd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623571951502:android:f2397e3cc1d918f3308edf",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3Q2OePcBVoMXoRzMrfPTSzWwAdXIBuT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

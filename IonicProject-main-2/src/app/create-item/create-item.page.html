@@ -1,0 +1,396 @@
+<ion-header [translucent]="true" *ngIf="visiblity === ''">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" [routerLink]="['/get-item']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Item</ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="CreateItem(item.value)">
+        <ion-label>SAVE</ion-label>
+      </ion-button>
+      <ion-button shape="round" (click)="startScan('item')">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header [translucent]="true" *ngIf="visiblity === 'hidden'">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button shape="round" color="danger" (click)="stopScan()">
+        <ion-label>STOP</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Scanning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [style.visibility]="visiblity" [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+    <form #item='ngForm' class="was-validated" novalidate>
+      <ion-card>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-12 d-flex ion-justify-content-between">
+              <div class="form-check">
+                <input type="radio" class="form-check-input " name="type" value="RAWMATERIAL" [(ngModel)]="PreItemData.type" id="rawmaterials" aria-describedby="invalidCheck3Feedback" required>
+                <label class="form-label m-0" for="rawmaterials">RAW MATERIALS</label>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please check a input or give the correct.
+                </div>
+
+                <input type="radio" class="form-check-input " name="type" value="TOOL" [(ngModel)]="PreItemData.type" id="tool" aria-describedby="invalidCheck3Feedback" required>
+                <label class="form-label m-0" for="tool">TOOL</label>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please check a input or give the correct.
+                </div>
+              </div>
+
+              <div class="form-check">
+                <ion-thumbnail slot="start">
+                  <img id="open-custom-dialog-get-item-img" alt="Silhouette of mountains" [src]="image!==''?image:'https://ionicframework.com/docs/img/demos/thumbnail.svg'" />
+                  <ion-modal id="example-modal-img" #modal trigger="open-custom-dialog-get-item-img">
+                    <ng-template>
+                      <div class="wrapper">
+                        <ion-toolbar>
+                          <ion-title>Item Images</ion-title>
+                          <ion-buttons slot="end">
+                            <ion-button (click)="modal.dismiss()">Close</ion-button>
+                          </ion-buttons>
+                        </ion-toolbar>
+                        <div class="d-block pre-img-text" *ngIf="!image">
+                          <p>You can add attachments or images.</p>
+                          <ion-button shape="round" color="secondary" fill="outline" (click)="takePicture()">Add Images</ion-button>
+                        </div>
+                        <div class="d-grid ion-justify-content-center" *ngIf="image">
+                          <img src="{{image}}" width="280px">
+                        </div>
+                        <ion-footer *ngIf="image" class="position-absolute bottom-0">
+                          <ion-toolbar>
+                            <ion-buttons class="d-flex ion-justify-content-around after-img-bottom">
+                              <ion-button shape="round" (click)="takePicture()">
+                                <ion-icon name="repeat"></ion-icon>
+                              </ion-button>
+                              <ion-button shape="round" (click)="image=''">
+                                <ion-icon color="danger" name="trash"></ion-icon>
+                              </ion-button>
+                              <ion-button shape="round" (click)="modal.dismiss()">
+                                <ion-icon color="success" name="checkmark-done-outline"></ion-icon>
+                              </ion-button>
+                            </ion-buttons>
+                          </ion-toolbar>
+                        </ion-footer>
+                      </div>
+                    </ng-template>
+                  </ion-modal>
+                </ion-thumbnail>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Item Name</label>
+              <input type="text" class="form-control" id="validationCustom01" name="productName" [(ngModel)]="PreItemData.productName" value="Sheet" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-location" class="form-label">Location</label>
+              <input inputmode="none" inputmode="none" type="text" class="form-control " id="popover-button-location" name="location" [(ngModel)]="PreItemData.location" value="Store" required>
+              <ion-popover class="w-0" trigger="popover-button-location" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of location;" (click)="handleLocation(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <!--<div class="col-12">
+              <div class="form-check">
+                <input checked class="form-check-input " type="checkbox" name="returnable" id="returnable" aria-describedby="invalidCheck3Feedback" required>
+                <label class="form-label m-0" for="returnable">
+                  Returnable Item
+                </label>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please check a input or give the correct.
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Product Details</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+            </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Detailed about purchase item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" id="date" name="date" [(ngModel)]="PreItemData.date" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="specification" class="form-label">Specifications</label>
+              <input type="text" class="form-control " id="specification" name="productSpecification" [(ngModel)]="PreItemData.productSpecification" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-unit" class="form-label">Unit</label>
+              <input inputmode="none" type="text" class="form-control" id="popover-button-unit" name="unit" [(ngModel)]="PreItemData.unit" required>
+              <ion-popover class="w-0" trigger="popover-button-unit" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of unit;" (click)="handleunit(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="rate" class="form-label">Rate</label>
+              <input type="number" class="form-control " id="rate" name="rate" [(ngModel)]="PreItemData.rate" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="quantity" class="form-label">Quantity</label>
+              <input type="number" class="form-control " id="quantity" name="productQuantity" [(ngModel)]="PreItemData.productQuantity" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="CGST" class="form-label">CGST</label>
+              <input type="number" class="form-control " id="CGST" name="CGST" [(ngModel)]="PreItemData.CGST" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="SGST" class="form-label">SGST</label>
+              <input type="number" class="form-control " id="SGST" name="SGST" [(ngModel)]="PreItemData.SGST" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="IGST" class="form-label">IGST</label>
+              <input type="number" class="form-control " id="IGST" name="IGST" [(ngModel)]="PreItemData.IGST" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="limit" class="form-label">Limit</label>
+              <input type="number" class="form-control " id="limit" name="productLimit" [(ngModel)]="PreItemData.productLimit" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <!--<div class="col-md-4">
+              <label for="purchaseBy" class="form-label">Purchase By</label>
+              <input type="text" class="form-control" id="purchaseBy" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="receivedBy" class="form-label">Received By</label>
+              <input type="text" class="form-control" id="receivedBy" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>-->
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Vendor Info</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+          </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Vendor information of purchase the item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3" *ngFor="let info of PreItemData.invoiceInfo">
+            <div class="col-md-4">
+              <label for="open-modal-partyName" class="form-label">Vendor Name</label>
+              <input inputmode="none" type="text" class="form-control" id="open-modal-partyName" name="partyName" [(ngModel)]="info.partyName" required>
+              <ion-modal #modal trigger="open-modal-partyName" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchItem()" [(ngModel)]="customerText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredData;" (click)="handlepartyName(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.venderName }}</h2>
+                          <p>{{i.venderGST}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="invoiceId" class="form-label">Invoice ID</label>
+              <input type="text" class="form-control" id="invoiceId" name="invoiceId" [(ngModel)]="info.invoiceId" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="invoiceNo" class="form-label">Invoice No</label>
+              <input type="text" class="form-control " id="invoiceNo" name="invoiceNum" [(ngModel)]="info.invoiceNum" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Other</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+        </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Other info of purchase item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="note" class="form-label">Note</label>
+              <textarea type="text" class="form-control " id="note" name="note" [(ngModel)]="PreItemData.note" required></textarea>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="setOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>

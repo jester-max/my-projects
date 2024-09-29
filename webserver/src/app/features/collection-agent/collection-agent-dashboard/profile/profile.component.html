@@ -1,0 +1,40 @@
+
+<!--<div class="profile-card">
+  <img class="profile-image" src="{{ userData.image }}" alt="TrieUser Image">
+
+  <div class="profile-info">
+    <h1>{{ userData.firstName }} {{ userData.lastName }}</h1>
+
+    <div>
+      <label class="label">Email</label>
+      <h2 class="custom-heading">{{userData?.email}}</h2>
+    </div>
+
+    <label>Phone</label>{{ userData.contact}}
+
+  </div>
+
+  <button class="logout-button" (click)="logout()">Logout</button>
+</div>-->
+
+<div class="profile-card">
+  <div class="profile-image-container">
+    <img class="profile-image" src="{{ userData.image }}" alt="TrieUser Image">
+  </div>
+
+  <div class="profile-info">
+    <h1>{{ userData.firstName }} {{ userData.lastName }}</h1>
+
+    <div class="info-group">
+      <label class="label">Email:</label>
+      <span class="info">{{ userData?.email }}</span>
+    </div>
+
+    <div class="info-group">
+      <label class="label">Phone:</label>
+      <span class="info">{{ userData.contact }}</span>
+    </div>
+
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+</div>

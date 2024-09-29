@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+ul li{
+  list-style: none;
+  height: 20px;
+  font-family: Montserrat, sans-serif;
+}
+
+
+.profile p ,h4, h6{
+  font-family: Montserrat, sans-serif;
+}
+
+.profile p{
+  font-size: 12px;
+}
+
+.profile h5, .profile h6{
+  font-size: 16px;
+}

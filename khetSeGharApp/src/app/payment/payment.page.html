@@ -1,0 +1,48 @@
+<ion-header [translucent]="true" xmlns="http://www.w3.org/1999/html">
+  <ion-toolbar>
+    <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+      <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start"></ion-back-button>
+      <ion-title>Payment</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <div class="bg"></div>
+
+    <ion-card style="border-radius: 10px" (click)="selectPaymentMethod('COD')" [class.selected]="paymentMethod === 'COD'">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto">
+            <div class="color-overlay">
+            <img src="assets/cash-on-delivery_2363248.png" height="25px" width="25px" >
+            </div>
+          </ion-col>
+          <h5 style="color: #0c0c0c" class="fw-bold sc-ion-label-md">Cash on Delivery</h5>
+        </ion-row>
+        <p class="font1">Delivery to home</p>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card style="border-radius: 10px">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto">
+            <img src="assets/value_1435952.png" height="25px" width="25px" >
+
+          </ion-col>
+          <h5 style="color: #0c0c0c" class="fw-bold sc-ion-label-md">UPI</h5>
+        </ion-row>
+        <p class="font">This time UPI service is not available...</p>
+      </ion-grid>
+    </ion-card>
+  </ion-grid>
+
+
+  <ion-row class="ion-justify-content-center" >
+    <ion-col size="6" class="ion-text-center">
+      <button  type="button" [routerLink]="['/select-box-size']" [queryParams]="{paymentMethod:paymentMethod}" class="btn btn-primary rounded-pill w-100 fw-bold">NEXT</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

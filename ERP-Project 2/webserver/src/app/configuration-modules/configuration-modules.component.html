@@ -1,0 +1,398 @@
+<div class="window">
+  <header class="window-header">
+    <nav class="navigation">
+      <div class="navigation-top">
+        <a class="navigation-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 4L21 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M19 13V19.4C19 19.7314 18.7314 20 18.4 20H5.6C5.26863 20 5 19.7314 5 19.4V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="navigation-item-title">Dashboard</span>
+        </a>
+        <a class="navigation-item active" *ngFor="let services of serviceData">
+          <img *ngIf="services.serviceName === 'ERP'" src="assets/erp.jpeg" style="width: 30px;">
+          <img *ngIf="services.serviceName === 'CRM'" src="assets/crm.png" style="width: 30px;">
+          <img *ngIf="services.serviceName === 'BENEFITS'" src="assets/benifit.png" style="width: 30px;">
+          <img *ngIf="services.serviceName === 'PAYROLL'" src="assets/payrool.png" style="width: 30px;">
+          <span class="navigation-item-title">{{services.serviceName}}</span>
+        </a>
+        <a   class="navigation-item">
+          <img src="assets/crm.png" style="width: 30px;">
+          <span class="navigation-item-title">CRM</span>
+
+        </a>
+        <a   class="navigation-item">
+          <img src="assets/benifit.png" style="width: 30px;">
+          <span class="navigation-item-title">Benefits</span>
+
+        </a>
+        <a   class="navigation-item navigation-item--notification">
+          <img src="assets/payrool.png" style="width: 30px;">
+          <span class="navigation-item-title">Payroll</span>
+
+        </a>
+      </div>
+      <div class="navigation-bottom">
+        <a   class="navigation-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M19.6224 10.3954L18.5247 7.7448L20 6L18 4L16.2647 5.48295L13.5578 4.36974L12.9353 2H10.981L10.3491 4.40113L7.70441 5.51596L6 4L4 6L5.45337 7.78885L4.3725 10.4463L2 11V13L4.40111 13.6555L5.51575 16.2997L4 18L6 20L7.79116 18.5403L10.397 19.6123L11 22H13L13.6045 19.6132L16.2551 18.5155C16.6969 18.8313 18 20 18 20L20 18L18.5159 16.2494L19.6139 13.598L21.9999 12.9772L22 11L19.6224 10.3954Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+
+          <span class="navigation-item-title">Settings</span>
+        </a>
+        <a class="navigation-item">
+          <img src="favicon.ico">
+          <span class="navigation-item-title">Your Profile</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="window-panel">
+    <h2 class="section-title">
+      Module Relationship
+    </h2>
+    <div class="search">
+      <input type="search" class="search-input" placeholder="Filter..." />
+    </div>
+    <ul class="tree">
+      <li class="tree-branch">
+        <div class="tree-branch-action">
+          <a   class="tree-branch-link active">ERP</a>
+          <button class="tree-branch-button">+</button>
+        </div>
+      </li>
+      <li class="tree-branch">
+        <div class="tree-branch-action accordion" id="accordionExample">
+          <a class="tree-branch-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">SALE</a>
+          <button class="tree-branch-button">+</button>
+        </div>
+        <ul class="tree tree--sub accordion-collapse collapse show" id="collapseOne" data-bs-parent="#accordionExample">
+          <li class="tree-branch tree-branch--sub">
+            <div class="tree-branch-action">
+              <a class="tree-branch-link tree-branch-link--sub">Quotation</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a class="tree-branch-link tree-branch-link--sub">Transport</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a class="tree-branch-link tree-branch-link--sub">DO</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a class="tree-branch-link tree-branch-link--sub active">Invoice</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="tree-branch">
+        <div class="tree-branch-action">
+          <a   class="tree-branch-link" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">PURCHASE</a>
+          <button class="tree-branch-button">+</button>
+        </div>
+        <ul class="tree tree--sub accordion-collapse collapse" id="collapseTwo" data-bs-parent="#accordionExample">
+          <li class="tree-branch tree-branch--sub">
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">Quotation</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">Invoice</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">PO</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">Gate Entry</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">Goods Receipts</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">Goods Pause</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+
+            <div class="tree-branch-action">
+              <a   class="tree-branch-link tree-branch-link--sub">R-Goods Receipt</a>
+              <button class="tree-branch-button">+</button>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="tree-branch">
+        <div class="tree-branch-action">
+          <a class="tree-branch-link">CUSTOMER</a>
+          <button class="tree-branch-button">+</button>
+        </div>
+      </li>
+      <li class="tree-branch">
+        <div class="tree-branch-action">
+          <a class="tree-branch-link">EMPLOYEE</a>
+          <button class="tree-branch-button">+</button>
+        </div>
+      </li>
+      <li class="tree-branch">
+        <div class="tree-branch-action">
+          <a   class="tree-branch-link">INVENTORY</a>
+          <button class="tree-branch-button">+</button>
+        </div>
+      </li>
+      <li class="tree-branch">
+        <a   class="tree-branch-link tree-branch-link--404">STOP</a>
+      </li>
+    </ul>
+  </div>
+
+  <main class="window-main">
+
+    <div class="window-main-body">
+
+      <form class="editor">
+        <div class="editor-toolbar">
+          <form #form action="http://192.168.59.54:9090/default/static" method="get" style="display: flex; justify-content: space-between;width: 100%;align-items: center;">
+            <div style="align-items: center; display: flex; justify-content: center;">
+              <button class="button button--schedule">
+                Defaulter
+              </button>
+              <button type="submit" class="button button--preview" (click)="submit()">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="module-relationship">
+          <ul class="wtree">
+            <li class="accordion-button collapsed d-block p-0 first-child">
+              <input type="checkbox" checked class="form-check-input" required>
+              <label>ERP</label>
+        <ul class="accordion accordion-flush" id="accordionFlushExample">
+          <li *ngFor="let services of serviceData[0].modules; let i = index">
+            <input type="checkbox" class="form-check-input" name="moduleName_{{i}}" [indeterminate]="someComplete(i)" (change)="SelectedModules(i,$event.target)" required>
+            <label class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" >
+              {{services.moduleName}}
+            </label>
+            <div class="module-icons dropstart d-flex">
+              <svg data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-square btn btn-secondary dropdown-toggle" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16" class="bi bi-chevron-down ms-2 d-block w-auto accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+              </svg>
+              <div class="dropdown-menu">
+                <form class="was-validated module-form">
+                  <div class="mb-3">
+                    <label for="validationTextarea" class="form-label">Module Name</label>
+                    <textarea [(ngModel)]="services.moduleName" [ngModelOptions]="{standalone: true}" name="moduleName_{{i}}" class="form-control" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                    <div class="invalid-feedback pt-1">
+                      Please enter a module name in the textarea.
+                    </div>
+                    <div class="valid-feedback pt-1">
+                      Please enter a module name in the textarea.
+                    </div>
+                  </div>
+
+                  <!--                  <div class="mb-3">-->
+                  <!--                    <select class="form-select" required aria-label="select example">-->
+                  <!--                      <option value="">Open this select menu</option>-->
+                  <!--                      <option value="1">One</option>-->
+                  <!--                      <option value="2">Two</option>-->
+                  <!--                      <option value="3">Three</option>-->
+                  <!--                    </select>-->
+                  <!--                    <div class="invalid-feedback">Example invalid select feedback</div>-->
+                  <!--                  </div>-->
+
+                  <!--                  <div class="mb-3">-->
+                  <!--                    <input type="file" class="form-control" aria-label="file example" required>-->
+                  <!--                    <div class="invalid-feedback">Example invalid form file feedback</div>-->
+                  <!--                  </div>-->
+
+                  <div class="mb-3">
+                    <button class="btn btn-primary w-50" type="submit" (click)="PostTenantModules()">Submit</button>
+                    <button class="btn btn-danger ms-1 w-50" type="submit">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <ul id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <li *ngFor="let subservices of services.subModule; let j = index">
+                <input type="checkbox" class="form-check-input" name="subModule_{{j}}" [checked]="allComplete" (ngModelChange)="updateSubModule(i)" required>
+                <label>
+                  {{subservices}}
+                </label>
+            </ul>
+          </li>
+<!--          <li>
+            <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+            <label for="validationFormCheck1" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              SALE
+            </label>
+            <div class="module-icons dropdown d-flex">
+              <svg data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-square btn btn-secondary dropdown-toggle" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16" class="bi bi-chevron-down ms-2 d-block w-auto accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+              </svg>
+
+              <div class="dropdown-menu">
+                <form class="was-validated module-form">
+                  <div class="mb-3">
+                    <label for="validationTextarea" class="form-label">Module Name</label>
+                    <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                    <div class="invalid-feedback pt-1">
+                      Please enter a message in the textarea.
+                    </div>
+                    <div class="valid-feedback pt-1">
+                      Please enter a message in the textarea.
+                    </div>
+                  </div>
+
+&lt;!&ndash;                  <div class="mb-3">&ndash;&gt;
+&lt;!&ndash;                    <select class="form-select" required aria-label="select example">&ndash;&gt;
+&lt;!&ndash;                      <option value="">Open this select menu</option>&ndash;&gt;
+&lt;!&ndash;                      <option value="1">One</option>&ndash;&gt;
+&lt;!&ndash;                      <option value="2">Two</option>&ndash;&gt;
+&lt;!&ndash;                      <option value="3">Three</option>&ndash;&gt;
+&lt;!&ndash;                    </select>&ndash;&gt;
+&lt;!&ndash;                    <div class="invalid-feedback">Example invalid select feedback</div>&ndash;&gt;
+&lt;!&ndash;                  </div>&ndash;&gt;
+
+&lt;!&ndash;                  <div class="mb-3">&ndash;&gt;
+&lt;!&ndash;                    <input type="file" class="form-control" aria-label="file example" required>&ndash;&gt;
+&lt;!&ndash;                    <div class="invalid-feedback">Example invalid form file feedback</div>&ndash;&gt;
+&lt;!&ndash;                  </div>&ndash;&gt;
+
+                  <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-danger" type="submit">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <ul id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <li>
+                <input type="checkbox" class="form-check-input" id="Quotation" required>
+                <label for="Quotation">
+                  Quotation
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="Transport" required>
+                <label for="Transport">
+                  Transport
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="DO" required>
+                <label for="DO">
+                  DO
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="Invoice" required>
+                <label for="Invoice">
+                  Invoice
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <input type="checkbox" class="form-check-input" id="PURCHASE" required>
+            <label for="PURCHASE" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapsePURCHASE" aria-expanded="false" aria-controls="flush-collapsePURCHASE">
+              PURCHASE
+            </label>
+            <ul id="flush-collapsePURCHASE" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <li>
+                <input type="checkbox" class="form-check-input" id="P-Quotation" required>
+                <label for="P-Quotation">
+                  Quotation
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="P-Invoice" required>
+                <label for="P-Invoice">
+                  Invoice
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="PO" required>
+                <label for="PO">
+                  PO
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="Gate Entry" required>
+                <label for="Gate Entry">
+                  Gate Entry
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="Goods Receipt" required>
+                <label for="Goods Receipt">
+                  Goods Receipt
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="Goods Pause" required>
+                <label for="Goods Pause">
+                  Goods Pause
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" class="form-check-input" id="R-Goods Receipt" required>
+                <label for="R-Goods Receipt">
+                  R-Goods Receipt
+                </label>
+              </li>
+            </ul>
+          </li>
+          <li class="accordion-button collapsed d-block p-0">
+            <input type="checkbox" class="form-check-input" id="CUSTOMER" required>
+            <label for="CUSTOMER">
+              CUSTOMER
+            </label>
+          </li>
+          <li class="accordion-button collapsed d-block p-0">
+            <input type="checkbox" class="form-check-input" id="EMPLOYEE" required>
+            <label for="EMPLOYEE">
+              EMPLOYEE
+            </label>
+          </li>
+          <li class="accordion-button collapsed d-block p-0">
+            <input type="checkbox" class="form-check-input" id="INVENTORY" required>
+            <label for="INVENTORY">
+              INVENTORY
+            </label>
+          </li>-->
+        </ul>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+
+
+

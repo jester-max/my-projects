@@ -1,0 +1,485 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Time</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+
+    <!-- search -->
+
+    <div class="position-sticky top-0 z-1 bg-white">
+      <div class="d-flex">
+        <ion-searchbar (ionInput)="searchItem(searchText)" [(ngModel)]="searchText" name="searchText" show-clear-button="always" [debounce]="1000"></ion-searchbar>
+      </div>
+      <ion-list *ngIf="showList" class="position-absolute z-2 w-100 search-list">
+        <ion-item *ngFor="let result of results">
+          <ion-label (click)="oneSearch(result?.[filterWith])">{{ result?.[filterWith] }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <!-- indicators -->
+
+      <ion-card class="mt-0 d-flex align-items-center ion-justify-content-around">
+        <ion-card-header (click)="handleVerifyStatus('SUCCESS')">
+          <div class="approve ps-3">
+            <ion-card-subtitle id="success-time">Approved</ion-card-subtitle>
+            <ion-card-title>{{approved}}</ion-card-title>
+          </div>
+        </ion-card-header>
+
+        <ion-card-header (click)="handleVerifyStatus('PENDING')">
+          <div class="pending ps-3">
+            <ion-card-subtitle id="warning-time">Pending</ion-card-subtitle>
+            <ion-card-title>{{pending}}</ion-card-title>
+          </div>
+        </ion-card-header>
+
+        <ion-card-header  (click)="handleVerifyStatus('REJECT')">
+          <div class="reject ps-3">
+            <ion-card-subtitle id="danger-time">Rejected</ion-card-subtitle>
+            <ion-card-title>{{rejected}}</ion-card-title>
+          </div>
+        </ion-card-header>
+      </ion-card>
+
+      <!-- date filter -->
+
+      <ion-card class="mt-0 d-flex align-items-center ion-justify-content-around">
+        <ion-card-header>
+          <ion-card-subtitle>Change date for filter : </ion-card-subtitle>
+        </ion-card-header>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime max="{{currentDate}}" id="datetime" presentation="date" [showDefaultButtons]="true" [showDefaultTitle]="true" [(ngModel)]="fromDate" (ionChange)="dateFilter()">
+              <span slot="title">Select Start Date</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <ion-card-header>
+          <ion-card-subtitle>To</ion-card-subtitle>
+        </ion-card-header>
+        <ion-datetime-button datetime="datetime2"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime max="{{currentDate}}" id="datetime2" presentation="date" [showDefaultButtons]="true" [showDefaultTitle]="true" [(ngModel)]="toDate" (ionChange)="dateFilter()">
+              <span slot="title">Select End Date</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-card>
+
+    </div>
+
+    <!-- pre-details -->
+
+    <ion-card *ngFor="let item of GetTimeData; let i = index">
+      <ion-card-header class="pb-0">
+        <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+          <div>
+            <div class="d-flex ion-align-items-center gap-2">
+              <ion-icon *ngIf="item.varifyProductStatus === 'PENDING'" name="ellipse" color="warning"></ion-icon>
+              <ion-icon *ngIf="item.varifyProductStatus === 'SUCCESS'" name="ellipse" color="success"></ion-icon>
+              <ion-icon *ngIf="item.varifyProductStatus === 'REJECT'" name="ellipse" color="danger"></ion-icon>
+              <span>{{item.employeeName}}</span>
+            </div>
+            <span class="fs-6 ion-color-tertiary">{{item.occupation}}</span>
+          </div>
+          <div class="d-inline-grid">
+            <span class="p-1 d-flex ion-justify-content-center item-rate">{{item.workTime}}</span>
+            <span class="fs-6 ion-color-tertiary">{{item.timeUnit}}</span>
+          </div>
+        </ion-card-title>
+        <ion-card-subtitle class="m-0">
+          <span>{{item.lable}}</span>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="p-0">
+        <ion-list>
+          <ion-item lines="none">
+            <ion-thumbnail slot="start">
+              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+            </ion-thumbnail>
+            <ion-card-subtitle>
+              <h3><b>DATE : {{item.date}}</b></h3>
+              <h3>PRODUCT NAME : {{item.productName}}</h3>
+              <h3>SPECIFICATION : {{item.productSpecification}}</h3>
+              <h3>TIME ID : {{item.timeID}}</h3>
+              <h3>PRODUCT ID : {{item.productID}}</h3>
+              <h3>UNIT ID : {{item.productUnitID}}</h3>
+<!--              <h3>LOCATION : {{item.location}}</h3>-->
+              <h3>NOTE : {{item.notes}}</h3>
+            </ion-card-subtitle>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-card-content *ngIf="item.varifyProductStatus==='REJECT'" class="reason">
+        {{item.reason}}
+      </ion-card-content>
+      <ion-button (click)="stop('',item.timeID,'SUCCESS')" fill="clear" color="success" *ngIf="item.varifyProductStatus==='PENDING'">
+        Approve
+      </ion-button>
+      <ion-button id="open-custom-dialog-item_{{i}}" fill="clear" color="danger" *ngIf="item.varifyProductStatus==='PENDING'">
+        Reject
+      </ion-button>
+      <ion-modal id="example-modal-item" #modal trigger="open-custom-dialog-item_{{i}}">
+        <ng-template>
+          <form class="wrapper" ngNativeValidate>
+            <ion-toolbar>
+              <ion-title>Reason</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="modal.dismiss()">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+            <div class="row g-3">
+              <div class="col-md-4 pe-4 ps-4">
+                <textarea #reason class="form-control" ngModel name="reason_{{i}}" id="validationServer02" placeholder="Give the reason for rejection" required></textarea>
+                <span class="reject-status">{{rejectedStatus}}</span>
+              </div>
+              <div class="col-md-4 d-flex ion-justify-content-center mt-2">
+                <ion-button fill="clear" color="danger" (click)="stop(reason.value,item.timeID,'REJECT')">
+                  Submit
+                </ion-button>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </ion-modal>
+    </ion-card>
+
+    <!-- more-details -->
+
+    <ion-modal [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-buttons slot="start">
+              <ion-back-button defaultHref="" [routerLink]="['/get-time']" (click)="setOpen(false)"></ion-back-button>
+            </ion-buttons>
+            <ion-title>Time Details</ion-title>
+            <ion-buttons slot="end">
+              <ion-button>
+                <ion-icon name="pencil"></ion-icon>
+              </ion-button>
+              <ion-button id="popover-button">
+                <ion-icon  name="ellipsis-vertical"></ion-icon>
+              </ion-button>
+              <ion-popover class="w-0" trigger="popover-button" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list id="present-alert" class="p-0">
+                      <ion-item lines="none" [button]="true" [detail]="false"><ion-icon class="me-2 fs-4" color="danger" name="trash"></ion-icon>Delete</ion-item>
+                    </ion-list>
+                    <ion-alert
+                      trigger="present-alert"
+                      subHeader="You can not undo this action. Are you sure you want to delete this item."
+                      [buttons]="alertButtons"
+                    ></ion-alert>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-card class="m-0 first-detail">
+            <ion-card-header class="first-detail-header p-0">
+              <ion-card-title class="d-flex ion-align-items-center ion-justify-content-center">
+                <img class="w-100" src="{{GetOneTimeData?.barcodeImageWithHTTP}}" />
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-header class="first-detail-header">
+              <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+                <div class="d-block">
+                  <div class="d-flex ion-align-items-center gap-2 mb-3">
+                    <ion-icon name="ellipse" color="success"></ion-icon>
+                    <span>{{GetOneTimeData?.productName}}</span>
+                  </div>
+
+                  <div class="mb-3 purchase-info">
+                    <p class="m-0">Purchase Cost</p>
+                    <span>&#8377; {{GetOneTimeData?.rate}} / NOS</span>
+                  </div>
+
+                  <div class="mb-3 purchase-info">
+                    <p class="m-0">Product Id</p>
+                    <span>{{GetOneTimeData?.productId}}</span>
+                  </div>
+                </div>
+
+                <img id="open-custom-dialog-get-item-img" class="w-25" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+
+                <ion-modal id="example-modal-img" #modalImg trigger="open-custom-dialog-get-item-img">
+                  <ng-template>
+                    <div class="wrapper">
+                      <ion-toolbar>
+                        <ion-title>Item Images</ion-title>
+                        <ion-buttons slot="end">
+                          <ion-button (click)="modalImg.dismiss()">Close</ion-button>
+                        </ion-buttons>
+                      </ion-toolbar>
+                      <div class="d-block pre-img-text" *ngIf="!image">
+                        <p>You can add attachments or images.</p>
+                        <ion-button shape="round" color="secondary" fill="outline" (click)="takePicture()">Add Images</ion-button>
+                      </div>
+                      <div class="d-grid ion-justify-content-center" *ngIf="image">
+                        <img src="{{image}}" width="280px">
+                      </div>
+                      <ion-footer *ngIf="image" class="position-absolute bottom-0">
+                        <ion-toolbar>
+                          <ion-buttons class="d-flex ion-justify-content-around after-img-bottom">
+                            <ion-button shape="round" (click)="takePicture()">
+                              <ion-icon name="repeat"></ion-icon>
+                            </ion-button>
+                            <ion-button shape="round">
+                              <ion-icon color="danger" name="trash"></ion-icon>
+                            </ion-button>
+                            <ion-button shape="round" (click)="modalImg.dismiss()">
+                              <ion-icon color="success" name="checkmark-done-outline"></ion-icon>
+                            </ion-button>
+                          </ion-buttons>
+                        </ion-toolbar>
+                      </ion-footer>
+                    </div>
+                  </ng-template>
+                </ion-modal>
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="p-0">
+              <ion-card class="m-0 mb-2 mt-2 other-details">
+                <ion-card-header class="pb-0">
+                  <ion-card-title class="d-flex ion-align-items-center gap-2">
+                    <ion-icon name="stats-chart"></ion-icon>
+                    Stock Status
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                    In our store and software has content quantity.
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content class="pt-0 d-flex ion-align-items-center gap-4">
+                  <div>
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Purchased
+                    </ion-card-subtitle>
+                    <ion-card-subtitle>
+                      <span class="fs-5">0</span> Qty
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Stock
+                    </ion-card-subtitle>
+                    <ion-card-subtitle>
+                      <span class="fs-5">0</span> Qty
+                    </ion-card-subtitle>
+                  </div>
+                  <div>
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Issued
+                    </ion-card-subtitle>
+                    <ion-card-subtitle>
+                      <span class="fs-5">0</span> Qty
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Current Stock
+                    </ion-card-subtitle>
+                    <ion-card-subtitle>
+                      <span class="fs-5">0</span> Qty
+                    </ion-card-subtitle>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+
+              <ion-card class="m-0 mb-2 mt-2 other-details">
+                <ion-card-header class="pb-0">
+                  <ion-card-title class="d-flex ion-align-items-center gap-2">
+                    <ion-icon name="newspaper"></ion-icon>
+                    Purchase Information
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                    Information about purchasing the item.
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content class="pt-0 d-flex gap-5">
+                  <div>
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Vendor Name
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.invoiceInfo[0]?.partyName}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Date
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.date}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Amount
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      Rs.{{GetOneTimeData?.amount}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Purchase By
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      Mr Manager
+                    </ion-card-subtitle>
+                  </div>
+                  <div>
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Vendor Address
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      Dhamnod
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Quantity
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.productQuantity}} {{GetOneTimeData?.unit}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      GST Amount
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      Rs.{{GetOneTimeData?.amountWithGst}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Location
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.location}}
+                    </ion-card-subtitle>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+
+              <ion-card class="m-0 mb-2 mt-2 other-details">
+                <ion-card-header class="pb-0">
+                  <ion-card-title class="d-flex ion-align-items-center gap-2">
+                    <ion-icon name="grid"></ion-icon>
+                    More Information
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                    More Information about the item.
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content class="pt-0 d-flex gap-5">
+                  <div>
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Date
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.date}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Batch ID
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.productBatch}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Inventory ID
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      HPGINID001
+                    </ion-card-subtitle>
+                  </div>
+                  <div>
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Product ID
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.productId}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Unit
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.unit}}
+                    </ion-card-subtitle>
+
+                    <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                      Specification
+                    </ion-card-subtitle>
+                    <ion-card-subtitle class="pt-1">
+                      {{GetOneTimeData?.productSpecification}}
+                    </ion-card-subtitle>
+
+                  </div>
+                </ion-card-content>
+              </ion-card>
+
+              <ion-card class="m-0 mb-2 mt-2 other-details">
+                <ion-card-header class="pb-0">
+                  <ion-card-title class="d-flex ion-align-items-center gap-2">
+                    <ion-icon name="bandage"></ion-icon>
+                    Note
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                    Note about the item.
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content class="pt-0">
+                  <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+                    This item issue only by the manager.
+                  </ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-card-content>
+          </ion-card>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+  </div>
+
+  <!-- create -->
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [routerLink]="['/create-time']">
+    <ion-fab-button class="create-btn">
+      Create
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--  pagination or scroll-->
+
+  <ion-infinite-scroll (ionInfinite)="paginateItem($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="setOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>
+

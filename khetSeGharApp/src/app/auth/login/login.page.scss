@@ -1,0 +1,110 @@
+._logo{
+  width: 59px;
+  max-width: 100%;
+
+}
+.login-link {
+  text-align: center;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 16px;;
+}
+
+.signup-card{
+  box-shadow: none;
+}
+
+#email:focus, #password:focus{
+  border: 1px solid #6e8640c4;
+  //border-radius: 0 25px 25px 0;
+}
+
+.input-group-text{
+  border: 1px solid #6e8640c4;
+  background: #6e8640c4;
+  color: #fff;
+  //border-radius:25px;
+}
+
+a{
+  font-weight: bold;
+}
+.create{
+  --color: #ffffff;
+  font-size: medium;
+
+}
+ion-checkbox {
+  --size: 20px;
+  --checkbox-background-checked: #6e8640c4;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid #6e8640c4;
+}
+
+h2 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: black;
+}
+.custom-input {
+  --ion-item-label-font-size: 1.2em;
+  --ion-item-placeholder-font-size: 1.2em;
+  --ion-label-color: #6e8640c4;
+  --placeholder-color: #6e8640c4;
+  font-size: 1.2em;
+}
+ion-input.custom-input:focus {
+  --ion-item-background: transparent;
+  --ion-item-border-color: #6e8640c4;
+  --ion-item-border-width: 2px;
+}
+#remember:focus {
+  color: #6e8640c4;
+}
+.term {
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.term .forgot {
+  margin-left: auto;
+}
+
+.show-password-login{
+  color: #6e8640c4 !important;
+}
+
+#icon-password-login{
+  color: #dddddd;
+  background: transparent;
+  border: 1px solid #ced4da;
+}
+.form-check-input:checked {
+  background-color: #6e8640c4;
+  border-color: #ffffff;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #6e8640c4;
+}
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  color: #6e8640c4;
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+a {
+  background-color: transparent;
+  color: rgba(110, 134, 64, 0.768627451);
+}
+.custom-button {
+  --background: #6e8640c4;
+}

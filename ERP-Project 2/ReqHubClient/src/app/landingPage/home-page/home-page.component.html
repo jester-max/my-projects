@@ -1,0 +1,234 @@
+<nav [ngStyle]="isScrolled ? { boxShadow: '0px 2px 8px 0px rgba(29, 140, 242, 0.16)' } : {}">
+  <div class="logo">
+    <img class="me-2" src="assets/Company%20logoBusiness%20logoBrand%20logo%20-%20Made%20with%20PosterMyWall%20(1).png">
+    <h4 class="m-0">HP Unified Platform</h4>
+  </div>
+  <div class="d-none justify-content-center align-items-center w-50">
+    <div class="col-md-12">
+      <div class="form">
+        <input type="text" class="form-control form-input" placeholder="Search anything...">
+        <span class="left-pan">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div id="navbarNav">
+    <ul class="navbar-nav">
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link" >Programs</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" >Users</a>-->
+<!--      </li>-->
+      <li class="nav-item">
+        <a class="nav-link">Contact US</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link signIn" routerLink="sign-in-root-user">Sign-In</a>
+      </li>
+      <li class="nav-item bg-white">
+        <button class="continue-services" routerLink="sign-up">Sign-Up</button>
+      </li>
+    </ul>
+  </div>
+<!--  <span class="v-line"></span>-->
+</nav>
+
+<section class="banner">
+  <div class="container hero-section">
+    <div class="hero-text">
+      <h1>We Can Serve You</h1>
+      <p>Boost your team’s alignment, efficiency, and productivity by<br>customizing any workflow to fit your needs.</p>
+      <button class="free-services">Try For Free</button>
+    </div>
+  </div>
+</section>
+
+
+<div class="container service-section">
+  <div class="row">
+<!--    <div class="mb-30 col-md-6 col-lg-3">-->
+<!--      <input type="checkbox" id="erp" class="checkbox-input">-->
+<!--      <label for="erp" class="card erp">-->
+<!--        <img class="card-icon" src="https://image.ibb.co/cFV8mR/monitoring.png" alt="monitoring" >-->
+<!--        <h3 class="card-title">Monitoring</h3>-->
+<!--        <p class="card-text">Collect metrics on visibility, monitor Droplet performance and receive alerts when problems arise in your infrastructure–at no additional cost.</p>-->
+<!--        <a class="card-link" >Learn more</a>-->
+<!--      </label>-->
+<!--    </div>-->
+<!--    <div class="mb-30 col-md-6 col-lg-3">-->
+<!--      <input type="checkbox" id="crm" class="checkbox-input">-->
+<!--      <label for="crm" class="card crm">-->
+<!--        <img class="card-icon" src="https://image.ibb.co/jfmg6R/cloud_firewalls.png" alt="monitoring" >-->
+<!--        <h3 class="card-title">Cloud Firewalls</h3>-->
+<!--        <p class="card-text">Perfect for both staging and production deployments, cloud firewalls let you easily secure your infrastructure and define what services are visible on your Droplets–at no additional cost.</p>-->
+<!--        <a class="card-link" >Learn more</a>-->
+<!--      </label>-->
+<!--    </div>-->
+<!--    <div class="mb-30 col-md-6 col-lg-3">-->
+<!--      <input type="checkbox" id="payroll" class="checkbox-input">-->
+<!--      <label for="payroll" class="card payroll">-->
+<!--        <img class="card-icon" src="https://image.ibb.co/fcnzt6/team_management.png" alt="team management" >-->
+<!--        <h3 class="card-title">Team Management</h3>-->
+<!--        <p class="card-text">With Digital Teams you can invite and manage users, ensure security with two-factor authentication, and control your resource spend with centralized billing–at no additional cost.</p>-->
+<!--        <a class="card-link" >Learn more</a>-->
+<!--      </label>-->
+<!--    </div>-->
+<!--    <div class="mb-30 col-md-6 col-lg-3">-->
+<!--      <input type="checkbox" id="benefits" class="checkbox-input">-->
+<!--      <label for="benefits" class="card benefits">-->
+<!--        <img class="card-icon" src="https://image.ibb.co/evyiLm/backups.png" alt="monitoring" >-->
+<!--        <h3 class="card-title">Backups</h3>-->
+<!--        <p class="card-text">Backups run automatically on your Droplets each week and are stored for four weeks–add 20% of monthly Droplet cost.</p>-->
+<!--        <a class="card-link" >Learn more</a>-->
+<!--      </label>-->
+<!--    </div>-->
+
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="erp" class="checkbox-input">
+      <label for="erp" class="card erp">
+        <img class="card-icon" src="assets/ErpLogo.png" alt="monitoring" >
+        <h3 class="card-title">ERP</h3>
+        <p class="card-text">Any relevant information that the client needs to know, such as the ERP system being used, specific methodologies or technologies applied, and any assumptions made during the quote creation.</p>
+        <a class="card-link" >Learn more</a>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="crm" class="checkbox-input">
+      <label for="crm" class="card crm">
+        <img class="card-icon" src="assets/CrmLogo.png" alt="monitoring" >
+        <h3 class="card-title">CRM</h3>
+        <p class="card-text">CRM providers offer custom solutions tailored to the specific needs of larger enterprises. These usually come with negotiated pricing based on the features and services required.</p>
+        <a class="card-link" >Learn more</a>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="payroll" class="checkbox-input">
+      <label for="payroll" class="card payroll">
+        <img class="card-icon" src="assets/AttendanceaLogo.png" alt="team management" >
+        <h3 class="card-title">PAYROLL</h3>
+        <p class="card-text">Payroll refers to the process of managing the financial aspects of employee, It involves calculating and disbursing salaries, wages, bonuses, and deductions to employees for their work during a specific pay period.</p>
+        <a class="card-link" >Learn more</a>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="benefits" class="checkbox-input">
+      <label for="benefits" class="card benefits">
+        <img class="card-icon" src="assets/benifit.png" alt="monitoring" >
+        <h3 class="card-title">BENEFITS</h3>
+        <p class="card-text">Benefits can be described as the advantages, gains, or positive outcomes derived from a particular action, service, or product. it often refers to the advantages or perks that users or consumers gain by utilizing that service.</p>
+        <a class="card-link" >Learn more</a>
+      </label>
+    </div>
+  </div>
+<!--  <button class="continue-services erp crm payroll benefits">Continue-->
+<!--    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">-->
+<!--    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>-->
+<!--    </svg>-->
+<!--  </button>-->
+</div>
+
+<!--<section class="banner">-->
+<!--  <img alt="HP asset white bg" class="jsx-4212101279 main-image regular-asset-image" src="https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP_tests/HP_asset_white_bg.png" style="width: 100%;">-->
+<!--</section>-->
+
+<footer class="footer_area section_padding_130_0">
+  <div class="container">
+    <div class="row">
+      <!-- Single Widget-->
+      <div class="col-12 col-sm-6 col-lg">
+        <div class="single-footer-widget section_padding_0_130">
+          <!-- Widget Title-->
+          <h5 class="widget-title">About</h5>
+          <!-- Footer Menu-->
+          <div class="footer_menu">
+            <ul>
+              <li><a >About Us</a></li>
+              <li><a >Corporate Sale</a></li>
+              <li><a >Terms &amp; Policy</a></li>
+              <li><a >Community</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Single Widget-->
+      <div class="col-12 col-sm-6 col-lg">
+        <div class="single-footer-widget section_padding_0_130">
+          <!-- Widget Title-->
+          <h5 class="widget-title">Support</h5>
+          <!-- Footer Menu-->
+          <div class="footer_menu">
+            <ul>
+              <li><a >Help</a></li>
+              <li><a >Support</a></li>
+              <li><a >Privacy Policy</a></li>
+<!--              <li><a >Term &amp; Conditions</a></li>-->
+<!--              <li><a >Help &amp; Support</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Single Widget-->
+      <div class="col-12 col-sm-6 col-lg">
+        <div class="single-footer-widget section_padding_0_130">
+          <!-- Widget Title-->
+          <h5 class="widget-title">Contact</h5>
+          <!-- Footer Menu-->
+          <div class="footer_menu">
+            <ul>
+              <li><a >Call Centre</a></li>
+              <li><a >Email Us</a></li>
+              <li><a >Term &amp; Conditions</a></li>
+              <li><a >Help Center</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Single Widget-->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="single-footer-widget section_padding_0_130">
+          <h5 class="widget-title">Follow</h5>
+          <!-- Footer Logo-->
+          <div class="footer-logo mb-3 d-flex justify-content-lg-start align-items-center gap-2">
+            <img src="assets/Company%20logoBusiness%20logoBrand%20logo%20-%20Made%20with%20PosterMyWall%20(1).png">
+            <h5 class="mb-0">Hari Priya <br> Unified Platform</h5>
+          </div>
+          <p>On Social Handles</p>
+          <!-- Footer Social Area-->
+          <div class="footer_social_area">
+            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+              </svg>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+              </svg>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Single Widget-->
+      <div class="col-12 col-sm-6 col-lg">
+        <div class="single-footer-widget section_padding_0_130">
+          <button class="continue-services" routerLink="sign-up">Complete-Sign-Up</button>
+        </div>
+      </div>
+      <!-- Single Widget-->
+      <div class="col-12 col-sm-12 copywrite-text">
+        <div class="single-footer-widget section_padding_0_130">
+          <p>Copyright © 2024 All rights reserved by haripriyagrp.com | This template is made with by ankit@haripriyagrp.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

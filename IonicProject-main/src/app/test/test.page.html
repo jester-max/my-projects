@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>test</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">test</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form #formdata = ngForm (ngSubmit)="savedata(formdata.value)">
+  <ion-item>
+    <ion-label> Name</ion-label>
+    <ion-input ngModel  name="Name" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label> address</ion-label>
+    <ion-input ngModel  name="address" required></ion-input>
+  </ion-item>
+    <button type="submit">Submit</button>
+  </form>
+</ion-content>

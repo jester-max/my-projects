@@ -1,0 +1,62 @@
+ion-header{
+  box-shadow: none !important;
+  background: #c8d1b7;
+}
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(180deg, rgba(110, 134, 64, 0.77) 50%, transparent 110%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0%;
+  z-index: -1000000;
+  height: 240px;
+  border-bottom-right-radius: 65%;
+  border-bottom-left-radius: 65%;
+}
+ion-card{
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.image-post {
+  max-width: 50%;
+  height: auto;
+  border-radius: 50%; /* Add this if you want a circular image */
+}
+.image-container {
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  padding: 10px;
+}
+.type{
+  color: #292525;
+  font-size: medium;
+}
+.font{
+  margin: 0.2em;
+  color: #302e2e;
+
+}
+.heading{
+  font-weight: bold;
+  color: #333030;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+
+}
+.btn-primary {
+  color: #fff;
+  background-color: rgba(88, 108, 51, 0.77);
+  border-color: rgba(88, 108, 51, 0.77);
+}
+.item{
+  border-radius: 15px;
+  box-shadow: rgba(188, 202, 163, 0.77) 0px 7px 29px 0px;
+  color: rgba(61, 89, 27, 0.56);
+}

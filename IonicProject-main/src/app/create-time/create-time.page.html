@@ -1,0 +1,313 @@
+<ion-header [translucent]="true" *ngIf="visiblity === ''">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" [routerLink]="['/get-time']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Time</ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="CreateTime(Time.value)">
+        <ion-label>SAVE</ion-label>
+      </ion-button>
+      <ion-button id="popover-button-scan">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </ion-button>
+      <ion-popover class="w-0" trigger="popover-button-scan" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list id="present-alert" class="p-0">
+<!--              <ion-item lines="none" (click)="startScan('item')" [button]="true" [detail]="false">Item Scan</ion-item>-->
+              <ion-item lines="none" (click)="startScan('WorkingMachine')" [button]="true" [detail]="false">Working Machine Scan</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-header [translucent]="true" *ngIf="visiblity === 'hidden'">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button shape="round" color="danger" (click)="stopScan()">
+        <ion-label>STOP</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Scanning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [style.visibility]="visiblity" [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <div id="container">
+    <ion-card class="d-flex">
+      <div class="w-100 barcode">
+        <img class="w-100" src="{{WorkingMachineBarcode}}">
+        Machine Barcode
+      </div>
+    </ion-card>
+    <form #Time=ngForm class="was-validated" novalidate>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Item Relations</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+          </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Major id's for the time.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="productUnitID" class="form-label">Unit ID</label>
+              <input type="text" class="form-control" id="productUnitID" name="productUnitID" [(ngModel)]="PreTimeData.productUnitID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productID" class="form-label">Product ID</label>
+              <input type="text" class="form-control" id="productID" name="productID" [(ngModel)]="PreTimeData.productID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Product Details</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+        </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Detailed about time.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="date" class="form-label">Time Date</label>
+              <input type="date" class="form-control " id="date" name="date" [(ngModel)]="PreTimeData.date" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="open-modal-employeeName" class="form-label">Employee Name</label>
+              <input inputmode="none" type="text" class="form-control " id="open-modal-employeeName" name="employeeName" [(ngModel)]="PreTimeData.employeeName" required>
+              <ion-modal #modal trigger="open-modal-employeeName" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchTime()" [(ngModel)]="employeeText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredData;" (click)="handleemployeeName(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.firstName +" "+ i.lastName }}</h2>
+                          <p>{{i?.role}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <ion-popover class="w-0" trigger="popover-button-employeeName" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of employeeName;" (click)="handleemployeeName(i)" lines="none">
+                        {{ i.firstName +" "+ i.lastName }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productName" class="form-label">Product Name</label>
+              <input type="text" class="form-control " id="productName" name="productName" [(ngModel)]="PreTimeData.productName" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productSpecification" class="form-label">Product Specification</label>
+              <input type="text" class="form-control" id="productSpecification" name="productSpecification" [(ngModel)]="PreTimeData.productSpecification" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-workTime" class="form-label">Work Time</label>
+              <input inputmode="none" type="number" class="form-control " id="popover-button-workTime" name="workTime" [(ngModel)]="PreTimeData.workTime" required>
+              <ion-popover class="w-0 work-time" trigger="popover-button-workTime" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of workTime;" (click)="handleWorkTime(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-timeUnit" class="form-label">Time Unit</label>
+              <input inputmode="none" type="text" class="form-control" id="popover-button-timeUnit" name="timeUnit" [(ngModel)]="PreTimeData.timeUnit" required>
+              <ion-popover class="w-0" trigger="popover-button-timeUnit" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of timeUnit;" (click)="handleTimeUnit(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-occupation" class="form-label">Occupation</label>
+              <input inputmode="none" type="text" class="form-control " id="popover-button-occupation" name="occupation" [(ngModel)]="PreTimeData.occupation" required>
+              <ion-popover class="w-0" trigger="popover-button-occupation" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of occupation;" (click)="handleOccupation(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-lable" class="form-label">Level</label>
+              <input inputmode="none" type="text" class="form-control " id="popover-button-lable" name="lable" [(ngModel)]="PreTimeData.lable" required>
+              <ion-popover class="w-0" trigger="popover-button-lable" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of lable;" (click)="handleLevel(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="amount" class="form-label">Amount</label>
+              <input inputmode="none" type="number" class="form-control " id="amount" name="amount" [(ngModel)]="PreTimeData.amount" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Other</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+        </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Other info of time.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="notes" class="form-label">Note</label>
+              <textarea type="text" class="form-control " id="notes" name="notes" [(ngModel)]="PreTimeData.notes" required></textarea>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="setOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>

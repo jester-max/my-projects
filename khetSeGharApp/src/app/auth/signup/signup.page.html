@@ -1,0 +1,98 @@
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="signupData" class="ion-padding row g-3 p-0" novalidate>
+    <div class="card p-0 border-0">
+      <div class="d-flex align-items-baseline justify-content-center">
+        <img src="assets/sapiens.png" class="w-75">
+      </div>
+      <div class="card-body">
+        <div class="col-md-12">
+          <h5 class="card-title m-0 text-center">Create your Account</h5>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="email" class="form-label">Email</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><ion-icon name="mail-outline"></ion-icon></span>
+            <input type="email" class="form-control shadow-none" id="email" formControlName="email" placeholder="name@domain.com" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="signupData.get('email')?.invalid && signupData.get('email')?.touched">
+            Please enter a valid email
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="contact" class="form-label">Contact</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><ion-icon name="call-outline"></ion-icon></span>
+            <input type="number" class="form-control shadow-none" (keyup)="sendOTP()" id="contact" formControlName="contact" placeholder="+91 xxxxxxxxxx" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="signupData.get('contact')?.invalid && signupData.get('contact')?.touched">
+            Please enter a valid contact
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3" *ngIf="otpInput">
+          <label for="otp" class="form-label">OTP</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><ion-icon name="phone-portrait-outline"></ion-icon></span>
+            <input type="text" class="form-control shadow-none" formControlName="otp" id="otp" placeholder="xxxxxx" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+        </div>
+
+        <div class="col-md-4 d-flex align-items-center justify-content-center mb-3" *ngIf="otpInput">
+          <button class="btn btn-primary w-75 rounded-pill" (click)="verifyOTP()">Verify</button>
+          <button class="btn btn-outline-primary w-75 rounded-pill" (click)="sendOTP()">Resend</button>
+        </div>
+
+        <div class="col-md-4 mb-3" *ngIf="emailAndContactValid()">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><ion-icon name="key-outline"></ion-icon></span>
+            <input type="password" class="form-control shadow-none" id="password" formControlName="password" placeholder="••••••••" aria-label="Password" aria-describedby="addon-wrapping">
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="signupData.get('password')?.invalid && signupData.get('password')?.touched">
+            Please enter a valid password
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3"*ngIf="emailAndContactValid()">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><ion-icon name="key-outline"></ion-icon></span>
+            <input type="password" class="form-control shadow-none" id="confirmPassword" formControlName="confirmPassword" placeholder="••••••••" aria-label="Confirm Password" aria-describedby="addon-wrapping">
+            <span id="icon-password-register" class="input-group-text" (click)="showHidePassword()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                  </svg>
+            </span>
+          </div>
+          <div *ngIf="signupData.errors?.['notMatching'] && (signupData.dirty || signupData.touched)" class="invalid-feedback d-block">
+            Passwords do not match.
+          </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+          <div class="form-check">
+            <input class="form-check-input" formControlName="terms"  type="checkbox" value="" id="term" required>
+            <label class="form-check-label" for="term">
+              I accept the <a href="#">Terms and Conditions</a>
+            </label>
+            <div class="invalid-feedback">
+              You must agree before submitting.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+          <button class="btn btn-primary w-75 rounded-pill" (click)="SignUp()" type="submit">Sign Up</button>
+        </div>
+      </div>
+      <p class="login-link"> Already have an account? <a routerLink="/login">Login Here</a></p>
+    </div>
+
+  </form>
+
+</ion-content>

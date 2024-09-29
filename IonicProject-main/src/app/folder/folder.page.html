@@ -1,0 +1,96 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerLink="/scanner/{{ActiveRouter.snapshot.params['userId']}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Issue Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form class="form-box" ngNativeValidate >
+    <div class="modal-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="stockId">StockID:-</label>
+          <input class="form-control" type="text" [(ngModel)]="data.stockId"  id="stockId"  name="stockId" >
+        </div>
+        <div class="col-md-6">
+          <label for="batch">Batch:-</label>
+<!--          <select name="batch" id="batch" style="position:relative; left: 1px" [(ngModel)]="data.batch" class="form-control">-->
+<!--            <option *ngFor="let i of data.batch;" value="{{i}}" [selected]="i">{{ i }}</option>-->
+<!--          </select>-->
+          <input id="batch" list="encodings2" name="batch"  class="form-control col-sm-6 custom-select custom-select-sm">
+          <datalist id="encodings2" [(ngModel)]="data.BatchInfo">
+            <option *ngFor="let batch of data.BatchInfo;" value="{{batch.productBatch}}" [selected]="batch.productBatch">{{batch.productBatch}}</option>
+          </datalist>
+        </div>
+        <div class="col-md-6">
+          <label for="workFor">wipID:-</label>
+          <input type="text" class="form-control" [(ngModel)]="data.wipID"  id="wipID" name="wipID"  >
+        </div>
+        <div class="col-md-6">
+          <label for="productIssueDate">ProductIssueDate:-</label>
+          <input class="form-control" type="date" [(ngModel)]="data.productIssueDate"  id="productIssueDate"  name="productIssueDate"  >
+        </div>
+        <div class="col-md-6">
+          <label for="productSubmitDate">ProductSubmitDate:-</label>
+          <input class="form-control" type="date" [(ngModel)]="data.productSubmitDate"  id="productSubmitDate"  name="productSubmitDate"    >
+        </div>
+        <br><br>
+        <div class="col-md-6">
+          <label>IssueProduct:-</label>
+          <input class="form-control" type="text" [(ngModel)]="data.productName"  name="productName">
+        </div>
+        <div class="col-md-6">
+          <label>productSpecification:-</label>
+          <input class="form-control" type="text" [(ngModel)]="data.productSpecification"  name="productSpecification">
+        </div>
+        <div class="col-md-6">
+          <label for="issueQuantity">IssueQuantity:-</label>
+          <input type="number" class="form-control" [(ngModel)]="data.issueQuantity"  name="issueQuantity" id="issueQuantity"  step="0.01">
+        </div>
+        <div class="col-md-6">
+          <label for="type">Type:-</label>
+          <input id="type" list="encodings" [(ngModel)]="data.type" name="type"  class="form-control col-sm-6 custom-select custom-select-sm">
+          <datalist id="encodings" [(ngModel)]="data.type">
+            <option value="RAWMATERIAL">RAWMATERIAL</option>
+            <option value="TOOL">TOOL</option>
+          </datalist>
+<!--          <select type="text" class="form-control" [(ngModel)]="data.type"   id="type" name="type"  >-->
+<!--            <option>RAWMATERIAL</option>-->
+<!--            <option>TOOL</option>-->
+<!--          </select>-->
+        </div>
+        <div class="col-md-6">
+          <label for="unit">IssueUnit:-</label>
+          <input type="text" class="form-control" [(ngModel)]="data.unit"   id="unit" name="unit"  >
+        </div>
+        <div class="col-md-6">
+          <label for="issueBy">IssueBy:-</label>
+          <input type="text"  class="form-control" [(ngModel)]="data.issueBy"   id="issueBy" name="issueBy"  >
+        </div>
+        <div class="col-md-6">
+          <label for="receivedBy">ReceivedBy:-</label>
+          <input type="text"  class="form-control" [(ngModel)]="data.receivedBy"   id="receivedBy" name="receivedBy"  >
+        </div>
+        <div class="col-md-6">
+          <label for="workFor">WorkFor:-</label>
+          <input type="text" class="form-control" [(ngModel)]="data.workFor"   id="workFor" name="workFor"  >
+        </div>
+        <div class="col-md-6">
+          <label for="workFor">Note:-</label>
+          <input type="text" class="form-control" [(ngModel)]="data.note"   id="note" name="note"  >
+        </div>
+        <div class="col-md-6">
+          <button type="submit" id="b" class="btn btn-outline-primary" (click)="on()" data-bs-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div id="overlay">
+      <div class="w-100 d-flex justify-content-center align-items-center">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </form>
+</ion-content>

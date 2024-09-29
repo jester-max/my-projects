@@ -1,0 +1,37 @@
+<ion-header [translucent]="true" xmlns="http://www.w3.org/1999/html">
+  <ion-toolbar>
+    <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+
+      <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start" ></ion-back-button>
+
+      <ion-title>Order's</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="bg"></div>
+  <ion-grid>
+    <ion-card *ngFor="let data of oders;let i = index" (click)="orderDetail(i)" size="12" size-lg="6" class="relative pl-custom-padding" class="CreateCard border-0 m-2" style="max-width: 540px;" >
+      <ion-item lines="none">
+        <div class="image-container">
+          <img class="image-post" alt="Project Image" [src]="data.CartContents[0].boxImg"/>
+        </div>
+        <ion-label class="ion-text-wrap">
+          <h2 class="ion-text-base ion-font-semibold leading-7" style="font-weight: bold">{{data?. CartContents[0].boxType}}</h2>
+          <p class=" font mt-2 ion-text-base leading-7 ">  {{ data.CartContents[0].boxSize }}</p>
+          <p class=" font mt-2 ion-text-base leading-7 fw-bold">  &#8377; {{data.CartContents[0].price}}/{{data.CartContents[0].weight}}{{data.CartContents[0].unit}}</p>
+<!--          <p class= " font mt-2 ion-text-base leading-7 text-gray-600">{{data.CartContents[0].weight}}{{data.CartContents[0].unit}}</p>-->
+
+          <p class=" font mt-2 ion-text-base leading-7 text-gray-600"> {{data.CartContents[0].frequency}}</p>
+          <p class= " font mt-2 ion-text-base leading-7 text-gray-600"> {{data.CartContents[0].deliveryDate}}</p>
+
+        </ion-label>
+
+      </ion-item>
+
+    </ion-card>
+
+  </ion-grid>
+
+</ion-content>

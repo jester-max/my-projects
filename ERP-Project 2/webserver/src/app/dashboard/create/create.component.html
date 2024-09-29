@@ -1,0 +1,46 @@
+<form *ngIf="create" #post="ngForm">
+  <div class="href-target" id="icons"></div>
+  <div *ngFor="let Data of data;  let i = index;" class="nice-form-group" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <div *ngIf="i != 0 && Data.key != '__v' && !Data.showCalculation">
+      <label>{{Data.key}}</label>
+    </div>
+    <div  *ngIf="Data.type === 'array'">
+      <div>
+        <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+          <div *ngFor="let Data2 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+            <div class="merge" *ngIf="Data2.key!==undefined && !Data2.showCalculation">
+              <label class="custome">{{Data2.key}}</label>
+            </div>
+            <input *ngIf="Data2.key!==undefined && !Data2.showCalculation" [type]="Data2.type" [(ngModel)]="Data2.default" name="{{Data2.key}}_{{i}}">
+          </div>
+          <button mat-raised-button color="primary" style="width: 40%;" (click)="add(i)">+Add</button>
+          <button mat-raised-button color="accent" style="width: 40%;" (click)="remove(i)">-Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div  *ngIf="Data.relation === 'object'">
+      <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+        <div *ngFor="let Data3 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+          <div class="merge" *ngIf="i != 0 && !Data3.showCalculation" >
+            <label class="custome">{{Data3.key}}</label>
+          </div>
+          <input *ngIf="i != 0 && !Data3.showCalculation" [type]="Data3.type" [(ngModel)]="Data3.default" name="{{Data3.key}}_{{i}}">
+        </div>
+      </div>
+    </div>
+    <input *ngIf="Data.relation === 'no' && i != 0 && Data.key != '__v' && Data.enum === false" [type]="Data.type" [(ngModel)]="Data.default" name="{{Data.key}}_{{i}}">
+    <select *ngIf="Data.relation === 'no' && i != 0 && Data.key != '__v' && Data.enum === true" [(ngModel)]="Data.default" name="{{Data.key}}_{{i}}">
+      <option *ngFor="let enumItem of Data.enumValues">{{enumItem}}</option>
+    </select>
+  </div>
+
+  <details (click)="submit(post.value)">
+    <summary>
+      <div class="toggle-code">
+        Submit
+      </div>
+    </summary>
+  </details>
+</form>
+

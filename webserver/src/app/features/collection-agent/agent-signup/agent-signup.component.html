@@ -1,0 +1,115 @@
+
+<html>
+
+
+<body>
+<div class="agentBackground">
+  <div class="form-container">
+
+    <form [formGroup]="registrationAgent" (submit)="registrationToAgent()">
+      <h2>REGISTRATION</h2>
+
+      <div class="form-group">
+        <div class="image-selector">
+          <input type="file" id="image" name="image" accept="image/*" (change)="previewImage($event)">
+          <label for="image" class="image-label">
+
+            <div class="image-preview">
+              <img *ngIf="imagePreview" [src]="imagePreview" alt="Preview">
+              <img *ngIf="!imagePreview" src="assets/images/profile-icon.png" alt="Default Image">
+            </div>
+          </label>
+          <label for="image" class="image-label">
+            <i class="fa fa-camera camera-icon" ></i>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName" class="lables">First Name:</label>
+        <input type="text" id="firstName" placeholder="Enter your first name" formControlName="firstName" required
+               (input)="checkFormValidity()" >
+        <div *ngIf="registrationAgent.get('firstName')?.errors && registrationAgent.get('firstName')?.touched">
+          <small class="error">First Name is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" placeholder="Enter your last name" formControlName="lastName" required
+               (input)="checkFormValidity()">
+        <div *ngIf="registrationAgent.get('lastName')?.errors && registrationAgent.get('lastName')?.touched">
+          <small class="error">Last Name is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contact">Contact:</label>
+        <input type="tel" id="contact" placeholder="Enter your contact number" formControlName="contact" required
+               (input)="checkFormValidity()">
+        <div *ngIf="registrationAgent.get('contact')?.errors && registrationAgent.get('contact')?.touched">
+          <small class="error">Valid Contact is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email address" formControlName="email" required
+               (input)="checkFormValidity()">
+        <div *ngIf="registrationAgent.get('email')?.errors && registrationAgent.get('email')?.touched">
+          <small class="error">Valid Email is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" >Password:</label>
+        <input (focus)="showPasswordMessages()" (blur)="hideMessages()"  type="password" id="password" placeholder="Enter your password" formControlName="password" required
+               (input)="checkFormValidity()">
+
+        <div *ngIf="showMessages" class="tooltip-container">
+          <div class="tooltip-message">
+            <span class="password">Password Requirements:</span>
+            <ul>
+              <li>Minimum of 8 characters,</li>
+              <li>At least one uppercase letter,</li>
+              <li>At least one number,</li>
+              <li>At least one special character (!@#$%^&*)</li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="registrationAgent.get('password')?.errors && registrationAgent.get('password')?.touched">
+          <small class="error">Password is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" formControlName="confirmPassword"
+               required (input)="checkFormValidity()">
+
+        <div *ngIf="registrationAgent.get('confirmPassword')?.errors && registrationAgent.get('confirmPassword')?.touched">
+          <small class="error">Passwords must match.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="accessCode">Access Code:</label>
+        <input type="password" id="accessCode" placeholder="Enter your access code" formControlName="accessCode" required
+               (input)="checkFormValidity()">
+      </div>
+
+      <button type="submit" [disabled]="registrationAgent.invalid">Sign Up</button>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+      <div>
+        <p>Already have an account? <a href="/collection-center/agent/signing" class="login-link">Login here</a></p>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+</body>
+
+</html>

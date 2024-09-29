@@ -1,0 +1,7 @@
+{
+  "name": "MyIonic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

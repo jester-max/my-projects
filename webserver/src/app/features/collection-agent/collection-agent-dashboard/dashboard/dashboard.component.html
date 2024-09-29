@@ -1,0 +1,134 @@
+
+<section class="bg">
+
+  <div *ngIf="!showOtpBox" class="flex flex-col items-center sm:h-screen w-full justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <!-- Sidebar and other dashboard content -->
+    <div class="app-container">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <i  id="profile" class="fa-solid fa-user"></i>
+          <div class="email-address">
+            <span>{{ userData.firstName }}</span>&nbsp;
+            <span>{{ userData.lastName }}</span>&nbsp;|
+            <span>{{ userData.email }}</span>
+          </div>
+          <div class="app-icon">
+            <img src="../../../../assets/images/hplogo.png">
+          </div>
+          <div class="app-title">KhetSeGhar</div>
+        </div>
+
+        <ul class="sidebar-list">
+          <li>
+            <a routerLink="/collection-center/agent/dashboard/home" routerLinkActive="active">
+              <i class="fa-solid fa-house"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="profile" routerLinkActive="active">
+              <i class="fa-solid fa-user"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+
+<!--          <li>-->
+<!--            <a href="#">-->
+<!--              <i class="fa-solid fa-bell"></i>-->
+<!--              <span>Notifications</span>-->
+<!--              <span class="badge">3</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li>-->
+<!--            <a>-->
+<!--            <i class="fa-solid fa-bell"></i>-->
+<!--             <span (click)="onSuccess()">Notifications</span>-->
+<!--             <span class="badge">{{notificationCount}}</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+
+          <li>
+            <a>
+              <i class="fa-solid fa-bell" (click)="toggleNotificationModal()"></i>
+              <span (click)="toggleNotificationModal()">Notifications</span>
+              <span  class="badge" (click)="toggleNotificationModal()">{{ notificationCount }}</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a routerLink="products" routerLinkActive="active">
+              <i class="fa-solid fa-shopping-bag"></i>
+              <span>Products</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- Notification Modal -->
+
+<!--<div *ngIf="isNotificationOpen"; class="notification-modal">-->
+<!--  <div class="modal-content">-->
+<!--    <div class="modal-header">-->
+<!--      <h5>Notifications</h5>-->
+<!--      <button (click)="toggleNotificationModal()">Close</button>-->
+<!--    </div>-->
+<!--    <div class="modal-body">-->
+<!--      <ul>-->
+<!--        <li *ngFor="let notification of notifications">-->
+<!--          {{ notification.message }} - {{ notification.time | date:'shortTime' }}-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+
+<!-- Notification Modal -->
+<div *ngIf="isNotificationOpen" class="notification-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Notifications </h5>
+
+      <button (click)="toggleNotificationModal()">Close</button>
+    </div>
+
+
+    <div class="modal-body">
+      <ul *ngIf="hasNotifications; else noNotifications">
+        <li *ngFor="let notification of notifications" (click)="redirectToProductPage()">
+          <a>
+            {{ notification.productDetails.productName + ' '+notification.productDetails.quantity+' '+notification.productDetails.unit}}
+          </a>
+          <h1 class="date">{{ 'Date'+'-'+notification.createdDate  }}</h1>
+        </li>
+      </ul>
+      <ng-template #noNotifications>
+        <p>No notifications found</p>
+      </ng-template>
+    </div>
+  </div>
+
+</div>
+
+

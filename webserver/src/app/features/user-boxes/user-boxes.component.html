@@ -1,0 +1,133 @@
+<section class="bg-white min-h-lvh dark:bg-gray-900">
+  <div class="h-[32rem] dark:bg-gray-800">
+    <div class="container px-6 py-10 mx-auto">
+      <h1 class="text-2xl font-semibold text-left text-gray-800 capitalize lg:text-3xl dark:text-white">My Boxes</h1>
+
+      <div class="flex justify-start mx-auto mt-6">
+        <span class="inline-block w-40 h-1 bg-lime-500 rounded-full"></span>
+        <span class="inline-block w-3 h-1 mx-1 bg-lime-500 rounded-full"></span>
+        <span class="inline-block w-1 h-1 bg-lime-500 rounded-full"></span>
+      </div>
+
+      <hr class="my-6 border-gray-200 dark:border-gray-700">
+
+    </div>
+  </div>
+
+  <div class="container max-w-4xl px-6 py-10 mx-auto -mt-72 sm:-mt-80 md:-mt-96">
+    <div *ngFor="let box of boxDetails; let i = index" class="transition border-2 border-gray-100 rounded-lg dark:border-gray-700">
+      <button (click)="openAccordion(i)" class="transition flex items-center justify-between w-full p-8">
+
+        <div class="flex text-gray-700 dark:text-white">
+          <img [src]="box.boxImg" class="object-cover h-28 rounded-lg mr-3">
+          <h1 class="text-left font-semibold">
+            <span class="text-sm">{{box.orderId}}</span><br>
+          {{box.boxType}}<br>
+          {{box.boxSize}}<br>
+          {{box.deliveryDate}}<br>
+          {{box.price}}/{{box.weight}}{{box.unit}}
+          </h1>
+        </div>
+
+        <span [matTooltip]="!isAccordion ? 'Open and customise box':'Close'" class="text-gray-400 hover:bg-gray-200 flex justify-center p-1 rounded-full">
+          <svg *ngIf="!isAccordion" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"/>
+          </svg>
+          <svg *ngIf="isAccordion" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z"/>
+          </svg>
+        </span>
+      </button>
+
+      <hr class="border-gray-200 dark:border-gray-700">
+
+      <div class="accordion-content_{{i}} overflow-hidden max-h-0 text-sm text-gray-500 dark:text-gray-300">
+
+      <section class="bg-white dark:bg-gray-900">
+        <div class="container max-w-4xl px-6 py-10 mx-auto">
+          <form class="hidden mb-6 md:block w-full searchInput">
+            <label for="topbar-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <div
+                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+              >
+                <svg
+                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                (click)="activeFilters()" (keyup)="searchBoxItem()"
+                [(ngModel)]="itemQuery"
+                type="search"
+                name="itemQuery"
+                id="topbar-search"
+                class="direct-search bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Search fruits and vegetables for your box..."
+              />
+                <div class="resultBox max-h-40 border w-full border-primary-500 rounded-lg dark:border-primary-700">
+                  <div class="flex items-center justify-between space-x-4 border-t p-4 border-b">
+                    <p class="text-gray-900 text-sm">List of fruits and vegetables where you able to add in your box...</p>
+                    <button (click)="removeFilters()" type="submit" class="text-white uppercase bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                      Close
+                    </button>
+                  </div>
+                  <button *ngFor="let items of itemSearch" class="flex w-full items-center justify-between border-b p-4">
+                    <h1 class="font-semibold text-gray-700 dark:text-white">{{items.name}}</h1>
+
+                    <span (click)="addItem(items.name,box.bId,i)" [matTooltip]="'Add in your box'" class="text-white hover:bg-lime-500 bg-lime-600 rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+            </div>
+          </form>
+
+          <h1 *ngIf="box.boxItem.length>0" class="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-white">
+            <img src="assets/images/shipping.gif" class="object-cover h-20 mb-3 mr-auto ml-auto">
+            Box Items
+          </h1>
+          <h3 *ngIf="box.boxItem.length===0" class="text-xl font-semibold text-center text-gray-800 dark:text-white">
+            <img src="assets/images/unboxing.gif" class="object-cover h-20 mb-3 mr-auto ml-auto">
+            Currently box is empty
+          </h3>
+
+          <div *ngIf="box.boxItem.length>0" class="mt-6 flex flex-wrap">
+            <div *ngFor="let items of box.boxItem; let b = index" class="border-2 w-1/2 border-gray-100 rounded-lg dark:border-gray-700 mb-2">
+              <button class="flex w-full items-center justify-between m-1 p-4">
+                <h1 class="font-semibold text-gray-700 dark:text-white">{{items.produce}} {{items.quantity}} {{items.unit}}</h1>
+
+                <div class="flex justify-center items-center">
+                <span (click)="plusMinus('minus',items,box.bId,i)" [matTooltip]="'Minus'" class="text-white hover:bg-red-500 bg-red-600 rounded-full mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-dash w-6 h-6" viewBox="0 0 16 16">
+                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                  </svg>
+                </span>
+                <span>
+                  {{items.quantity}} {{items.unit}}
+                </span>
+                <span (click)="plusMinus('plus',items,box.bId,i)" [matTooltip]="'Plus'" class="text-white hover:bg-lime-500 bg-lime-600 rounded-full ml-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </div>
+  </div>
+</section>

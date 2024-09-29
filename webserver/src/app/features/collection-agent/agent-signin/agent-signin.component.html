@@ -1,0 +1,53 @@
+<!--
+
+<html class="agentBackground">
+<form (ngSubmit)="LoginToAgent()">
+  <h2>LOGIN</h2>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="email" (input)="checkFormValidity()" required placeholder="Enter your email">
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" (input)="checkFormValidity()" required placeholder="Enter your password">
+  </div>
+  <button type="submit" [disabled]="!isFormValid">Login</button>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+</form>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Login Form</title>
+</head>
+
+<body>
+<div class="agentBackground">
+  <div class="form-container">
+    <form (ngSubmit)="LoginToAgent()">
+      <h2>LOGIN</h2>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" (input)="checkFormValidity()" required placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" (input)="checkFormValidity()" required placeholder="Enter your password">
+      </div>
+      <button type="submit" [disabled]="!isFormValid">Login</button>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    </form>
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+
+<section class="main-container">
+<section class="banner">
+  <div class="container hero-section">
+    <div class="hero-text">
+      <h1>A platform built for a<br>
+        new way of working</h1>
+      <p>What would you like to manage with unifiedplatform.com Work OS?</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="container service-section">
+  <div class="row">
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="erp" [(ngModel)]="services.erp" name="erp" class="checkbox-input" (change)="selectServices()">
+      <label for="erp" class="card erp">
+        <i class="fi fi-rr-workflow-alt"></i>
+        <h3 class="card-title">ERP</h3>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="crm" [(ngModel)]="services.crm" name="crm" class="checkbox-input" (change)="selectServices()">
+      <label for="crm" class="card crm">
+        <i class="fi fi-rr-review"></i>
+        <h3 class="card-title">CRM</h3>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="payroll" [(ngModel)]="services.payroll" name="payroll" class="checkbox-input" (change)="selectServices()">
+      <label for="payroll" class="card payroll">
+        <i class="fi fi-rr-hands-usd"></i>
+        <h3 class="card-title">PAYROLL</h3>
+      </label>
+    </div>
+    <div class="mb-30 col-md-6 col-lg-3">
+      <input type="checkbox" id="benefits" [(ngModel)]="services.benefits" name="benefits" class="checkbox-input" (change)="selectServices()">
+      <label for="benefits" class="card benefits">
+        <i class="fi fi-rr-hand-holding-medical"></i>
+        <h3 class="card-title">BENEFITS</h3>
+      </label>
+    </div>
+  </div>
+</div>
+
+  <div class="sub-btn" data-aos="fade-up">
+    <a id="sub-btn" href="http://localhost:4200/mainModules/{{this.ActiveRoute.snapshot.params['_accessToken']}}">Get Start<span><i class="fi fi-rr-angle-small-right d-flex justify-content-md-center align-items-center"></i></span></a>
+  </div>
+
+</section>

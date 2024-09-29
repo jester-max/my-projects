@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+      <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start"></ion-back-button>
+      <ion-title>Order Details</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="bg"></div>
+  <ion-grid>
+    <div *ngIf="orderDetails">
+    <ion-card>
+      <h5><ion-icon name="person"></ion-icon>Personal Info</h5>
+      <p class="font mt-2 ion-text-base leading-7"><span class=" heading fw-bold">Name: </span> {{orderDetails?.billingAddress?.fullName}}</p>
+    </ion-card>
+      <ion-card>
+        <h5><ion-icon name="receipt"></ion-icon> Product Details</h5>
+        <div *ngFor="let content of orderDetails?.CartContents; let i = index">
+          <p class="font mt-2 ion-text-base leading-7">
+            <span class="heading fw-bold">Box Type:</span> {{content.boxType}}
+          </p>
+          <p class="font mt-1 ion-text-base leading-7">
+            <span class="heading fw-bold">Box Size:</span> {{content.boxSize}}
+          </p>
+          <p class="font mt-1 ion-text-base leading-7">
+            <span class="heading fw-bold">Frequency:</span> {{content.frequency}}
+          </p>
+          <p class="font mt-1 ion-text-base leading-7">
+            <span class="heading fw-bold">Delivery Date:</span> {{content.deliveryDate}}
+          </p>
+          <p class="font mt-1 ion-text-base leading-7">
+            <span class="heading fw-bold">Item Price:</span> &#8377; {{content.price}}
+          </p>
+          <p class="font mt-1 ion-text-base leading-7">
+            <span class="heading fw-bold">Weight:</span> {{content.weight}} {{content.unit}}
+          </p>
+          <hr *ngIf="i < orderDetails.CartContents.length - 1" />
+        </div>
+      </ion-card>
+
+
+      <ion-card >
+      <h5><ion-icon name="receipt" ></ion-icon>Bill Details</h5>
+      <p class="font mt-1 ion-text-base leading-7"><span class="heading fw-bold"> Item Price: </span> {{orderDetails?.itemPrice}}</p>
+      <p class="font mt-2 ion-text-base leading-7"><span class="heading fw-bold"> Extra charges: </span> {{orderDetails?.taxAmount}}</p>
+      <p class="font mt-2 ion-text-base leading-7"><span class="heading fw-bold"> Total Amount: </span> {{orderDetails?.totalAmount}}</p>
+
+    </ion-card>
+    <ion-card >
+      <h5><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="25" height="25" ><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>Order Details</h5>
+      <p class="font mt-2 ion-text-base leading-7"><span class=" heading fw-bold">OrderId: </span> {{orderDetails?.orderId}}</p>
+      <p class="font mt-2 ion-text-base leading-7"><span class="heading fw-bold"> Order placed:  </span> {{orderDetails?.createdAt}}</p>
+      <p class="font mt-2 ion-text-base leading-7"><span class="heading fw-bold">Payment Method :</span> {{orderDetails?.paymentMethod}}</p>
+      <p class="font mt-2 ion-text-base leading-7"><span class="heading fw-bold">Address: </span> {{orderDetails?.shippingAddress.streetAddress}}{{orderDetails?.shippingAddress.city}} {{orderDetails?.shippingAddress.state}} {{orderDetails?.shippingAddress.zipCode}} </p>
+
+    </ion-card>
+    </div>
+  </ion-grid>
+</ion-content>
+<div class="card add-cart">
+  <div class="card-body">
+    <button type="button" class="btn btn-primary rounded-pill w-75 fw-bold" [routerLink]="'/user-box/'+orderDetails?.orderId">Get your Box</button>
+  </div>
+</div>

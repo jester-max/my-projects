@@ -1,0 +1,168 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button id="popover-button-filter-vendor-payment" class="toolbar-dropdown" fill="clear">
+      Vendor
+      <ion-icon name="chevron-down-outline" class="ms-2"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="popover-button-filter-vendor-payment" [dismissOnSelect]="true">
+      <ng-template>
+        <ion-content>
+          <ion-list lines="none">
+            <ion-item routerLink="/get-payments" [button]="true" [detail]="false">
+              <ion-icon class="me-2 fs-6" slot="start" name="ellipse"></ion-icon>
+              <ion-label>
+                <h2>Customers Payments</h2>
+              </ion-label>
+            </ion-item>
+
+            <ion-item routerLink="/get-vendors-payments" style="color: #0d6efd" [button]="true" [detail]="false">
+              <ion-icon style="color: #0d6efd" class="me-2 fs-6" slot="start" name="ellipse"></ion-icon>
+              <ion-label>
+                <h2>Vendors Payments</h2>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+    <ion-buttons slot="end">
+      <ion-button shape="round">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-icon name="ellipse" color="danger" class="notification"></ion-icon>
+      </ion-button>
+      <ion-button shape="round">
+        <ion-icon name="help"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+
+    <!-- search -->
+
+   <!-- <div class="position-sticky top-0 z-1 bg-white">
+      <div class="d-flex">
+        <ion-searchbar (ionInput)="searchItem(searchText)" [(ngModel)]="searchText" name="searchText" show-clear-button="always" [debounce]="1000"></ion-searchbar>
+        <ion-buttons slot="end">
+          <ion-button id="popover-button-filter-material" fill="clear" class="m-0 me-2 p-1 filter border-1">
+            <ion-icon name="filter"></ion-icon>
+          </ion-button>
+          <ion-popover trigger="popover-button-filter-material" [dismissOnSelect]="true">
+            <ng-template>
+              <ion-content>
+                <ion-list lines="none">
+                  <ion-item [ngStyle]="{'color' : filterWith === 'vendorName' ? '#0d6efd' : 'auto'}" (click)="handleChange('vendorName')" [button]="true" [detail]="false">
+                    <ion-icon [ngStyle]="{'color' : filterWith === 'vendorName' ? '#0d6efd' : 'auto'}" class="me-2 fs-6" slot="start" name="ellipse"></ion-icon>
+                    <ion-label>
+                      <h2>Vendor</h2>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item [ngStyle]="{'color' : filterWith === 'purchaseID' ? '#0d6efd' : 'auto'}" (click)="handleChange('purchaseID')" [button]="true" [detail]="false">
+                    <ion-icon [ngStyle]="{'color' : filterWith === 'purchaseID' ? '#0d6efd' : 'auto'}" class="me-2 fs-6" slot="start" name="ellipse"></ion-icon>
+                    <ion-label>
+                      <h2>Purchase ID</h2>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </ion-buttons>
+      </div>
+      <ion-list *ngIf="showList" class="position-absolute z-2 w-100 search-list">
+        <ion-item *ngFor="let result of results">
+          <ion-label (click)="oneSearch(result?.[filterWith])">{{result?.[filterWith]}}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      &lt;!&ndash; date filter &ndash;&gt;
+
+      <ion-card class="mt-0 d-flex align-items-center ion-justify-content-around">
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime max="{{currentDate}}" id="datetime" presentation="date" [showDefaultButtons]="true" [showDefaultTitle]="true" [(ngModel)]="fromDate" (ionChange)="dateFilter()">
+              <span slot="title">Select Start Date</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <ion-card-header>
+          <ion-card-subtitle>To</ion-card-subtitle>
+        </ion-card-header>
+        <ion-datetime-button datetime="datetime2"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime max="{{currentDate}}" id="datetime2" presentation="date" [showDefaultButtons]="true" [showDefaultTitle]="true" [(ngModel)]="toDate" (ionChange)="dateFilter()">
+              <span slot="title">Select End Date</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-card>
+
+    </div>-->
+
+    <!-- pre-details -->
+
+    <ion-card *ngFor="let data of GetVendorAccountData; let i = index" class="new-style">
+      <ion-card-header class="pb-0" routerLink="/get-one-item/{{data.productId}}">
+        <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+          <div>
+            <div class="d-flex ion-align-items-center gap-2">
+              <ion-icon *ngIf="data?.varifyProductStatus === 'PENDING'" name="ellipse" color="warning"></ion-icon>
+              <ion-icon *ngIf="data?.varifyProductStatus === 'SUCCESS'" name="ellipse" color="success"></ion-icon>
+              <ion-icon *ngIf="data?.varifyProductStatus === 'REJECT'" name="ellipse" color="danger"></ion-icon>
+              <span>{{data?.vendorName}}</span>
+            </div>
+          </div>
+        </ion-card-title>
+        <ion-card-subtitle class="m-0">
+          <span>{{data.vendorGST}}</span>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="p-0">
+        <ion-list>
+          <ion-item lines="none">
+            <ion-thumbnail slot="start">
+              <img alt="Silhouette of mountains" src="assets/pngtree-man-avatar-wearing-gray-suit-png-image_6102786-removebg-preview.jpg" width="350px" />
+            </ion-thumbnail>
+            <ion-card-subtitle>
+              <h3 [ngStyle]="{'color': (data?.balance>20000) ? 'green' : ''}"><b>TDS : Rs {{data?.totalTDS.toLocaleString('en-IN', { maximumFractionDigits: 2 })}}</b></h3>
+              <h3 [ngStyle]="{'color': (data?.balance>20000) ? 'green' : ''}"><b>CREDIT : Rs {{data?.totalCredit.toLocaleString('en-IN', { maximumFractionDigits: 2 })}}</b></h3>
+              <h3 [ngStyle]="{'color': (data?.balance>20000) ? 'green' : ''}"><b>DEBIT : Rs {{data?.totalDebit.toLocaleString('en-IN', { maximumFractionDigits: 2 })}}</b></h3>
+              <h3 [ngStyle]="{'color': (data?.balance>20000) ? 'green' : ''}"><b>BALANCE : Rs {{data?.balance.toLocaleString('en-IN', { maximumFractionDigits: 2 })}}</b></h3>
+            </ion-card-subtitle>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+  <!--  pagination or scroll-->
+
+  <ion-infinite-scroll *ngIf="DateFilter" (ionInfinite)="paginateItem($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="setOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}">
+  </ion-toast>
+</ion-content>

@@ -1,0 +1,31 @@
+
+<mat-toolbar>
+  <button (click)="toggleSidebar()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+          [matTooltip]=" showmenu ? 'Hide Menu' : 'Show Menu'">
+    <mat-icon>sort</mat-icon>
+  </button>
+  <div class="logo d-flex align-items-center ms-2 p-2">
+    <img src="assets/hp.png">
+    <h5 class="ps-2 m-0 fs-6"
+        [matTooltip]="'Company Profile'">HARI PRIYA GLOBAL ENTERPRISES PVT LTD<br>
+      <p class="m-0">Plot. 191/3. Old A B Road, Nimrani, Near Darbar Hotel.<br> Teh. Kasrawad. Khargone. West Nimar-451660 Madhya Pradesh, India</p>
+    </h5>
+  </div>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+          [matTooltip]="'Notifications'">
+    <mat-icon>notifications</mat-icon>
+  </button>
+  <button class="ms-2 profile" [matMenuTriggerFor]="beforeMenu" mat-fab extended
+          [matTooltip]="'User Profile'">
+    <mat-icon>person</mat-icon>
+    {{employeeName}} ({{employeeRole}})<br>
+    {{employeeEmail}}
+  </button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

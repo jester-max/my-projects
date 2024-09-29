@@ -1,0 +1,84 @@
+<body>
+<div class="login-root">
+  <div class="side-img">
+    <div class="field padding-bottom--24">
+<!--      <input class="w-50" type="submit" name="submit" value="Sign in existing Account">-->
+      <h2>Secure verification</h2>
+      <img class="O1nZl" src="assets/undraw_access_account_re_8spm.svg" alt="Background" data-testid="right-side-asset">
+    </div>
+  </div>
+  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
+            <h3 class="padding-bottom--15">Sign Up For HPU</h3>
+            <h5 class="padding-bottom--15">Contact information</h5>
+            <form id="stripe-login" #SignUpContactInfo="ngForm" (ngSubmit)="SignUpContact(SignUpContactInfo.value)">
+              <div class="field padding-bottom--24">
+                <label for="fullName">Full Name</label>
+                <span>Use a you full name with middle and last name.</span>
+                <input ngModel id="fullName" type="email" name="fullName">
+                <span *ngIf="Response?.fields === 'fullName'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="organizationName">Organisation Name</label>
+                <span>Use your organisation name for the verify your business.</span>
+                <input ngModel id="organizationName" type="text" name="organizationName">
+                <span *ngIf="Response?.fields === 'organizationName'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="organizationGST">Organisation GSTIN</label>
+                <span>Use your organisation GST for the verify your business</span>
+                <input ngModel id="organizationGST" type="text" name="organizationGST">
+                <span *ngIf="Response?.fields === 'organizationGST'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="mobileNumber">Phone Number</label>
+                <span>Use you mobile and phone number as per your requirement</span>
+                <input ngModel id="mobileNumber" type="email" name="mobileNumber">
+                <span *ngIf="Response?.fields === 'mobileNumber'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="country">Country</label>
+                <span>Give the country name where your organization is established.</span>
+                <input ngModel id="country" type="text" name="country">
+                <span *ngIf="Response?.fields === 'country'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="state">State</label>
+                <span>Give the state name where your organization is connected.</span>
+                <input ngModel id="state" type="text" name="state">
+                <span *ngIf="Response?.fields === 'state'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="city">City</label>
+                <span>Give the city name where your organization is.</span>
+                <input ngModel id="city" type="text" name="city">
+                <span *ngIf="Response?.fields === 'city'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="pin">PIN Code</label>
+                <span>Choose a name for your account. You can change this name in your account settings after you sign up.</span>
+                <input ngModel id="pin" type="text" name="pin">
+                <span *ngIf="Response?.fields === 'pin'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="landmark">Landmark</label>
+                <span>Fill your full of the address like apartment, unit, building, area etc.</span>
+<!--                <input ngModel id="landmark" type="text" name="landmark">-->
+                <textarea ngModel type="text" id="landmark" name="landmark"></textarea>
+                <span *ngIf="Response?.fields === 'landmark'" style="color: red">{{Response?.error}}</span>
+              </div>
+              <div class="field padding-bottom--24">
+                <input type="submit" name="submit" value="Verify and continue">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+

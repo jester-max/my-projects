@@ -1,0 +1,12 @@
+{
+  "name": "KhetSeGharApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "serve": {
+    "ssl": true
+  },
+  "sslCert": "ssl/ipcertificate2.crt",
+  "sslKey": "ssl/private-key.pem"
+}

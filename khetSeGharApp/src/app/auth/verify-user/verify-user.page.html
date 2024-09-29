@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="otp" class="ion-padding row g-3 p-0" novalidate>
+    <div class="card p-0 border-0">
+      <div class="d-flex align-items-baseline justify-content-center">
+        <img src="assets/istockphoto-520221976-612x612.jpg" class="w-75">
+      </div>
+      <div class="card-body">
+        <div class="col-md-12">
+          <h5 class="card-title m-0 text-center">Verify your number</h5>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="otp" class="form-label">OTP</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"><ion-icon name="phone-portrait-outline"></ion-icon></span>
+            <input type="text" class="form-control shadow-none" id="otp" formControlName="otp" placeholder="xxxxxx" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="otp.get('otp')?.invalid && otp.get('otp')?.touched">
+            Please enter a valid otp
+          </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+          <button class="btn btn-primary w-75 rounded-pill" (click)="verifyOTP()" type="submit">Verify</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,66 @@
+<body>
+<div class="login-root">
+  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+        <h1><a href="http://blog.stackfindover.com/" rel="dofollow">SignUp</a></h1>
+      </div>
+      <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
+            <span class="padding-bottom--15">Sign in to your account</span>
+            <form id="stripe-login" #signUp="ngForm">
+              <div class="field padding-bottom--24">
+                <label for="email">Email</label>
+                <input ngModel id="email" type="email" name="email">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="username">Username</label>
+                <input ngModel id="username" type="text" name="username">
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="vemail">Verify Email</label>
+                <input ngModel id="vemail" type="text" name="verifyCode">
+              </div>
+<!--              <div class="field padding-bottom&#45;&#45;24">-->
+<!--                <div class="grid&#45;&#45;50-50">-->
+<!--                  <label for="password">Password</label>-->
+<!--                  <div class="reset-pass">-->
+<!--                    <a href="#">Forgot your password?</a>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <input ngModel id="password" type="password" name="password">-->
+<!--              </div>-->
+              <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+                <label for="checkbox">
+                  <input id="checkbox" type="checkbox" name="checkbox"> Stay signed in for a week
+                </label>
+              </div>
+              <div class="field padding-bottom--24">
+                <input type="submit" name="submit" value="Continue" (click)="SignUp(signUp.value)">
+              </div>
+              <div class="field">
+                <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="footer-link padding-top--24">
+          <span>Don't have an account? <a href="">Sign up</a></span>
+          <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+            <span><a href="#">© Stackfindover</a></span>
+            <span><a href="#">Contact</a></span>
+            <span><a href="#">Privacy & terms</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="side-img">
+    <div class="field padding-bottom--24">
+      <input type="submit" name="submit" value="Continue">
+      <img class="O1nZl" src="https://dapulse-res.cloudinary.com/image/upload/monday_platform/signup/signup-right-side-assets-new-flow/welcome-to-monday.png" alt="Background" data-testid="right-side-asset">
+    </div>
+  </div>
+</div>
+</body>

@@ -1,0 +1,190 @@
+<div class="antialiased bg-gray-50 dark:bg-gray-900">
+
+  <main class="p-4 md:ml-64 h-dvh pt-20 sm:pt-28">
+
+    <!--actions-->
+    <div class="border-2 rounded-lg bg-white dark:border-gray-600 h-auto mb-4 p-4">
+      <div class="flex items-center justify-between flex-wrap sm:justify-center">
+        <div class="flex items-center gap-2">
+          <div class="rounded-full p-1 bg-green-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-send-fill p-0.5" viewBox="0 0 16 16">
+              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+            </svg>
+          </div>
+          <div class="navigation sm:pb-3">
+            <h3 class="font-medium text-2xl text-black">Purchase requests</h3>
+            <p>There are the request of purchase the product from farmers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--table -->
+    <div class="border-2 rounded-lg bg-white dark:border-gray-600 h-auto mb-4 main-container relative overflow-scroll">
+      <table class="absolute table-auto w-full">
+        <thead class="text-sm font-semibold uppercase bg-gray-100 sticky top-0">
+        <tr>
+          <th class="p-4 whitespace-nowrap">
+            <div class="font-semibold text-center">S.No</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Requested Date</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-center">Status</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Farmer Name</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Product</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Category</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Quantity</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Rate</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Subtotal</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Name</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Contact</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Address</div>
+          </th>
+          <th class="p-4 pl-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Action</div>
+          </th>
+        </tr>
+        </thead>
+        <tbody class="text-sm divide-y divide-gray-100">
+        <tr *ngFor="let farmers of farmersProducts;  let i = index">
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-center">{{i+1}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left">{{farmers.requestDate}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div [ngClass]="{'bg-green-200' : farmers.status==='Accepted' , 'bg-amber-200': farmers.status==='Pending' , 'bg-red-200': farmers.status==='Rejected', 'bg-blue-200' : farmers.status==='Purchased'}" class="text-center p-1 rounded-full">{{farmers.status}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="assets/images/farmer.png" width="40" height="40" alt="Alex Shatov"></div>
+              <div class="text-gray-800 capitalize font-bold">{{farmers.farmerName}}</div>
+            </div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left capitalize">{{farmers.productName}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-medium capitalize">{{farmers.category}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-medium">
+              {{farmers.quantity}}{{farmers.unit}}
+            </div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-black capitalize">&#8377; {{farmers?.unitPrice}}/{{farmers.unit}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-medium">&#8377; {{farmers.subtotal}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="assets/images/user.png" width="40" height="40" alt="Alex Shatov"></div>
+              <div class="text-gray-800 capitalize font-bold">{{farmers.contactInformation.fullName}}</div>
+            </div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-medium">{{farmers.contactInformation.contact}}</div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-medium capitalize">{{farmers.contactInformation.streetAddress}}, {{farmers.contactInformation.city}}<br>
+              {{farmers.contactInformation.state}}, {{farmers.contactInformation.country}}
+            </div>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <div class="text-left font-medium capitalize">
+              <button (click)="requestId = farmers.requestId" [matTooltip]="farmers.status==='Pending' ? 'This request is not accepted' : farmers.status==='Purchased' ? 'This is already bought' : farmers.status==='Accepted' ? 'Buy it now':''" [ngClass]="{'bg-green-500 hover:bg-green-600' : farmers.status==='Accepted', 'bg-gray-500' : farmers.status!=='Accepted'}" [disabled]="farmers.status!=='Accepted'" type="button" data-modal-target="purchaseFormModal" data-modal-show="purchaseFormModal" class="text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-0">
+                Buy this product
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!--add purchase form-->
+    <div id="purchaseFormModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-0rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          <!-- Modal header -->
+          <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Confirm Purchase Request of {{requestId}}
+            </h3>
+            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="purchaseFormModal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="w-full" >
+            <h2 class="text-base font-semibold leading-7 text-gray-900 ">Payment Information</h2>
+            <ul class="grid w-full gap-6 md:grid-cols-1 mt-6 mb-6">
+              <li>
+                <input type="radio" id="shipping" name="shipping"  class="hidden peer" required />
+                <label for="shipping" class="inline-flex items-center justify-between w-full h-full p-5 bg-white border rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 text-blue-600 border-blue-700 dark:text-gray-400 dark:bg-gray-800">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Cash On Delivery</div>
+                    <div class="w-full">Pay on the delivery time</div>
+                  </div>
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="billing" name="billing"   class="hidden peer">
+                <label for="billing" class="inline-flex items-center justify-between w-full h-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Pay with UPI</div>
+                    <div class="w-full text-red-600">Currently this service is unavailable.</div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+            <div class="flex items-center justify-center space-x-4 border-t pt-4">
+              <button (click)="buyRequest(requestId)" type="submit" class="text-white w-2/5 uppercase bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--pagination-->
+    <div class="border-2 rounded-lg bg-white dark:border-gray-600 h-auto mb-4 p-4">
+      <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+      </mat-paginator>
+    </div>
+
+    <!-- Loading or Error template -->
+    <ng-template #loadingOrError>
+      <div class="py-3 px-4">
+        <span class="block text-sm text-red-500 dark:text-red-400">Error occurred while loading data.</span>
+      </div>
+    </ng-template>
+  </main>
+</div>

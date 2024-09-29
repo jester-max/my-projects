@@ -1,0 +1,221 @@
+<!--<div class="demo-page">
+  <section>
+    <div class="d-flex align-items-center mb-3">
+      <h1>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 21.4V2.6C4 2.26863 4.26863 2 4.6 2H16.2515C16.4106 2 16.5632 2.06321 16.6757 2.17574L19.8243 5.32426C19.9368 5.43679 20 5.5894 20 5.74853V21.4C20 21.7314 19.7314 22 19.4 22H4.6C4.26863 22 4 21.7314 4 21.4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M16 5.4V2.35355C16 2.15829 16.1583 2 16.3536 2C16.4473 2 16.5372 2.03725 16.6036 2.10355L19.8964 5.39645C19.9628 5.46275 20 5.55268 20 5.64645C20 5.84171 19.8417 6 19.6464 6H16.6C16.2686 6 16 5.73137 16 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8 10L16 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8 18L16 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8 14L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Sale-Invoice
+      </h1>
+      <div class="nice-form-group" style="margin: 0; width: 10% ; margin-right: 0.75em;
+    padding-right: 0.75em;
+    border-right: 1px solid gainsboro;">
+        <select (change)="toggle()">
+          <option>{{navigate[0]}}</option>
+          <option>{{navigate[1]}}</option>
+        </select>
+      </div>
+      <div *ngIf="display" class="nice-form-group" style="margin: 0;">
+        <button class="btn btn-outline-danger" (click)="deleteAllInvoice()">
+          Delete ALL
+        </button>
+      </div>
+    </div>
+    <form *ngIf="create" #post="ngForm">
+      <div class="href-target" id="icons"></div>
+      <div *ngFor="let Data of data;  let i = index;" class="nice-form-group" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <div *ngIf="i != 0 && Data.key != '__v'">
+          <label>{{Data.key}}</label>
+        </div>
+        <div  *ngIf="Data.type === 'array'">
+          <div>
+            <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+              <div *ngFor="let Data2 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+                <div class="merge" *ngIf="Data2.key!== undefined">
+                  <label class="custome">{{Data2.key}}</label>
+                </div>
+                <input *ngIf="Data2.key!== undefined" [type]="Data2.type" [(ngModel)]="Data2.default" name="{{Data2.key}}_{{i}}">
+              </div>
+              <button mat-raised-button color="primary" style="width: 40%;" (click)="add(i)">+Add</button>
+              <button mat-raised-button color="accent" style="width: 40%;" (click)="remove(i)">-Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngIf="Data.relation === 'object'">
+          <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+            <div *ngFor="let Data3 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+              <div class="merge" *ngIf="i != 0" >
+                <label class="custome">{{Data3.key}}</label>
+              </div>
+              <input *ngIf="i != 0" [type]="Data3.type" [(ngModel)]="Data3.default" name="{{Data3.key}}_{{i}}">
+            </div>
+          </div>
+        </div>
+        <input *ngIf="Data.relation === 'no' && i != 0 && Data.key != '__v'" [type]="Data.type" [(ngModel)]="Data.default" name="{{Data.key}}_{{i}}">
+      </div>
+
+      <details (click)="submit(post.value)">
+        <summary>
+          <div class="toggle-code">
+            Submit
+          </div>
+        </summary>
+      </details>
+    </form>
+
+
+    <div *ngIf="display" class="d-flex justify-content-sm-between align-items-center mb-3">
+      <div class="input-group w-50">
+        <span class="input-group-text p-2" id="basic-addon1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </span>
+        <input type="text" class="form-control" [(ngModel)]="searchInput"  (keyup)="search(pageSize,pageNumber)" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1">
+      </div>
+      <nav aria-label="...">
+        <ul class="pagination justify-content-end mb-0 p-0 m-0">
+          <li class="page-item">
+            <div class="input-group" style="width: 50%;margin-left: auto;">
+        <span class="input-group-text p-2" style="width: 50%; background: #FFFFFF; color: black; border-color:#dee2e6; ">
+          Jump to
+        </span>
+              <input type="text" class="form-control" name="number" [(ngModel)]="pageNumber" (keyup)="selectPageSize(pageSize,pageNumber)">
+            </div>
+          </li>
+          <li class="page-item">
+            <a class="page-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+              </svg>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item active" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="page-link size">1-{{pageSize}} of 100</a>
+          </li>
+          <ul class="dropdown-menu p-0">
+            <li *ngFor="let size of pageSizeOptions" (click)="selectPageSize(size,pageNumber)"><a class="dropdown-item">1-{{size}} of 100</a></li>
+          </ul>
+          <li class="page-item">
+            <a class="page-link"  >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+              </svg>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <table *ngIf="display" class="table table-sm">
+      <thead>
+      <tr>
+        <th *ngFor="let item of getData[0]" scope="col">{{item.key}}</th>
+        <th>Delete</th>
+        <th>Update</th>
+      </tr>
+      </thead>
+      <ng-container>
+        <tbody class="table-group-divider">
+        <tr *ngFor="let Data of getData">
+          <td *ngFor="let item of Data">{{item.default}}</td>
+          <td (click)="deleteOneInvoice(Data[0].default)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+              <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+            </svg>
+          </td>
+          <td (click)="update(Data[0].default)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+            </svg>
+          </td>
+        </tr>
+        </tbody>
+      </ng-container>
+    </table>
+  </section>
+</div>-->
+
+
+
+<div class="demo-page">
+  <section>
+    <div class="d-flex align-items-center mb-3 container-head">
+      <h1>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 21.4V2.6C4 2.26863 4.26863 2 4.6 2H16.2515C16.4106 2 16.5632 2.06321 16.6757 2.17574L19.8243 5.32426C19.9368 5.43679 20 5.5894 20 5.74853V21.4C20 21.7314 19.7314 22 19.4 22H4.6C4.26863 22 4 21.7314 4 21.4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M16 5.4V2.35355C16 2.15829 16.1583 2 16.3536 2C16.4473 2 16.5372 2.03725 16.6036 2.10355L19.8964 5.39645C19.9628 5.46275 20 5.55268 20 5.64645C20 5.84171 19.8417 6 19.6464 6H16.6C16.2686 6 16 5.73137 16 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8 10L16 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8 18L16 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8 14L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Sale-Invoice
+      </h1>
+
+      <!--      <div class="nice-form-group" style="margin: 0; width: 10%; margin-right: 0.85em; padding-right: 0.85em; border-right: 1px solid gainsboro;">-->
+      <!--        <select (change)="toggle()">-->
+      <!--          <option>{{navigate[0]}}</option>-->
+      <!--          <option><a routerLink="display/{{router.snapshot.params['_id']}}">{{navigate[1]}}</a></option>-->
+      <!--        </select>-->
+      <!--      </div>-->
+
+      <div class="dropdown" style="margin: 0; width: auto; margin-right: 0.85em; padding-right: 0.85em; border-right: 1px solid gainsboro;">
+        <a class="btn btn-primary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{this.router.snapshot.children[0].url[0].path}}
+        </a>
+
+        <ul class="dropdown-menu">
+          <li routerLink="{{navigate[0]}}/{{router.snapshot.params['_id']}}"><a class="dropdown-item">Create</a></li>
+          <li routerLink="{{navigate[1]}}/{{router.snapshot.params['_id']}}"><a class="dropdown-item">Display</a></li>
+          <li routerLink="{{navigate[2]}}/{{router.snapshot.params['_id']}}"><a class="dropdown-item">Update</a></li>
+        </ul>
+      </div>
+
+      <div *ngIf="display" class="input-group w-25" style="margin-right: 0.85em; margin-left: auto; padding-right: 0.85em; border-right: 1px solid gainsboro;">
+        <span class="input-group-text p-2" id="basic-addon1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </span>
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1">
+      </div>
+
+      <nav *ngIf="display" aria-label="...">
+        <ul class="pagination justify-content-end mb-0 p-0 m-0">
+          <li class="page-item">
+            <a class="page-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+              </svg>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item active" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="page-link">1-20 of 100</a>
+          </li>
+          <ul class="dropdown-menu p-0">
+            <li><a class="dropdown-item">1-20 of 100</a></li>
+            <li><a class="dropdown-item">1-50 of 100</a></li>
+            <li><a class="dropdown-item">1-100 of 100</a></li>
+          </ul>
+          <li class="page-item">
+            <a class="page-link"  >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+              </svg>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <router-outlet></router-outlet>
+  </section>
+</div>

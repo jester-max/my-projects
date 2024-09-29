@@ -1,0 +1,374 @@
+<ion-header [translucent]="true" *ngIf="visiblity === ''">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" [routerLink]="['/get-mistake']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Mistake</ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="CreateMistake(Mistake.value)">
+        <ion-label>SAVE</ion-label>
+      </ion-button>
+      <ion-button id="popover-button-scan">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </ion-button>
+      <ion-popover class="w-0" trigger="popover-button-scan" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list id="present-alert" class="p-0">
+              <ion-item lines="none" (click)="startScan('item')" [button]="true" [detail]="false">Item Scan</ion-item>
+              <ion-item lines="none" (click)="startScan('WorkingMachine')" [button]="true" [detail]="false">Working Machine Scan</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-header [translucent]="true" *ngIf="visiblity === 'hidden'">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button shape="round" color="danger" (click)="stopScan()">
+        <ion-label>STOP</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Scanning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [style.visibility]="visiblity" [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+    <ion-card class="d-flex">
+      <div class="w-50 barcode">
+        <img [src]="ItemBarcode">
+        Item Barcode
+      </div>
+      <div class="w-50 barcode">
+        <img src="{{WorkingMachineBarcode}}">
+        Machine Barcode
+      </div>
+    </ion-card>
+    <form #Mistake=ngForm class="was-validated" ngNativeValidate>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Item Relations</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+          </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Major id's of mistake item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="inventoryID" class="form-label">Inventory ID</label>
+              <input type="text" class="form-control" id="inventoryID" name="inventoryID" [(ngModel)]="PreMistakeData.inventoryID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productUnitID" class="form-label">Unit ID</label>
+              <input type="text" class="form-control" id="productUnitID" name="productUnitID" [(ngModel)]="PreMistakeData.productUnitID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productID" class="form-label">Product ID</label>
+              <input type="text" class="form-control" id="productID" name="productID" [(ngModel)]="PreMistakeData.productID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Item Details</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+        </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Detailed about mistake.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="date" class="form-label">Mistake Date</label>
+              <input type="date" class="form-control " id="date" name="date" [(ngModel)]="PreMistakeData.date" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="open-modal-employeeName" class="form-label">Employee Name</label>
+              <input inputmode="none" type="text" class="form-control " id="open-modal-employeeName" name="employeeName" [(ngModel)]="PreMistakeData.employeeName" required>
+              <ion-modal #modal trigger="open-modal-employeeName" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchMistake()" [(ngModel)]="employeeText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredData;" (click)="handleemployeeName(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.firstName +" "+ i.lastName }}</h2>
+                          <p>{{i?.role}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <ion-popover class="w-0" trigger="popover-button-employeeName" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of employeeName;" (click)="handleemployeeName(i)" lines="none">
+                        {{ i.firstName +" "+ i.lastName }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-employeeRole" class="form-label">Employee Role</label>
+              <input inputmode="none" type="text" class="form-control " id="popover-button-employeeRole" name="employeeRole" [(ngModel)]="PreMistakeData.employeeRole" required>
+              <ion-popover class="w-0" trigger="popover-button-employeeRole" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of employeeRole;" (click)="handleemployeeRole(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="description" class="form-label">Description Of Mistake</label>
+              <input type="text" class="form-control" id="description" name="description" [(ngModel)]="PreMistakeData.description" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-severityOfMistake" class="form-label">Severity Of Mistake</label>
+              <input inputmode="none" type="text" class="form-control " id="popover-button-severityOfMistake" name="severityOfMistake" [(ngModel)]="PreMistakeData.severityOfMistake" required>
+              <ion-popover class="w-0" trigger="popover-button-severityOfMistake" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of severityOfMistake;" (click)="handleseverityOfMistake(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-typeOfMistake" class="form-label">Type Of Mistake</label>
+              <input inputmode="none" type="text" class="form-control " id="popover-button-typeOfMistake" name="typeOfMistake" [(ngModel)]="PreMistakeData.typeOfMistake" required>
+              <ion-popover class="w-0" trigger="popover-button-typeOfMistake" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of typeOfMistake;" (click)="handletypeOfMistake(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="open-modal-eyeWitness" class="form-label">Witness</label>
+              <input inputmode="none" type="text" class="form-control " id="open-modal-eyeWitness" name="eyeWitness" [(ngModel)]="PreMistakeData.eyeWitness" required>
+              <ion-modal #modal trigger="open-modal-eyeWitness" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchMistake()" [(ngModel)]="employeeText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredData;" (click)="handleeyeWitness(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.firstName +" "+ i.lastName }}</h2>
+                          <p>{{i?.role}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <ion-popover class="w-0" trigger="popover-button-eyeWitness" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of eyeWitness;" (click)="handleeyeWitness(i)" lines="none">
+                        {{ i.firstName +" "+ i.lastName }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="workExperience" class="form-label">Work Experience</label>
+              <input type="text" class="form-control " id="workExperience" name="workExperience" [(ngModel)]="PreMistakeData.workExperience[0].experience" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="explanation" class="form-label">Explanation</label>
+              <input type="text" class="form-control " id="explanation" name="explanation" [(ngModel)]="PreMistakeData.explanation" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="actionOnMistake" class="form-label">Action On Mistake</label>
+              <input type="text" class="form-control " id="actionOnMistake" name="actionOnMistake" [(ngModel)]="PreMistakeData.actionOnMistake" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="purpose" class="form-label">Product Name</label>
+              <input type="text" class="form-control " id="purpose" name="purpose" [(ngModel)]="PreMistakeData.purpose" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="specification" class="form-label">Product Specification</label>
+              <input type="text" class="form-control " id="specification" name="specification" [(ngModel)]="PreMistakeData.specification" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Other</span>
+            <span class="p-1">
+              <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+            </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Other info of mistake.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="note" class="form-label">Note</label>
+              <textarea type="text" class="form-control " id="note" name="note" [(ngModel)]="PreMistakeData.note" required></textarea>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="setOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>

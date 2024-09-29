@@ -1,0 +1,959 @@
+<div class="containerr" xmlns="http://www.w3.org/1999/html">
+
+<!--<section class="example-section" [formGroup]="toppings">-->
+<!--  <h4>Select your modules related to the ERP</h4>-->
+<!--  <p><mat-checkbox formControlName="invoice" (click)="click()">Invoice</mat-checkbox></p>-->
+<!--  <p><mat-checkbox formControlName="extracheese">Customer</mat-checkbox></p>-->
+<!--  <p><mat-checkbox formControlName="mushroom">Employee</mat-checkbox></p>-->
+<!--</section>-->
+
+<section class="example-section" [formGroup]="toppings">
+<!--  <h4>You chose:</h4>-->
+<!--  {{toppings.value | json}}-->
+
+<!--    <section class="example-section" *ngIf="toppings.value.invoice" [formGroup]="toppings">-->
+<!--      <h4>Select your fields related to the module</h4>-->
+
+
+<!--      <form class="example-form">-->
+<!--      <mat-accordion *ngFor="let item of this.data | keyvalue">-->
+<!--        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">-->
+<!--          <mat-expansion-panel-header>-->
+<!--            <mat-panel-title>-->
+<!--              <mat-checkbox (change)="post(dynamicData.value,$event)">-->
+<!--              {{ item.key }}-->
+<!--              </mat-checkbox>-->
+<!--            </mat-panel-title>-->
+<!--            <mat-panel-description>-->
+<!--              Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+<!--            </mat-panel-description>-->
+<!--          </mat-expansion-panel-header>-->
+
+<!--  <form #dynamicData="ngForm">-->
+<!--            <mat-form-field class="example-full-width" appearance="fill">-->
+<!--              <mat-label>Field Name</mat-label>-->
+<!--              <input type="text"-->
+<!--                     name="Field Name"-->
+<!--                     placeholder="Enter here"-->
+<!--                     aria-label="Field Name"-->
+<!--                     matInput-->
+<!--              [(ngModel)]="item.key">-->
+<!--            </mat-form-field>-->
+
+<!--            <mat-form-field class="example-full-width" appearance="fill">-->
+<!--              <mat-label>Feild Type</mat-label>-->
+<!--              <input type="text"-->
+<!--                     placeholder="Pick one"-->
+<!--                     aria-label="Feild Type"-->
+<!--                     matInput-->
+<!--                     name="item"-->
+<!--                     [(ngModel)]="item.value"-->
+<!--                     [formControl]="myControl"-->
+<!--                     [matAutocomplete]="auto">-->
+
+<!--              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">-->
+<!--                <mat-option name="Feild Type" [(ngModel)]="item.value" (click)="changeInput(option)" *ngFor="let option of filteredOptions | async" [value]="option">-->
+<!--                  {{option}}-->
+<!--                </mat-option>-->
+<!--              </mat-autocomplete>-->
+<!--            </mat-form-field>-->
+
+<!--            <mat-form-field class="example-full-width" appearance="fill">-->
+<!--              <mat-label>Default Value</mat-label>-->
+<!--              <input type="{{item.value}}" ngModel placeholder="Pick one" aria-label="Default Value" name="Default Value" matInput>-->
+<!--            </mat-form-field>-->
+
+<!--    <mat-form-field appearance="fill">-->
+<!--      <mat-label>Select an index</mat-label>-->
+<!--      <mat-select ngModel name="index" disableRipple>-->
+<!--        <mat-option value="true">Yes</mat-option>-->
+<!--        <mat-option value="false">No</mat-option>-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
+
+<!--  </form>-->
+
+<!--          <div *ngIf="item.key === 'proDetails'">-->
+<!--            <div *ngFor="let item9 of this.data.proDetails">-->
+<!--              <mat-selection-list #select *ngFor="let item99 of item9 | keyvalue">-->
+<!--                <mat-list-option >-->
+<!--                  {{item99.key}}-->
+<!--                </mat-list-option>-->
+<!--              </mat-selection-list>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div *ngIf="item.key === 'billingAddress'">-->
+<!--            <mat-selection-list #shoes>-->
+<!--              <mat-list-option *ngFor="let item2 of this.data.billingAddress | keyvalue">-->
+<!--                {{item2.key}}-->
+<!--              </mat-list-option>-->
+<!--            </mat-selection-list>-->
+<!--          </div>-->
+
+
+<!--          <div *ngIf="item.key === 'custDetails'">-->
+<!--            <div *ngFor="let item3 of this.data.custDetails">-->
+<!--              <mat-selection-list #shoes *ngFor="let item33 of item3 | keyvalue">-->
+<!--                <mat-list-option >-->
+<!--                  {{item33.key}}-->
+<!--                </mat-list-option>-->
+<!--              </mat-selection-list>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div *ngIf="item.key === 'shippingAddress'">-->
+<!--            <mat-selection-list #shoes>-->
+<!--              <mat-list-option *ngFor="let item4 of this.data.shippingAddress | keyvalue">-->
+<!--                {{item4.key}}-->
+<!--              </mat-list-option>-->
+<!--            </mat-selection-list>-->
+<!--          </div>-->
+
+
+<!--          <div *ngIf="item.key === 'transit'">-->
+<!--            <mat-selection-list #shoes>-->
+<!--              <mat-list-option *ngFor="let item5 of this.data.transit | keyvalue">-->
+<!--                {{item5.key}}-->
+<!--              </mat-list-option>-->
+<!--            </mat-selection-list>-->
+<!--          </div>-->
+
+<!--          <div *ngIf="item.key === 'customFields'">-->
+<!--            <div *ngFor="let item6 of this.data.customFields">-->
+<!--              <mat-selection-list #shoes *ngFor="let item66 of item6 | keyvalue">-->
+<!--                <mat-list-option >-->
+<!--                  {{item66.key}}-->
+<!--                </mat-list-option>-->
+<!--              </mat-selection-list>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div *ngIf="item.key === 'paymentHistory'">-->
+<!--            <div *ngFor="let item7 of this.data.paymentHistory">-->
+<!--              <mat-selection-list #shoes *ngFor="let item77 of item7 | keyvalue">-->
+<!--                <mat-list-option >-->
+<!--                  {{item77.key}}-->
+<!--                </mat-list-option>-->
+<!--              </mat-selection-list>-->
+<!--            </div>-->
+<!--          </div>-->
+
+
+<!--          <div *ngIf="item.key === 'TermsAndConditions'">-->
+<!--            <div *ngFor="let item8 of this.data.TermsAndConditions">-->
+<!--              <mat-selection-list #shoes *ngFor="let item88 of item8 | keyvalue">-->
+<!--                <mat-list-option >-->
+<!--                  {{item88.key}}-->
+<!--                </mat-list-option>-->
+<!--              </mat-selection-list>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </mat-expansion-panel>-->
+
+<!--      </mat-accordion>-->
+
+<!--        <button (click)="submit()" type="submit" mat-fab extended color="primary">-->
+<!--          <mat-icon>post</mat-icon>-->
+<!--          Submit-->
+<!--        </button>-->
+
+<!--      </form>-->
+<!--    </section>-->
+
+<!--  <div class="card">-->
+<!--    <form>-->
+<!--      <div class="accordion" id="accordionPanelsStayOpenExample">-->
+<!--        <div class="accordion-item">-->
+<!--          <h2 class="accordion-header">-->
+<!--            <mat-checkbox class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">-->
+<!--              Accordion Item #1-->
+<!--            </mat-checkbox>-->
+<!--          </h2>-->
+<!--          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">-->
+<!--            <div class="accordion-body">-->
+<!--              <div class="card-body">-->
+<!--                <div class="row mb-3" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">-->
+<!--                  <input for="inputEmail3" class="col-sm-2 col-form-label lable" value="Email">-->
+<!--                  <div class="col-sm-10">-->
+<!--                    <input type="email" class="form-control" id="inputEmail3">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="collapse" id="collapseExample">-->
+<!--                  <div class="card card-body">-->
+<!--                    <div class="row g-3">-->
+<!--                      <div class="col">-->
+<!--                        <input type="text" class="form-control" placeholder="First name" aria-label="First name">-->
+<!--                      </div>-->
+<!--                      <div class="col">-->
+<!--                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">-->
+<!--                      </div>-->
+<!--                    </div>                  </div>-->
+<!--                </div>-->
+<!--                <div class="row mb-3" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">-->
+<!--                  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>-->
+<!--                  <div class="col-sm-10">-->
+<!--                    <input type="password" class="form-control" id="inputPassword3">-->
+<!--                  </div>-->
+<!--                </div>-->
+
+<!--                <div class="collapse" id="collapseExample2">-->
+<!--                  <div class="card card-body">-->
+<!--                    <div class="row g-3">-->
+<!--                      <div class="col">-->
+<!--                        <input type="text" class="form-control" placeholder="First name" aria-label="First name">-->
+<!--                      </div>-->
+<!--                      <div class="col">-->
+<!--                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">-->
+<!--                      </div>-->
+<!--                    </div>                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+
+  <div class="demo-page">
+
+    <form #post="ngForm">
+    <main class="demo-page-content">
+<div class="combo">
+  <section>
+        <div class="href-target" id="input-types"></div>
+    <form #form action="http://192.168.59.54:9090/default/static" method="get">
+        <h1>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-justify">
+            <line x1="21" y1="10" x2="3" y2="10" />
+            <line x1="21" y1="6" x2="3" y2="6" />
+            <line x1="21" y1="14" x2="3" y2="14" />
+            <line x1="21" y1="18" x2="3" y2="18" />
+          </svg>
+          Invoice
+            <button (click)="form.submit()" mat-raised-button color="accent">Preview</button>
+        </h1>
+    </form>
+        <p>All available input types are included</p>
+
+        <div *ngFor="let Data of data;  let i = index;" class="nice-form-group" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <div class="merge">
+            <mat-checkbox *ngIf="i != 0 && Data.key != '__v'" (change)="postV(Data,$event)">
+              <input class="custome" [(ngModel)]="Data.key" [ngModelOptions]="{standalone: true}" [ngStyle]="{'text-transform': Data.uppercase === true ? 'uppercase' : 'lowercase'}">
+            </mat-checkbox>
+          </div>
+
+          <div  *ngIf="Data.type === 'array'">
+            <div>
+              <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+                <div *ngFor="let Data2 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+                  <div class="merge" *ngIf="i != 0">
+                    <mat-checkbox [checked]="allComplete" (change)="postV(Data2,$event)">
+                      <input class="custome" [value]="Data2.key" [ngStyle]="{'text-transform': Data2.uppercase === true ? 'uppercase' : 'lowercase'}">
+                    </mat-checkbox>
+                  </div>
+                  <input *ngIf="i != 0" placeholder="" [type]="Data2.type" [(ngModel)]="Data2.default" name="{{Data2.key}}" placeholder="" [ngStyle]="{'text-transform': Data2.uppercase === true ? 'uppercase' : 'lowercase'}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div  *ngIf="Data.type === 'object'">
+            <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+            <div *ngFor="let Data3 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+              <div class="merge" *ngIf="i != 0" >
+                <mat-checkbox (change)="postV(Data3,$event)">
+                  <input class="custome" [value]="Data3.key" [ngStyle]="{'text-transform': Data3.uppercase === true ? 'uppercase' : 'lowercase'}">
+                </mat-checkbox>
+              </div>
+              <input *ngIf="i != 0" [type]="Data3.type" [(ngModel)]="Data3.default" name="{{Data3.key}}" placeholder="" [ngStyle]="{'text-transform': Data3.uppercase === true ? 'uppercase' : 'lowercase'}">
+            </div>
+            </div>
+          </div>
+          <input *ngIf="Data.relation === 'no' && i != 0 && Data.key != '__v'" [type]="Data.type" [(ngModel)]="Data.default" name="{{Data.key}}" placeholder="" [ngStyle]="{'text-transform': Data.uppercase === true ? 'uppercase' : 'lowercase'}">
+        </div>
+<!--    <div  *ngIf="newArray">-->
+<!--      <div *ngFor="let Data of newArray;  let i = index;">-->
+<!--      <div class="merge">-->
+<!--        <mat-checkbox (change)="postV(Data,$event)">-->
+<!--          <input class="custome" [value]="Data.key">-->
+<!--        </mat-checkbox>-->
+<!--      </div>-->
+<!--      <input [type]="Data.type" [(ngModel)]="Data.value" name="{{Data.key}}" placeholder="Your phonenumber">-->
+<!--      </div>-->
+<!--      <div>-->
+<!--      <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">-->
+<!--        <div class="nice-form-group col-md-5">-->
+<!--          <label>Product Name</label>-->
+<!--          <input type="text" placeholder="Your email">-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group col-md-5">-->
+<!--          <label>Product Quantity</label>-->
+<!--          <input type="email" placeholder="Your email">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--        <div class="row g-3" style="justify-content: space-evenly; margin: 10px 20px;">-->
+<!--        <div class="example-button-container" style="display: flex; gap: 1em">-->
+<!--          <button (click)="addproduct()" mat-raised-button color="primary" style="width: 100%;">Primary</button>-->
+<!--          <button mat-raised-button color="accent" style="width: 100%;">Accent</button>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+        <details>
+          <summary>
+            <div class="toggle-code" (click)="submit(post.value)">
+              Submit
+            </div>
+          </summary>
+          <script src="https://gist.github.com/nielsVoogt/e25c9c8f2b8456bbd1239b775d21333f.js"></script>
+        </details>
+      </section>
+
+  <div *ngIf="forChange">
+    <section style="position: sticky; top: 2em;">
+        <div class="href-target" id="fieldset"></div>
+        <h1>
+          <svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-columns">
+            <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18" />
+          </svg>
+          Fieldset
+        </h1>
+
+        <div class="row g-3" style="justify-content: space-evenly">
+        <div class="nice-form-group col-md-5">
+          <label>Change Field Name</label>
+          <input type="text" placeholder="Your filed name" name="filed name" [(ngModel)]="forChange.key" required>
+        </div>
+
+        <div class="nice-form-group col-md-5">
+          <label>Change Field Value</label>
+          <input type="{{forChange.type}}" placeholder="Your filed value" name="filed value" [(ngModel)]="forChange.default" required />
+        </div>
+        </div>
+
+        <div class="row g-3" style="justify-content: space-evenly">
+          <div class="nice-form-group col-md-5">
+            <label>Select Field Type</label>
+<!--            <input type="text" placeholder="Your filed type" name="filed type" [(ngModel)]="forChange.type" required />-->
+            <select type="text" placeholder="Your filed type" name="filed type" [(ngModel)]="forChange.type" required>
+              <option>number</option>
+              <option>string</option>
+              <option>date</option>
+              <option>email</option>
+              <option>radio</option>
+            </select>
+          </div>
+
+          <div class="nice-form-group col-md-5">
+            <label>Enum</label>
+            <input type="text" placeholder="Your filed type" name="filed type" required />
+          </div>
+        </div>
+
+      <div class="row g-3" style="justify-content: space-evenly">
+        <fieldset class="nice-form-group col-md-3">
+          <legend>Primary Key</legend>
+          <div class="nice-form-group">
+            <input type="radio" id="yes-primarykey" value="true" name="primarykey" [checked]="forChange.primarykey == true"/>
+            <label for="yes-primarykey">Yes</label>
+          </div>
+
+          <div class="nice-form-group">
+            <input type="radio" id="no-primarykey" value="false" name="primarykey" [checked]="forChange.primarykey == false"/>
+            <label for="no-primarykey">No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="nice-form-group col-md-3">
+          <legend>Candidate Key</legend>
+          <div class="nice-form-group">
+            <input type="radio" id="yes-ckey" value="{{forChange.ckey}}" name="ckey" [checked]="forChange.ckey === true"/>
+            <label for="yes-ckey">Yes</label>
+          </div>
+
+          <div class="nice-form-group">
+            <input type="radio" id="no-ckey" value="{{forChange.ckey}}" name="ckey" [checked]="forChange.ckey === false"/>
+            <label for="no-ckey">No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="nice-form-group col-md-3">
+          <legend>Forieng Key</legend>
+          <div class="nice-form-group">
+            <input type="radio" id="yes-fkey" value="{{forChange.fkey}}" name="fkey" [checked]="forChange.fkey === true"/>
+            <label for="yes-fkey">Yes</label>
+          </div>
+
+          <div class="nice-form-group">
+            <input type="radio" id="no-fkey" value="{{forChange.fkey}}" name="fkey" [checked]="forChange.fkey === false"/>
+            <label for="no-fkey">No</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row g-3" style="justify-content: space-evenly">
+        <fieldset class="nice-form-group col-md-3">
+          <legend>Required</legend>
+          <div class="nice-form-group">
+            <input type="radio" id="yes-required" value="{{forChange.required}}" name="required" [checked]="forChange.required === true">
+            <label for="yes-required">Yes</label>
+          </div>
+
+          <div class="nice-form-group">
+            <input type="radio" id="no-required" value="{{forChange.required}}" name="required" [checked]="forChange.required === false">
+            <label for="no-required">No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="nice-form-group col-md-3">
+          <legend>Uppercase</legend>
+          <div class="nice-form-group">
+            <input type="radio" id="yes-uppercase" [(ngModel)]="forChange.uppercase" value="{{true}}" name="uppercase" [checked]="forChange.uppercase === true">
+            <label for="yes-uppercase">Yes</label>
+          </div>
+
+          <div class="nice-form-group">
+            <input type="radio" id="no-uppercase" [(ngModel)]="forChange.uppercase" value="{{false}}" name="uppercase" [checked]="forChange.uppercase === false">
+            <label for="no-uppercase">No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="nice-form-group col-md-3">
+          <legend>Lowercase</legend>
+          <div class="nice-form-group">
+            <input type="radio" id="yes-lowercase" value="{{forChange.lowercase}}" name="lowercase" [checked]="forChange.lowercase === true">
+            <label for="yes-lowercase">Yes</label>
+          </div>
+
+          <div class="nice-form-group">
+            <input type="radio" id="no-lowercase" value="{{forChange.lowercase}}" name="lowercase" [checked]="forChange.lowercase === false">
+            <label for="no-lowercase">No</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row g-3" style="justify-content: space-evenly">
+        <div class="nice-form-group col-md-5">
+          <label>Min Length</label>
+          <input type="number" placeholder="Your filed name" name="minlength" [(ngModel)]="forChange.minlength" required>
+        </div>
+
+        <div class="nice-form-group col-md-5">
+          <label>Max Length</label>
+          <input type="number" placeholder="Your filed value" name="maxlength" [(ngModel)]="forChange.maxlength" required>
+        </div>
+      </div>
+<br>
+              <div class="row g-3" style="justify-content: space-evenly; margin: 10px 20px;">
+                <label style="margin-bottom: 20px; font-size: 1rem">Add New One next to there</label>
+              <div class="example-button-container" style="display: flex; gap: 1em">
+                <button mat-raised-button color="primary" style="width: 100%;" (click)="addNewFeilds()">+Fields</button>
+                <button mat-raised-button color="accent" style="width: 100%;" (click)="addNewArray()">+Array</button>
+                <button mat-raised-button color="warn" style="width: 100%;">+Object</button>
+              </div>
+              </div>
+
+       <details>
+          <summary>
+            <div class="toggle-code">
+              Post
+            </div>
+          </summary>
+          <script src="https://gist.github.com/nielsVoogt/e513d0df728dfc3fb1f5f9ecae042bf8.js"></script>
+        </details>
+    </section>
+  </div>
+
+<!--  <section class="collapse" id="collapseExample3">-->
+<!--    <div class="href-target" id="fieldset"></div>-->
+<!--    <h1>-->
+<!--      <svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-columns">-->
+<!--        <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18" />-->
+<!--      </svg>-->
+<!--      Fieldset-->
+<!--    </h1>-->
+
+<!--    <p>-->
+<!--      The <code>fieldset</code> is used to group multiple related input-->
+<!--      fields. All nested <code>.nice-form-group</code> elements within-->
+<!--      will automaticly have a smaller margin.-->
+<!--    </p>-->
+
+<!--    <div class="row g-3" style="justify-content: space-evenly">-->
+<!--      <div class="nice-form-group col-md-5">-->
+<!--        <label>City</label>-->
+<!--        <input type="text" placeholder="Your email" name="city" [(ngModel)]="data.custDetails.custCity">-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group col-md-5">-->
+<!--        <label>Country</label>-->
+<!--        <input type="email" placeholder="Your email" name="country" [(ngModel)]="data.custDetails.custCountry" >-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="row g-3" style="justify-content: space-evenly">-->
+<!--      <div class="nice-form-group col-md-5">-->
+<!--        <label>Postal Code</label>-->
+<!--        <input type="email" placeholder="Your email" name="postal" [(ngModel)]="data.custDetails.custPin" >-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group col-md-5">-->
+<!--        <label>State</label>-->
+<!--        <input type="email" placeholder="Your email" name="state" [(ngModel)]="data.custDetails.custState">-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <fieldset class="nice-form-group">-->
+<!--      <legend>Select your favorite framework</legend>-->
+<!--      <div class="nice-form-group">-->
+<!--        <input type="radio" name="radio" id="react" />-->
+<!--        <label for="react">React</label>-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group">-->
+<!--        <input type="radio" name="radio" id="vue" />-->
+<!--        <label for="vue">Vue</label>-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group">-->
+<!--        <input type="radio" name="radio" id="angular" />-->
+<!--        <label for="angular">Angular</label>-->
+<!--      </div>-->
+<!--    </fieldset>-->
+
+<!--    <fieldset class="nice-form-group">-->
+<!--      <legend>Select your favorite languages</legend>-->
+<!--      <div class="nice-form-group">-->
+<!--        <input type="checkbox" id="css" />-->
+<!--        <label for="css">CSS</label>-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group">-->
+<!--        <input type="checkbox" id="html" />-->
+<!--        <label for="html">HTML</label>-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group">-->
+<!--        <input type="checkbox" id="js" />-->
+<!--        <label for="js">Javascript</label>-->
+<!--      </div>-->
+<!--    </fieldset>-->
+<!--    <details>-->
+<!--      <summary>-->
+<!--        <div class="toggle-code">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--            <polyline points="16 18 22 12 16 6" />-->
+<!--            <polyline points="8 6 2 12 8 18" />-->
+<!--          </svg>-->
+<!--          Toggle code-->
+<!--        </div>-->
+<!--      </summary>-->
+<!--      <script src="https://gist.github.com/nielsVoogt/e513d0df728dfc3fb1f5f9ecae042bf8.js"></script>-->
+<!--    </details>-->
+<!--  </section>-->
+
+<!--  <section class="collapse" id="collapseExample4">-->
+<!--    <div class="href-target" id="fieldset"></div>-->
+<!--    <h1>-->
+<!--      <svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-columns">-->
+<!--        <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18" />-->
+<!--      </svg>-->
+<!--      Fieldset-->
+<!--    </h1>-->
+
+<!--    <p>-->
+<!--      The <code>fieldset</code> is used to group multiple related input-->
+<!--      fields. All nested <code>.nice-form-group</code> elements within-->
+<!--      will automaticly have a smaller margin.-->
+<!--    </p>-->
+
+<!--    <div class="row g-3" style="justify-content: space-evenly" *ngFor="let proDetails of data.proDetails">-->
+<!--      <div class="nice-form-group col-md-5">-->
+<!--        <label>Product Name</label>-->
+<!--        <input type="text" placeholder="Your email" name="proName" [(ngModel)]="proDetails.proName">-->
+<!--      </div>-->
+
+<!--      <div class="nice-form-group col-md-5">-->
+<!--        <label>Product Quantity</label>-->
+<!--        <input type="email" placeholder="Your email" name="proQuantity" [(ngModel)]="proDetails.proQuantity" >-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <details>-->
+<!--      <summary>-->
+<!--        <div class="toggle-code">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--            <polyline points="16 18 22 12 16 6" />-->
+<!--            <polyline points="8 6 2 12 8 18" />-->
+<!--          </svg>-->
+<!--          Toggle code-->
+<!--        </div>-->
+<!--      </summary>-->
+<!--      <script src="https://gist.github.com/nielsVoogt/e513d0df728dfc3fb1f5f9ecae042bf8.js"></script>-->
+<!--    </details>-->
+<!--  </section>-->
+</div>
+
+<!--      <section>-->
+<!--        <div class="href-target" id="fieldset"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-columns">-->
+<!--            <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18" />-->
+<!--          </svg>-->
+<!--          Fieldset-->
+<!--        </h1>-->
+<!--        <p>-->
+<!--          The <code>fieldset</code> is used to group multiple related input-->
+<!--          fields. All nested <code>.nice-form-group</code> elements within-->
+<!--          will automaticly have a smaller margin.-->
+<!--        </p>-->
+
+<!--        <fieldset class="nice-form-group">-->
+<!--          <legend>Select your favorite framework</legend>-->
+<!--          <div class="nice-form-group">-->
+<!--            <input type="radio" name="radio" id="react" />-->
+<!--            <label for="react">React</label>-->
+<!--          </div>-->
+
+<!--          <div class="nice-form-group">-->
+<!--            <input type="radio" name="radio" id="vue" />-->
+<!--            <label for="vue">Vue</label>-->
+<!--          </div>-->
+
+<!--          <div class="nice-form-group">-->
+<!--            <input type="radio" name="radio" id="angular" />-->
+<!--            <label for="angular">Angular</label>-->
+<!--          </div>-->
+<!--        </fieldset>-->
+
+<!--        <fieldset class="nice-form-group">-->
+<!--          <legend>Select your favorite languages</legend>-->
+<!--          <div class="nice-form-group">-->
+<!--            <input type="checkbox" id="css" />-->
+<!--            <label for="css">CSS</label>-->
+<!--          </div>-->
+
+<!--          <div class="nice-form-group">-->
+<!--            <input type="checkbox" id="html" />-->
+<!--            <label for="html">HTML</label>-->
+<!--          </div>-->
+
+<!--          <div class="nice-form-group">-->
+<!--            <input type="checkbox" id="js" />-->
+<!--            <label for="js">Javascript</label>-->
+<!--          </div>-->
+<!--        </fieldset>-->
+<!--        <details>-->
+<!--          <summary>-->
+<!--            <div class="toggle-code">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--                <polyline points="16 18 22 12 16 6" />-->
+<!--                <polyline points="8 6 2 12 8 18" />-->
+<!--              </svg>-->
+<!--              Toggle code-->
+<!--            </div>-->
+<!--          </summary>-->
+<!--          <script src="https://gist.github.com/nielsVoogt/e513d0df728dfc3fb1f5f9ecae042bf8.js"></script>-->
+<!--        </details>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="icons"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather">-->
+<!--            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />-->
+<!--            <line x1="16" y1="8" x2="2" y2="22" />-->
+<!--            <line x1="17.5" y1="15" x2="9" y2="15" />-->
+<!--          </svg>-->
+<!--          Icons-->
+<!--        </h1>-->
+<!--        <p>-->
+<!--          For some input types it could make sense to show a icon. These icons-->
+<!--          are hidden by default but can be added by adding either-->
+<!--          <code>.icon-left</code> or <code>.icon-right</code> to the input-->
+<!--          element. The icons used are from-->
+<!--          <a href="https://feathericons.com/" target="_blank">feathericons</a>.-->
+<!--        </p>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Phonenumber</label>-->
+<!--          <input type="tel" placeholder="Your phonenumber" value="" class="icon-left" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Url</label>-->
+<!--          <input type="url" placeholder="www.google.com" value="" class="icon-left" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Email</label>-->
+<!--          <input type="email" placeholder="Your email" value="" class="icon-left" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Password</label>-->
+<!--          <input type="password" placeholder="Your password" class="icon-left" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Phonenumber</label>-->
+<!--          <input type="tel" placeholder="Your phonenumber" value="" class="icon-right" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Url</label>-->
+<!--          <input type="url" placeholder="www.google.com" value="" class="icon-right" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Email</label>-->
+<!--          <input type="email" placeholder="Your email" value="" class="icon-right" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Password</label>-->
+<!--          <input type="password" placeholder="Your password" class="icon-right" />-->
+<!--        </div>-->
+
+<!--        <details>-->
+<!--          <summary>-->
+<!--            <div class="toggle-code">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--                <polyline points="16 18 22 12 16 6" />-->
+<!--                <polyline points="8 6 2 12 8 18" />-->
+<!--              </svg>-->
+<!--              Toggle code-->
+<!--            </div>-->
+<!--          </summary>-->
+<!--          <script src="https://gist.github.com/nielsVoogt/8cc4cd8ebc6e81c3f889f1b40037b0cc.js"></script>-->
+<!--        </details>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="validation"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle">-->
+<!--            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />-->
+<!--            <line x1="12" y1="9" x2="12" y2="13" />-->
+<!--            <line x1="12" y1="17" x2="12.01" y2="17" />-->
+<!--          </svg>-->
+<!--          Field Validation-->
+<!--        </h1>-->
+<!--        <p>-->
+<!--          Fields that have a <code>required</code> attribute can be valid or-->
+<!--          invalid based on their value. When a user focuses on a invalid field-->
+<!--          the styling is set back to default.-->
+<!--        </p>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Email</label>-->
+<!--          <input type="email" placeholder="Your email" value="this is not a email adress" required />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Email</label>-->
+<!--          <input type="email" placeholder="Your email" value="nice@forms.com" required />-->
+<!--        </div>-->
+<!--        <details>-->
+<!--          <summary>-->
+<!--            <div class="toggle-code">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--                <polyline points="16 18 22 12 16 6" />-->
+<!--                <polyline points="8 6 2 12 8 18" />-->
+<!--              </svg>-->
+<!--              Toggle code-->
+<!--            </div>-->
+<!--          </summary>-->
+<!--          <script src="https://gist.github.com/nielsVoogt/75ebf8c12ca420eb2089312a931ab4cf.js"></script>-->
+<!--        </details>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="date"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">-->
+<!--            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />-->
+<!--            <line x1="16" y1="2" x2="16" y2="6" />-->
+<!--            <line x1="8" y1="2" x2="8" y2="6" />-->
+<!--            <line x1="3" y1="10" x2="21" y2="10" />-->
+<!--          </svg>-->
+<!--          Date input-->
+<!--        </h1>-->
+<!--        <p>-->
+<!--          Date fields show icons by default. The <code>month</code>,-->
+<!--          <code>week</code> and <code>date</code> fields have a fixed min-->
+<!--          width set at 14em. <code>time</code> is set at 7em.-->
+<!--        </p>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Month</label>-->
+<!--          <input type="month" value="2018-05" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Week</label>-->
+<!--          <input type="week" value="2017-W01" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Date</label>-->
+<!--          <input type="date" value="2018-07-22" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Time</label>-->
+<!--          <input type="time" value="13:30" />-->
+<!--        </div>-->
+
+<!--        <details>-->
+<!--          <summary>-->
+<!--            <div class="toggle-code">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--                <polyline points="16 18 22 12 16 6" />-->
+<!--                <polyline points="8 6 2 12 8 18" />-->
+<!--              </svg>-->
+<!--              Toggle code-->
+<!--            </div>-->
+<!--          </summary>-->
+<!--          <script src="https://gist.github.com/nielsVoogt/2ae279af287e520f545285b0d7c45828.js"></script>-->
+<!--        </details>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="other"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server">-->
+<!--            <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />-->
+<!--            <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />-->
+<!--            <line x1="6" y1="6" x2="6.01" y2="6" />-->
+<!--            <line x1="6" y1="18" x2="6.01" y2="18" />-->
+<!--          </svg>-->
+<!--          Other input types-->
+<!--        </h1>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Textarea</label>-->
+<!--          <textarea rows="5" placeholder="Your message"></textarea>-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Select</label>-->
+<!--          <select>-->
+<!--            <option>Please select a value</option>-->
+<!--            <option>Option 1</option>-->
+<!--            <option>Option 2</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>File upload</label>-->
+<!--          <input type="file" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Range slider</label>-->
+<!--          <input type="range" min="0" max="15" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Number</label>-->
+<!--          <input type="number" placeholder="1234" />-->
+<!--        </div>-->
+
+<!--        <div class="nice-form-group">-->
+<!--          <label>Color</label>-->
+<!--          <input type="color" />-->
+<!--        </div>-->
+
+<!--        <details>-->
+<!--          <summary>-->
+<!--            <div class="toggle-code">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">-->
+<!--                <polyline points="16 18 22 12 16 6" />-->
+<!--                <polyline points="8 6 2 12 8 18" />-->
+<!--              </svg>-->
+<!--              Toggle code-->
+<!--            </div>-->
+<!--          </summary>-->
+<!--          <script src="https://gist.github.com/nielsVoogt/f0480b1a2d0deda02138d61ec5c9f4d0.js"></script>-->
+<!--        </details>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="reset"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-power">-->
+<!--            <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />-->
+<!--            <line x1="12" y1="2" x2="12" y2="12" />-->
+<!--          </svg>-->
+<!--          Reset only-->
+<!--        </h1>-->
+<!--        <p>There is also a reset only version available, this version provides styled form fields out of the box without any wrapping class. This does however mean that <code>.icon-left</code>, <code>.icon-right</code> or <code>.switch</code> are not included.</p>-->
+<!--        <p>-->
+<!--          Grab the raw CSS <a href="https://raw.githubusercontent.com/nielsVoogt/nice-forms.css/main/dist/nice-forms-reset.css">here</a>, or import the reset from <strong>unpkg</strong> via-->
+<!--          <code>https://unpkg.com/nice-forms.css@0.1.7/dist/nice-forms-reset.css</code>-->
+<!--        </p>-->
+
+<!--        <a href="https://nielsvoogt.github.io/nice-forms.css/reset.html" class="to-reset" target="_blank">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">-->
+<!--            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />-->
+<!--            <polyline points="15 3 21 3 21 9" />-->
+<!--            <line x1="10" y1="14" x2="21" y2="3" />-->
+<!--          </svg>-->
+<!--          Check out the example page-->
+<!--        </a>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="customization"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders">-->
+<!--            <line x1="4" y1="21" x2="4" y2="14" />-->
+<!--            <line x1="4" y1="10" x2="4" y2="3" />-->
+<!--            <line x1="12" y1="21" x2="12" y2="12" />-->
+<!--            <line x1="12" y1="8" x2="12" y2="3" />-->
+<!--            <line x1="20" y1="21" x2="20" y2="16" />-->
+<!--            <line x1="20" y1="12" x2="20" y2="3" />-->
+<!--            <line x1="1" y1="14" x2="7" y2="14" />-->
+<!--            <line x1="9" y1="8" x2="15" y2="8" />-->
+<!--            <line x1="17" y1="16" x2="23" y2="16" />-->
+<!--          </svg>-->
+<!--          Customization-->
+<!--        </h1>-->
+<!--        <p>The styling is highly customizable using css variables.</p>-->
+<!--        <script src="https://gist.github.com/nielsVoogt/63daf967a17776d00f5923048cf28daf.js"></script>-->
+<!--      </section>-->
+
+<!--      <section>-->
+<!--        <div class="href-target" id="contribute"></div>-->
+<!--        <h1>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">-->
+<!--            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />-->
+<!--          </svg>-->
+<!--          Contribute-->
+<!--        </h1>-->
+<!--        <p>-->
+<!--          If you encounter a bug on any device or have suggestions for-->
+<!--          improvement, don't hesitate to open a bug report or pull request.-->
+<!--        </p>-->
+
+<!--        <a href="https://github.com/nielsVoogt/nice-forms.css" class="to-repo" target="_blank">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">-->
+<!--            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />-->
+<!--            <polyline points="15 3 21 3 21 9" />-->
+<!--            <line x1="10" y1="14" x2="21" y2="3" />-->
+<!--          </svg>-->
+<!--          Check out the repo-->
+<!--        </a>-->
+<!--      </section>-->
+
+<!--      <footer>Made with ♥ for CSS</footer>-->
+    </main>
+    </form>
+  </div>
+</section>
+</div>

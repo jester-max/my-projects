@@ -1,0 +1,122 @@
+
+
+form {
+  max-width: 400px;
+  padding: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form{
+  margin-top: 10%;
+  position: fixed;
+  margin-left: 40%;
+  background-color: rgba(240, 240, 240, 0.25);
+}
+
+
+form div {
+  margin-bottom: 20px;
+}
+
+form label {
+  //display: block;
+  margin-bottom: 5px;
+}
+
+form input[type="email"],
+form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+button {
+  padding: 10px 20px;
+  background-color: #7cbe1d;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+button:hover {
+  background-color: #65a30d;
+}
+
+
+button[disabled] {
+  background-color: #ccc;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+//
+//.success-message {
+//  color: black;
+//  font-size: 20px;
+//  margin-top: 5px;
+//}
+
+.success-message {
+  color: #100e0e;
+  font-size: 20px;
+  margin-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(124, 190, 29, 0.65);
+  padding: 15px 30px;
+  width: 20%;
+  text-align: center;
+  box-shadow: 0 10px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+
+
+.agentBackground {
+  //background-color: #170101;
+  background-image: url('../../../../assets/images/vegetable.png');
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+}
+
+h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  form {
+    padding: 20px;
+    margin: 10% 45px; /* Reduce margin for smaller screens */
+  }
+
+  button {
+    padding: 10px;
+  }
+
+  .success-message {
+    padding: 10px 20px;
+    width: 90%;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
+

@@ -1,0 +1,66 @@
+@import "../../../assets/panels.css";
+
+.module-icon{
+  background: #f1f5f9;
+  /* color: white; */
+  padding: 5px;
+  /* font-size: 12px; */
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.summary{
+  border-left: 1px solid rgba(68, 68, 68, 0.22);
+  line-height: 1em;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.active{
+  color: #3880ff !important;
+  border-color: #3880ff;
+}
+
+
+
+.modal-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 20px;
+  padding: 30px 30px;
+}
+
+.btn-close{
+  align-self: flex-end;
+}
+
+p {
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+button.accept {
+  background-color: #3880ff;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  padding: 14px;
+  font-size: 20px;
+  text-transform:uppercase;
+  color: white;
+  box-shadow: 0px 6px 18px -5px rgb(43, 133, 255);
+}
+
+.bi-trash2, .bi-printer{
+  background: red;
+  border-radius: 55px;
+  color: #fff;
+}

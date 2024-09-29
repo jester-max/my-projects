@@ -1,0 +1,339 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="" [routerLink]="['/get-item']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Item Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+      <ion-button id="popover-button">
+        <ion-icon  name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+      <ion-popover class="w-0" trigger="popover-button" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list id="present-alert" class="p-0">
+              <ion-item lines="none" [button]="true" [detail]="false"><ion-icon class="me-2 fs-4" color="danger" name="trash"></ion-icon>Delete</ion-item>
+            </ion-list>
+            <ion-alert
+              trigger="present-alert"
+              subHeader="You can not undo this action. Are you sure you want to delete this item."
+              [buttons]="alertButtons"
+            ></ion-alert>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="m-0 first-detail">
+    <ion-card-header class="first-detail-header p-0">
+      <ion-card-title class="d-flex ion-align-items-center ion-justify-content-center">
+        <!--                <img class="w-100" [src]="GetOneItemData?.barcodeImageWithHTTP" />-->
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-header class="first-detail-header">
+      <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+        <div class="d-block">
+          <div class="d-flex ion-align-items-center gap-2 mb-3">
+            <ion-icon *ngIf="GetOneItemData?.varifyProductStatus === 'PENDING'" name="ellipse" color="warning"></ion-icon>
+            <ion-icon *ngIf="GetOneItemData?.varifyProductStatus === 'SUCCESS'" name="ellipse" color="success"></ion-icon>
+            <ion-icon *ngIf="GetOneItemData?.varifyProductStatus === 'REJECT'" name="ellipse" color="danger"></ion-icon>
+            <span>{{GetOneItemData?.productName}}</span>
+          </div>
+
+          <div class="mb-3 purchase-info">
+            <p class="m-0">Purchase Cost</p>
+            <span>&#8377; {{GetOneItemData?.rate}} / NOS</span>
+          </div>
+
+          <div class="mb-3 purchase-info">
+            <p class="m-0">Product Id</p>
+            <span>{{GetOneItemData?.productId}}</span>
+          </div>
+        </div>
+        <img id="open-custom-dialog-get-one-item-img" class="w-25" [alt]="'Goods Image'" [src]="GetOneItemData?.goodImages" />
+        <ion-modal id="example-modal-img" #modalImg trigger="open-custom-dialog-get-one-item-img">
+          <ng-template>
+            <div class="wrapper">
+              <ion-toolbar>
+                <ion-title>Issue Image</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modalImg.dismiss()">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <div class="d-grid ion-justify-content-center">
+                <img [alt]="'Goods Image Not Found'" [src]="GetOneItemData?.goodImages" width="280px">
+              </div>
+            </div>
+          </ng-template>
+        </ion-modal>
+      </ion-card-title>
+      <div *ngIf="GetOneItemData?.varifyProductStatus==='REJECT'" class="reason border-0">
+        {{GetOneItemData.reason}}
+      </div>
+    </ion-card-header>
+    <ion-card-content class="p-0">
+      <!--<ion-card class="m-0 mb-2 mt-2 other-details">
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center gap-2">
+            <ion-icon name="stats-chart"></ion-icon>
+            Stock Status
+          </ion-card-title>
+          <ion-card-subtitle>
+            In our store and software has content quantity.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="pt-0 d-flex ion-align-items-center gap-4">
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Purchased
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+              <span class="fs-5">0</span> Qty
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Stock
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+              <span class="fs-5">0</span> Qty
+            </ion-card-subtitle>
+          </div>
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Issued
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+              <span class="fs-5">0</span> Qty
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Current Stock
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+              <span class="fs-5">0</span> Qty
+            </ion-card-subtitle>
+          </div>
+        </ion-card-content>
+      </ion-card>-->
+
+      <ion-card class="m-0 mb-2 mt-2 other-details">
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center gap-2">
+            <ion-icon name="newspaper"></ion-icon>
+            Purchase Information
+          </ion-card-title>
+          <ion-card-subtitle>
+            Information about purchasing the item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="pt-0 d-flex gap-5">
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Vendor Name
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.invoiceInfo[0]?.partyName}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Invoice Number
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.invoiceInfo[0]?.invoiceNum}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Rate
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Rs.{{GetOneItemData?.rate}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Amount
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Rs.{{GetOneItemData?.amount}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              CGST
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.CGST}} %
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              CGST Value
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Rs.{{GetOneItemData?.CGSTValue?.toFixed(2)}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Purchase By
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Mr Manager
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Location
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.location}}
+            </ion-card-subtitle>
+          </div>
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Date
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.date}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Invoice ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.invoiceInfo[0]?.invoiceId}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Quantity
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.productQuantity}} {{GetOneItemData?.unit}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              SGST
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.SGST}} %
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              SGST Value
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Rs.{{GetOneItemData?.SGSTValue?.toFixed(2)}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              IGST
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.IGST}} %
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              IGST Value
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Rs.{{GetOneItemData?.IGSTValue?.toFixed(2)}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              GST Amount
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              Rs.{{GetOneItemData?.amountWithGst}}
+            </ion-card-subtitle>
+
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="m-0 mb-2 mt-2 other-details">
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center gap-2">
+            <ion-icon name="grid"></ion-icon>
+            More Information
+          </ion-card-title>
+          <ion-card-subtitle>
+            More Information about the item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="pt-0 d-flex gap-5">
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Date
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.date}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Batch ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.productBatch}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Inventory ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              HPGINID001
+            </ion-card-subtitle>
+          </div>
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Product ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.productId}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Unit
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.unit}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Specification
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneItemData?.productSpecification}}
+            </ion-card-subtitle>
+
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="m-0 mb-2 mt-2 other-details">
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center gap-2">
+            <ion-icon name="bandage"></ion-icon>
+            Note
+          </ion-card-title>
+          <ion-card-subtitle>
+            Note about the item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="pt-0">
+          <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+            {{GetOneItemData?.note}}
+          </ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>

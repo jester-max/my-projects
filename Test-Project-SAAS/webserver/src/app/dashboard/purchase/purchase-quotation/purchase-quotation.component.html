@@ -1,0 +1,73 @@
+<div class="demo-page">
+  <section>
+    <div class="d-flex align-items-center mb-3">
+      <h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-postcard" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm7.5.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0zM2 5.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5M10.5 5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM13 8h-2V6h2z"/>
+        </svg>
+        Purchase-Quotation
+      </h1>
+      <div class="nice-form-group" style="margin: 0; width: 10%">
+        <select (change)="toggle()">
+          <option>{{navigate[0]}}</option>
+          <option>{{navigate[1]}}</option>
+        </select>
+      </div>
+    </div>
+    <form *ngIf="create" #post="ngForm">
+      <div class="href-target" id="icons"></div>
+      <div *ngFor="let Data of data;  let i = index;" class="nice-form-group" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <div *ngIf="i != 0 && Data.key != '__v'">
+          <label>{{Data.key}}</label>
+        </div>
+        <div  *ngIf="Data.type === 'array'">
+          <div>
+            <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+              <div *ngFor="let Data2 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+                <div class="merge" *ngIf="i != 0">
+                  <label class="custome">{{Data2.key}}</label>
+                </div>
+                <input *ngIf="i != 0" [type]="Data2.type" [(ngModel)]="Data2.default" name="{{Data2.key}}_{{i}}">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngIf="Data.relation === 'object'">
+          <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+            <div *ngFor="let Data3 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+              <div class="merge" *ngIf="i != 0" >
+                <label class="custome">{{Data3.key}}</label>
+              </div>
+              <input *ngIf="i != 0" [type]="Data3.type" [(ngModel)]="Data3.default" name="{{Data3.key}}_{{i}}">
+            </div>
+          </div>
+        </div>
+        <input *ngIf="Data.relation === 'no' && i != 0 && Data.key != '__v'" [type]="Data.type" [(ngModel)]="Data.default" name="{{Data.key}}_{{i}}">
+      </div>
+
+      <details (click)="submit(post.value)">
+        <summary>
+          <div class="toggle-code">
+            Submit
+          </div>
+        </summary>
+        <script src="https://gist.github.com/nielsVoogt/8cc4cd8ebc6e81c3f889f1b40037b0cc.js"></script>
+      </details>
+    </form>
+    <table *ngIf="display" class="table table-sm">
+      <thead>
+      <tr>
+        <th *ngFor="let item of getData[0]" scope="col">{{item.key}}</th>
+      </tr>
+      </thead>
+      <ng-container>
+        <tbody class="table-group-divider">
+        <tr *ngFor="let Data of getData">
+          <td *ngFor="let item of Data">{{item.default}}</td>
+        </tr>
+        </tbody>
+      </ng-container>
+    </table>
+  </section>
+</div>

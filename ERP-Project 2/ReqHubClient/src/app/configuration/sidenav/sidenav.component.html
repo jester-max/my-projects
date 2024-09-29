@@ -1,0 +1,171 @@
+<mat-nav-list class="p-0">
+  <div class="logo d-flex align-items-center p-2">
+    <!--<img src="assets/hp.png"/>
+    <div>
+        <h3>Ankit</h3>
+        <p>ankit@haripriyagrp.com</p>
+    </div>-->
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-amd icon" viewBox="0 0 16 16">
+      <path d="m.334 0 4.358 4.359h7.15v7.15l4.358 4.358V0zM.2 9.72l4.487-4.488v6.281h6.28L6.48 16H.2z"/>
+    </svg>
+    <h4 class="ps-2 m-0 fs-5">HARI PRIYA ERP</h4>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <h2 mat-subheader class="mt-2 mb-0 gap-3">
+    APPLICATIONS
+  </h2>
+
+  <!--    <a mat-list-item routerLink="/home" routerLinkActive="list-item-active">-->
+  <!--        <mat-icon fontIcon="home"></mat-icon> Home-->
+  <!--    </a>-->
+
+  <a mat-list-item routerLink="/dashboard" routerLinkActive="list-item-active">
+    <mat-icon>dashboard</mat-icon> Dashboard
+  </a>
+
+  <!--    <a mat-list-item routerLink="/dashboard" routerLinkActive="list-item-active">-->
+  <!--        <mat-icon>analytics</mat-icon> Analytics-->
+  <!--    </a>-->
+
+  <mat-divider></mat-divider>
+
+  <h2 mat-subheader class="mt-2 mb-0 gap-3">
+    ACCOUNT
+  </h2>
+
+  <a mat-list-item routerLink="/panel/1" routerLinkActive="list-item-active">
+    <mat-icon>sell</mat-icon> Sale
+  </a>
+
+  <a mat-list-item routerLink="/master-invoice-panel" routerLinkActive="list-item-active">
+    <mat-icon>description</mat-icon> Master Invoice
+  </a>
+
+  <a mat-list-item routerLink="/proforma-invoice-panel" routerLinkActive="list-item-active">
+    <mat-icon>library_books</mat-icon> Proforma Invoice
+  </a>
+
+  <a mat-list-item routerLink="/purchase-panel" routerLinkActive="list-item-active">
+    <mat-icon>shopping_bag</mat-icon> Purchase
+  </a>
+
+  <a mat-list-item routerLink="/purchase-order-panel" routerLinkActive="list-item-active">
+    <mat-icon>chrome_reader_mode</mat-icon> Purchase Order
+  </a>
+
+  <a mat-list-item routerLink="/quotation-panel" routerLinkActive="list-item-active">
+    <mat-icon>request_quote</mat-icon> Quotation
+  </a>
+
+  <a mat-list-item routerLink="/raw-invoice-panel" routerLinkActive="list-item-active">
+    <mat-icon>receipt_long</mat-icon> Raw Invoice
+  </a>
+
+  <a mat-list-item routerLink="/expences-panel" routerLinkActive="list-item-active">
+    <mat-icon>money</mat-icon> Expenses
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <h2 mat-subheader class="mt-2 mb-0 gap-3">
+    CHARACTERS
+  </h2>
+
+  <a mat-list-item routerLink="/employee-panel" routerLinkActive="list-item-active">
+    <mat-icon>badge</mat-icon> Employee
+  </a>
+
+  <a mat-list-item routerLink="/customer-panel" routerLinkActive="list-item-active">
+    <mat-icon>diversity_3</mat-icon> Customers
+  </a>
+
+  <a mat-list-item routerLink="/vendor-panel" routerLinkActive="list-item-active">
+    <mat-icon>diversity_2</mat-icon> Vendors
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <h2 mat-subheader class="mt-2 mb-0 gap-3">
+    PRODUCT'S
+  </h2>
+
+  <a mat-list-item routerLink="/products-panel/product-stock" routerLinkActive="list-item-active">
+    <mat-icon>card_travel</mat-icon> Stock
+  </a>
+
+  <a mat-list-item routerLink="/products-panel/in-working" routerLinkActive="list-item-active">
+    <mat-icon>graphic_eq</mat-icon> In Working
+  </a>
+
+  <a mat-list-item routerLink="/products-panel/product-catalog" routerLinkActive="list-item-active">
+    <mat-icon>view_carousel</mat-icon> Catalog
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <h2 mat-subheader class="mt-2 mb-0 gap-3">
+    INVENTORY
+  </h2>
+
+  <a mat-list-item routerLink="/inventory-panel/added-items" routerLinkActive="list-item-active">
+    <mat-icon>add_road</mat-icon> Add Items
+  </a>
+
+  <a mat-list-item routerLink="/inventory-panel/issue-items" routerLinkActive="list-item-active">
+    <mat-icon>tab_new_right</mat-icon> Issue
+  </a>
+
+  <a mat-list-item routerLink="/inventory-panel/waste-items" routerLinkActive="list-item-active">
+    <mat-icon>delete_forever</mat-icon> Waste
+  </a>
+
+  <a mat-list-item routerLink="/inventory-panel/waste-on-products" routerLinkActive="list-item-active">
+    <mat-icon>how_to_vote</mat-icon> Waste Products
+  </a>
+
+  <a mat-list-item routerLink="/inventory-panel/mistake-items" routerLinkActive="list-item-active">
+    <mat-icon>sync_problem</mat-icon> Mistake
+  </a>
+
+  <a mat-list-item routerLink="/inventory-panel/time-data" routerLinkActive="list-item-active">
+    <mat-icon>timer</mat-icon> Time
+  </a>
+
+  <a mat-list-item routerLink="/inventory-panel/faulty-data" routerLinkActive="list-item-active">
+    <mat-icon>nearby_error</mat-icon> Faulty
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <h2 mat-subheader class="mt-2 mb-0 gap-3">
+    OTHERS
+  </h2>
+
+  <a mat-list-item routerLink="/transport-panel" routerLinkActive="list-item-active">
+    <mat-icon>rv_hookup</mat-icon> Transport
+  </a>
+
+  <a mat-list-item routerLink="/gate-pass-panel" routerLinkActive="list-item-active">
+    <mat-icon>style</mat-icon> Gate Pass
+  </a>
+</mat-nav-list>
+<!--
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : '' ">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapes()">A</button>
+        <div class="logo-text" *ngIf="collapsed">Angular</div>
+        <button class="btn-closed" *ngIf="collapsed" (click)="closeCollapes()">
+            <i class="fa-solid fa-close"></i>
+        </button>
+    </div>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [routerLink]="'home'" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <i class="sidenav-link-icon fa-solid fa-house"></i>
+                <span class="sidenav-link-text" *ngIf="collapsed">Home</span>
+            </a>
+        </li>
+    </ul>
+</div>-->

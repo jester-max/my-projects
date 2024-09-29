@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+<ion-toolbar>
+  <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+
+    <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start" ></ion-back-button>
+    <ion-title>Box Containts</ion-title>
+
+  </div>
+</ion-toolbar>
+</ion-header>
+
+
+  <ion-content >
+    <ion-grid >
+      <div class="bg"></div>
+      <main class="main bd-grid p-0 row p-0 m-3">
+
+        <div class="col-md-3 p-0 w-100" *ngFor="let box of boxSizeDetails; let i = index">
+          <article class="card h-100">
+
+            <div class="card__precis p-2">
+              <div >
+                <span  class="card__preci card__preci--before">{{box?.boxSize}}</span>
+                <P> Sample Box Items</P>
+                <span class="card__preci card__preci--now">
+
+                <p *ngFor="let product of box?.produceList">{{product?.quantity}} {{product?.unit}} {{product?.produce}}</p>
+
+                </span>
+
+              </div>
+
+            </div>
+            <div class="card__bottom ">
+            <span class="card__preci card__preci--now">suitable for {{box.people }}</span>
+            <span class="card__preci card__preci--now"> Total unit{{box.weight}}{{box.unit}}</span>
+            <span class="card__preci card__preci--now"> {{box.price}} per delivery</span>
+            </div>
+          </article>
+
+        </div>
+
+
+        </main>
+
+    </ion-grid>
+</ion-content>

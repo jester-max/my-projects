@@ -1,0 +1,22 @@
+<ion-header>
+<ion-toolbar>
+  <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+
+    <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start" ></ion-back-button>
+    <ion-title>Address</ion-title>
+
+  </div>
+</ion-toolbar>
+</ion-header>
+<ion-content >
+  <div class="bg"></div>
+  <ion-card *ngIf="userData">
+    <h5 style="color: #0c0c0c"><ion-icon name="location-sharp"></ion-icon>Address Info</h5>
+    <p class="font mt-1 ms-2  leading-7"><span class="heading fw-bold"> StreetAddress: </span>{{userData?.address[0].streetAddress}} </p>
+    <p class="font mt-2 ms-2  leading-7"><span class="heading fw-bold"> City: </span>{{userData?.address[0].city}} </p>
+     <p class="font mt-2 ms-2   leading-7"><span class="heading fw-bold"> State: </span>{{userData?.address[0].state}} </p>
+    <p class="font mt-2 ms-2  leading-7"><span class="heading fw-bold"> Zip code: </span> {{userData?.address[0].zipCode}}</p>
+
+
+  </ion-card>
+</ion-content>

@@ -1,0 +1,531 @@
+<div class="login-root">
+  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div class="action-container">
+      <div class="action-top">
+        <div class="action-right d-flex align-items-center">
+          <a class="action-button me-1">
+            <i class="fi fi-rr-plus me-1"></i>
+            <span>Add New</span>
+          </a>
+          <a id="for-search" class="action-button border-0 me-1">
+            <i class="fi fi-rr-search me-1"></i>
+<!--            <span>Search</span>-->
+            <input type="text" class="input-search" [(ngModel)]="SearchInput" placeholder="{{IsSearchActive}}" (focus)="searchActive($event)" (blur)="searchActive($event)">
+            <i class="fi fi-rr-circle-xmark ms-2 d-none"></i>
+<!--              <button class="btn-search"><i class="fi fi-rr-search me-1"></i></button>-->
+<!--              <input type="text" class="input-search" placeholder="Type to Search...">-->
+          </a>
+          <a class="action-button border-0 me-1">
+            <i class="fi fi-rr-filter me-1"></i>
+            <span>Filter</span>
+          </a>
+          <a class="action-button border-0 me-1">
+            <i class="fi fi-rr-eye-crossed me-1"></i>
+            <span>Hide</span>
+          </a>
+          <a class="action-button border-0 me-1">
+            <i class="fi fi-rr-thumbtack me-1"></i>
+            <span>Pin</span>
+          </a>
+          <a class="action-button border-0 me-1">
+            <i class="fi fi-rr-fill me-1"></i>
+            <span>Color</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="box-root padding-top--24 flex-flex flex-direction--column position-relative" style="flex-grow: 1; z-index: 9;">
+      <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
+            <input class="title-text w-100" value="Sign Up for HPU">
+            <input class="sub-title-text w-100" value="Used for account recovery and some administrative functions">
+            <table class="table caption-top">
+              <thead>
+              <tr>
+                <th class="first" scope="col"></th>
+                <th scope="col">
+                  <div class="d-flex justify-content-sm-center align-items-center">
+                    <input id="two" type="checkbox" class="checkbox-input">
+                    <label for="two" class="check-label input-valid"></label>
+                  </div>
+                </th>
+                <th scope="col">
+                  <a>
+                  First
+                  <i class="fi fi-rr-comment-info"></i>
+                  </a>
+                </th>
+                <th scope="col">
+                  <a>
+                  Last
+                  <i class="fi fi-rr-comment-info"></i>
+                  </a>
+                </th>
+                <th scope="col">
+                  <a>
+                  Handle
+                  <i class="fi fi-rr-comment-info"></i>
+                  </a>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="data-row">
+                <td></td>
+                <td>
+                  <div class="d-flex justify-content-sm-center align-items-center">
+                    <input id="three" type="checkbox" class="checkbox-input">
+                    <label for="three" class="check-label input-valid"></label>
+                  </div>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+                  Mark
+                  </a>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                  Otto
+                  </a>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                  @mdo
+                  </a>
+                </td>
+              </tr>
+              <tr class="accordian-body collapse" id="collapseExample">
+                <td colspan="12" class="bg-table">
+                  <div class="merge" id="collapseExample">
+                    <table class="table caption-top connection">
+                      <thead>
+                      <tr>
+                        <th class="first"></th>
+                        <th colspan="5">Array data</th>
+                      </tr>
+                      <tr>
+                        <th scope="col"></th>
+                        <th class="bg-table" scope="col">
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="two" type="checkbox" class="checkbox-input">
+                            <label for="two" class="check-label input-valid"></label>
+                          </div>
+                        </th>
+                        <th class="bg-table" scope="col">
+                          <a>
+                            First
+                            <i class="fi fi-rr-comment-info"></i>
+                          </a>
+                        </th>
+                        <th class="bg-table" scope="col">
+                          <a>
+                            Last
+                            <i class="fi fi-rr-comment-info"></i>
+                          </a>
+                        </th>
+                        <th class="bg-table" scope="col">
+                          <a>
+                            Handle
+                            <i class="fi fi-rr-comment-info"></i>
+                          </a>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr class="data-row">
+                        <td></td>
+                        <td>
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="three" type="checkbox" class="checkbox-input">
+                            <label for="three" class="check-label input-valid"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Mark
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Otto
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            @mdo
+                          </a>
+                        </td>
+                      </tr>
+                      <tr class="data-row">
+                        <td></td>
+                        <td>
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="three" type="checkbox" class="checkbox-input">
+                            <label for="three" class="check-label input-valid"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Mark
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Otto
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            @mdo
+                          </a>
+                        </td>
+                      </tr>
+                      <tr class="data-row">
+                        <td class="last"></td>
+                        <td class="bg-table">
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="three" type="checkbox" class="checkbox-input">
+                            <label for="three" class="check-label input-valid"></label>
+                          </div>
+                        </td>
+                        <td class="bg-table">
+                          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Mark
+                          </a>
+                        </td>
+                        <td class="bg-table">
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Otto
+                          </a>
+                        </td>
+                        <td class="bg-table">
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            @mdo
+                          </a>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr class="data-row">
+                <td></td>
+                <td>
+                  <div class="d-flex justify-content-sm-center align-items-center">
+                    <input id="three" type="checkbox" class="checkbox-input">
+                    <label for="three" class="check-label input-valid"></label>
+                  </div>
+                </td>
+                <td>
+                  <a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fi fi-rr-angle-small-right"></i>
+                    Mark
+                  </a>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                    Otto
+                  </a>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                    @mdo
+                  </a>
+                </td>
+              </tr>
+              <tr class="accordian-body collapse" id="collapseExample2">
+                <td colspan="12" class="bg-table">
+                  <div class="merge" id="collapseExample2">
+                    <table class="table caption-top connection">
+                      <thead>
+                      <tr>
+                        <th class="first"></th>
+                        <th colspan="5">Array data</th>
+                      </tr>
+                      <tr>
+                        <th scope="col"></th>
+                        <th class="bg-table" scope="col">
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="two" type="checkbox" class="checkbox-input">
+                            <label for="two" class="check-label input-valid"></label>
+                          </div>
+                        </th>
+                        <th class="bg-table" scope="col">
+                          <a>
+                            First
+                            <i class="fi fi-rr-comment-info"></i>
+                          </a>
+                        </th>
+                        <th class="bg-table" scope="col">
+                          <a>
+                            Last
+                            <i class="fi fi-rr-comment-info"></i>
+                          </a>
+                        </th>
+                        <th class="bg-table" scope="col">
+                          <a>
+                            Handle
+                            <i class="fi fi-rr-comment-info"></i>
+                          </a>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr class="data-row">
+                        <td></td>
+                        <td>
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="three" type="checkbox" class="checkbox-input">
+                            <label for="three" class="check-label input-valid"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Mark
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Otto
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            @mdo
+                          </a>
+                        </td>
+                      </tr>
+                      <tr class="data-row">
+                        <td></td>
+                        <td>
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="three" type="checkbox" class="checkbox-input">
+                            <label for="three" class="check-label input-valid"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Mark
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Otto
+                          </a>
+                        </td>
+                        <td>
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            @mdo
+                          </a>
+                        </td>
+                      </tr>
+                      <tr class="data-row">
+                        <td class="last"></td>
+                        <td class="bg-table">
+                          <div class="d-flex justify-content-sm-center align-items-center">
+                            <input id="three" type="checkbox" class="checkbox-input">
+                            <label for="three" class="check-label input-valid"></label>
+                          </div>
+                        </td>
+                        <td class="bg-table">
+                          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Mark
+                          </a>
+                        </td>
+                        <td class="bg-table">
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            Otto
+                          </a>
+                        </td>
+                        <td class="bg-table">
+                          <a>
+                            <i class="fi fi-rr-angle-small-right"></i>
+                            @mdo
+                          </a>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr class="data-row">
+                <td class="last"></td>
+                <td>
+                  <div class="d-flex justify-content-sm-center align-items-center">
+                    <input id="three" type="checkbox" class="checkbox-input">
+                    <label for="three" class="check-label input-valid"></label>
+                  </div>
+                </td>
+                <td>
+                  <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fi fi-rr-angle-small-right"></i>
+                    Mark
+                  </a>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                    Otto
+                  </a>
+                </td>
+                <td>
+                  <a>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                    @mdo
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <div class="footer-link padding-top&#45;&#45;24">
+           <span>Don't have an account? <a href="">Sign up</a></span>
+           <div class="listing padding-top&#45;&#45;24 padding-bottom&#45;&#45;24 flex-flex center-center">
+             <span><a href="#">© Stackfindover</a></span>
+             <span><a href="#">Contact</a></span>
+             <span><a href="#">Privacy & terms</a></span>
+           </div>
+         </div>-->
+        <div>
+          <div class="footer-link" id="footer-link">
+            <div class="d-flex align-center w-100 justify-content-sm-between">
+              <a class="icon-button">
+                <i class="fi fi-rr-check"></i>
+              </a>
+              <a class="icon-button d-flex align-center">
+                <h4>Title of field</h4>
+              </a>
+              <a class="icon-button d-flex position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                <div class="operation-name">
+                  <i class="fi fi-rr-smile-plus"></i>
+                  <p>Value management</p>
+                </div>
+              </a>
+              <a class="icon-button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom2" aria-controls="offcanvasBottom2">
+                <div class="operation-name">
+                  <i class="fi fi-rr-search"></i>
+                  <p>Key management</p>
+                </div>
+              </a>
+              <a class="icon-button">
+                <div class="operation-name">
+                  <i class="fi fi-rr-interrogation"></i>
+                  <p>Index management</p>
+                </div>
+              </a>
+              <a class="icon-button">
+                <div class="operation-name">
+                  <i class="fi fi-rr-interrogation"></i>
+                  <p>Type management</p>
+                </div>
+              </a>
+              <a class="icon-button">
+                <i class="fi fi-rr-cross"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <div class="header-description-hint">
+              <h4 class="offcanvas-title" id="offcanvasBottomLabel">Invoice</h4>
+              <p class="header-description-content">
+                Manage any type of project. Assign owners, set timelines and keep track of where your project stands.
+              </p>
+            </div>
+            <!--            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
+          </div>
+          <div class="offcanvas-body small">
+            <div class="p-4">
+              <input id="demo" type="checkbox" class="checkbox-input" checked>
+              <label for="demo" class="field input-valid">
+                <div class="position-relative drag-icon">
+                  <input type="text" value="Email">
+                </div>
+                <div class="padding-14">
+                  <input type="text" name="text">
+                </div>
+              </label>
+            </div>
+            <hr>
+            <div class="p-4">
+              <fieldset>
+                <!--                <h2 class="fs-title">Personal Details</h2>-->
+                <!--                <h3 class="fs-subtitle">Tell us something more about you</h3>-->
+                <div class="row mb-3">
+                  <label for="first name" class="col-sm-2 col-form-label">Lable</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="first name">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="last name" class="col-sm-2 col-form-label">Value</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="last name">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="phone">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom2" aria-labelledby="offcanvasBottomLabel2">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel2">Offcanvas bottom2</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body small">
+            ...
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a class="action-button">
+          <i class="fi fi-rr-eraser"></i>
+<!--          <span>Blank</span>-->
+        </a>
+        <a class="action-button">
+          <i class="fi fi-rr-preview"></i>
+<!--          <span>Preview</span>-->
+        </a>
+        <a class="action-button">
+          <i class="fi fi-rr-template-alt"></i>
+<!--          <span>Template</span>-->
+<!--          <i class="fi fi-rr-angle-small-down ms-1"></i>-->
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

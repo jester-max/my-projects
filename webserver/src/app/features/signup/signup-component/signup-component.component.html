@@ -1,0 +1,348 @@
+<section class="bg-full-image dark:bg-gray-900">
+  <div *ngIf="!showOtpBox"
+    class="flex flex-col items-center sm:h-screen w-full justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+  >
+    <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white w-fit rounded-full bg-amber-300 p-1 pr-3 mr-auto  ml-auto">
+      <img class="w-15 h-10 mr-2" src="assets/images/Company%20logoBusiness%20logoBrand%20logo%20-%20Made%20with%20PosterMyWall%20(1).png" alt="logo">
+      KhetSeGhar
+    </a>
+    <div
+      class="w-1/4 bg-white rounded-lg shadow dark:border md:mt-0 sm:w-full xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1
+          class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
+        >
+          Create an account
+        </h1>
+        <form class="space-y-4 md:space-y-6" [formGroup]="signupData">
+          <div>
+            <label
+              for="email"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Your email</label
+            >
+            <input
+              type="text"
+              formControlName="email"
+              id="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="name@domain.com"
+              (input)="clearError('email')"
+            />
+            <p
+              class="mt-2 text-pink-600 text-sm"
+              *ngIf="isFieldInvalid('email')"
+            >
+              Please provide a valid email address.
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="contact"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Your contact</label
+            >
+            <input
+              type="text"
+              formControlName="contact"
+              id="contact"
+              maxlength="10"
+              minlength="10"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="+91 xxxxxxxxxx"
+              (input)="clearError('contact')"
+              min="10"
+              max="10"
+            />
+            <p
+              class="mt-2 text-pink-600 text-sm"
+              *ngIf="isFieldInvalid('contact')"
+            >
+              Please provide a valid contact number.
+            </p>
+          </div>
+
+<!--          <div *ngIf="this.number?.value?.length === 10">-->
+<!--            <label-->
+<!--              for="otp"-->
+<!--              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"-->
+<!--            >Your otp</label-->
+<!--            >-->
+<!--            <input-->
+<!--              type="text"-->
+<!--              formControlName="otp"-->
+<!--              id="otp"-->
+<!--              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"-->
+<!--              placeholder="xxxxxx"-->
+<!--              (input)="clearError('otp')"-->
+<!--              min="6"-->
+<!--              max="6"-->
+<!--            />-->
+<!--            <p-->
+<!--              class="mt-2 text-pink-600 text-sm"-->
+<!--              *ngIf="isFieldInvalid('otp')"-->
+<!--            >-->
+<!--              Please provide a valid otp.-->
+<!--            </p>-->
+<!--          </div>-->
+
+          <div>
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Password</label
+            >
+            <input
+              type="password"
+              formControlName="password"
+              id="password"
+              placeholder="••••••••"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              (input)="clearError('password')"
+            />
+            <div
+              class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+              role="alert"
+              *ngIf="isFieldInvalid('password')"
+            >
+              <svg
+                class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+                />
+              </svg>
+              <span class="sr-only">Danger</span>
+              <div>
+                <span class="font-medium"
+                  >Ensure that these requirements are met:</span
+                >
+                <ul class="mt-1.5 list-disc list-inside">
+                  <div class="flex items-center">
+                    <li>  At least 8 characters (and up to 24 characters) </li>
+                    <span
+                      *ngIf="characterLengthValid"
+                      class="inline-flex items-center justify-center w-4 h-4 me-2 ml-4 text-sm font-semibold text-gray-800 bg-lime-400 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      <svg
+                        class="w-2.5 h-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 16 12"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5.917 5.724 10.5 15 1.5"
+                        />
+                      </svg>
+                      <span class="sr-only">Icon description</span>
+                    </span>
+                  </div>
+                  <div class="flex items-center">
+                    <li>At least one numeric digit </li>
+                    <span
+                      *ngIf="numberValid"
+                      class="inline-flex items-center justify-center w-4 h-4 me-2 ml-4 text-sm font-semibold text-gray-800 bg-lime-400 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      <svg
+                        class="w-2.5 h-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 16 12"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5.917 5.724 10.5 15 1.5"
+                        />
+                      </svg>
+                      <span class="sr-only">Icon description</span>
+                    </span>
+                  </div>
+
+                  <div class="flex items-center">
+                    <li>At least one uppercase character </li>
+                    <span
+                      *ngIf="uppercaseValid"
+                      class="inline-flex items-center justify-center w-4 h-4 me-2 ml-4 text-sm font-semibold text-gray-800 bg-lime-400 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      <svg
+                        class="w-2.5 h-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 16 12"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5.917 5.724 10.5 15 1.5"
+                        />
+                      </svg>
+                      <span class="sr-only">Icon description</span>
+                    </span>
+                  </div>
+                  <div class="flex items-center">
+                    <li>Inclusion of at least one special character, e.g., ! @ # ? </li>
+                    <span
+                      *ngIf="specialCharacterValid"
+                      class="inline-flex items-center justify-center w-4 h-4 me-2 -ml-4 text-sm font-semibold text-gray-800 bg-lime-400 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                    >
+                      <svg
+                        class="w-2.5 h-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 16 12"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5.917 5.724 10.5 15 1.5"
+                        />
+                      </svg>
+                      <span class="sr-only">Icon description</span>
+                    </span>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label
+              for="confirm-password"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Confirm password</label
+            >
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              id="confirm-password"
+              placeholder="••••••••"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              (input)="clearError('confirmPassword')"
+            />
+            <p
+              class="mt-2 text-pink-600 text-sm"
+              *ngIf="isFieldInvalid('confirmPassword')"
+            >
+              Password do not match.
+            </p>
+          </div>
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="terms"
+                aria-describedby="terms"
+                type="checkbox"
+                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-lime-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-lime-600 dark:ring-offset-gray-800"
+                formControlName="termNdCondition"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label
+                for="terms"
+                class="font-light text-gray-500 dark:text-gray-300"
+                >I accept the
+                <a
+                  class="font-medium text-lime-600 hover:underline dark:text-lime-500"
+                  href="#"
+                  >Terms and Conditions</a
+                ></label
+              >
+            </div>
+          </div>
+          <button
+            type="submit"
+            (click)="signup()"
+            class="w-full text-white bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 flex justify-center"
+          >
+            <span [hidden]="isLoading">Create an account</span>
+            <span [hidden]="!isLoading">
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7 text-gray-200 animate-spin dark:text-gray-600 fill-black"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                /></svg
+            ></span>
+          </button>
+          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+            Already have an account?
+            <a
+              [routerLink]="['/action/login']"
+              class="font-medium text-lime-600 hover:underline dark:text-lime-500"
+              >Login here</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!--  otp boxes-->
+  <div *ngIf="showOtpBox" class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-sm bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <form class="max-w-sm mx-auto" [formGroup]="otpForm" >
+      <div class="flex mb-2 mt-8 space-x-2 rtl:space-x-reverse justify-center">
+        <div>
+          <label for="code-1" class="sr-only">First code</label>
+          <input type="text" maxlength="1" data-focus-input-init data-focus-input-next="code-2" id="code-1" class="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" formControlName="digit1" />
+        </div>
+        <div>
+          <label for="code-2" class="sr-only">Second code</label>
+          <input type="text" maxlength="1" data-focus-input-init data-focus-input-prev="code-1" data-focus-input-next="code-3" id="code-2" class="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" formControlName="digit2" />
+        </div>
+        <div>
+          <label for="code-3" class="sr-only">Third code</label>
+          <input type="text" maxlength="1" data-focus-input-init data-focus-input-prev="code-2" data-focus-input-next="code-4" id="code-3" class="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" formControlName="digit3" />
+        </div>
+        <div>
+          <label for="code-4" class="sr-only">Fourth code</label>
+          <input type="text" maxlength="1" data-focus-input-init data-focus-input-prev="code-3" data-focus-input-next="code-5" id="code-4" class="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" formControlName="digit4" />
+        </div>
+        <div>
+          <label for="code-5" class="sr-only">Fifth code</label>
+          <input type="text" maxlength="1" data-focus-input-init data-focus-input-prev="code-4" data-focus-input-next="code-6" id="code-5" class="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" formControlName="digit5" />
+        </div>
+        <div>
+          <label for="code-6" class="sr-only">Sixth code</label>
+          <input type="text" maxlength="1" data-focus-input-init data-focus-input-prev="code-5" id="code-6" class="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" formControlName="digit6" />
+        </div>
+      </div>
+      <div class="text-center mb-4">
+      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Please fill the 6 digit code we sent via email.</p>
+      <button type="submit" (click)="verifyOTP()" class="text-white bg-lime-600 hover:bg-lime-400  mt-2 focus:ring-4 focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Verify</button>
+
+      <button type="button" (click)="resendOtp()" class="text-white bg-green-700 hover:bg-green-800 mt-2 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Resend</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</section>

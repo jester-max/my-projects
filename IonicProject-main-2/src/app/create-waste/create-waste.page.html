@@ -1,0 +1,494 @@
+<ion-header [translucent]="true" *ngIf="visiblity === ''">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" [routerLink]="['/get-waste']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Waste</ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="CreateWaste(Waste.value)">
+        <ion-label>SAVE</ion-label>
+      </ion-button>
+      <ion-button id="popover-button-scan">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </ion-button>
+      <ion-popover class="w-0" trigger="popover-button-scan" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list id="present-alert" class="p-0">
+              <ion-item lines="none" (click)="startScan('item')" [button]="true" [detail]="false">Item Scan</ion-item>
+              <ion-item lines="none" (click)="startScan('WorkingMachine')" [button]="true" [detail]="false">Working Machine Scan</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-header [translucent]="true" *ngIf="visiblity === 'hidden'">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button shape="round" color="danger" (click)="stopScan()">
+        <ion-label>STOP</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Scanning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [style.visibility]="visiblity" [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+    <ion-card class="d-flex">
+      <div class="w-50 barcode">
+        <img src="{{ItemBarcode}}">
+        Item Barcode
+      </div>
+      <div class="w-50 barcode">
+        <img src="{{WorkingMachineBarcode}}">
+        Machine Barcode
+      </div>
+    </ion-card>
+    <form #Waste=ngForm class="was-validated" novalidate>
+      <ion-card>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-12 d-flex ion-justify-content-between">
+              <div class="form-check">
+                <label class="form-label m-0" for="rawmaterials">RAW MATERIAL</label>
+                <input checked type="radio" class="form-check-input" name="type" value="RAWMATERIAL" [(ngModel)]="PreWasteData.type" id="rawmaterials" aria-describedby="invalidCheck3Feedback" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please check a input or give the correct.
+                </div>
+
+                <label class="form-label m-0" for="tool">TOOL</label>
+                <input type="radio" class="form-check-input" name="type" value="TOOL" [(ngModel)]="PreWasteData.type" id="tool" aria-describedby="invalidCheck3Feedback" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please check a input or give the correct.
+                </div>
+              </div>
+
+              <div class="form-check">
+                <ion-thumbnail slot="start">
+                  <img id="open-custom-dialog-get-item-img" class="" alt="Silhouette of mountains" src="{{image}}" />
+                  <ion-modal id="example-modal-img" #modal trigger="open-custom-dialog-get-item-img">
+                    <ng-template>
+                      <div class="wrapper">
+                        <ion-toolbar>
+                          <ion-title>Item Images</ion-title>
+                          <ion-buttons slot="end">
+                            <ion-button (click)="modal.dismiss()">Close</ion-button>
+                          </ion-buttons>
+                        </ion-toolbar>
+                        <div class="d-block pre-img-text" *ngIf="!image">
+                          <p>You can add attachments or images.</p>
+                          <ion-button shape="round" color="secondary" fill="outline" (click)="takePicture()">Add Images</ion-button>
+                        </div>
+                        <div class="d-grid ion-justify-content-center" *ngIf="image">
+                          <img src="{{image}}" width="280px">
+                        </div>
+                        <ion-footer *ngIf="image" class="position-absolute bottom-0">
+                          <ion-toolbar>
+                            <ion-buttons class="d-flex ion-justify-content-around after-img-bottom">
+                              <ion-button shape="round" (click)="takePicture()">
+                                <ion-icon name="repeat"></ion-icon>
+                              </ion-button>
+                              <ion-button shape="round">
+                                <ion-icon color="danger" name="trash"></ion-icon>
+                              </ion-button>
+                              <ion-button shape="round" (click)="modal.dismiss()">
+                                <ion-icon color="success" name="checkmark-done-outline"></ion-icon>
+                              </ion-button>
+                            </ion-buttons>
+                          </ion-toolbar>
+                        </ion-footer>
+                      </div>
+                    </ng-template>
+                  </ion-modal>
+                </ion-thumbnail>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="machineName" class="form-label">Product Name</label>
+              <input type="text" class="form-control" id="machineName" name="machineName" [(ngModel)]="PreWasteData.machineName" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="machineSpecification" class="form-label">Product Specification</label>
+              <input type="text" class="form-control" id="machineSpecification" name="machineSpecification" [(ngModel)]="PreWasteData.machineSpecification" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="open-modal-partyName" class="form-label">Customer Name</label>
+              <input inputmode="none" type="text" class="form-control" id="open-modal-partyName" name="partyName" [(ngModel)]="PreWasteData.partyName" required>
+              <ion-modal #modal trigger="open-modal-partyName" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchWaste()" [(ngModel)]="customerText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredData;" (click)="handlepartyName(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.customerName }}</h2>
+                          <p>{{i?.customerGST}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <ion-popover class="w-0" trigger="popover-button-partyName" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of partyName;" (click)="handlepartyName(i)" lines="none">
+                        {{ i.customerName }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+           <!-- <div class="col-md-4">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" name="address" [(ngModel)]="PreWasteData.address" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>-->
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Item Relations</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+          </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Major id's of waste item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="productId" class="form-label">Item ID</label>
+              <input type="text" class="form-control" id="productId" name="productId" [(ngModel)]="PreWasteData.productId" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button" class="form-label">Batch ID</label>
+              <input inputmode="none" type="text" class="form-control" id="popover-button" name="productBatch" [(ngModel)]="PreWasteData.productBatch" required>
+              <ion-popover class="w-0" trigger="popover-button" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of selection;" (click)="handleChange(i)" lines="none">
+                        {{ i?.productBatch }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="unitID" class="form-label">Unit ID</label>
+              <input type="text" class="form-control" id="unitID" name="unitID" [(ngModel)]="PreWasteData.unitID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productID" class="form-label">Product ID</label>
+              <input type="text" class="form-control" id="productID" name="productID" [(ngModel)]="PreWasteData.productID" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Item Details</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+        </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Detailed about waste item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="wasteDate" class="form-label">Waste Date</label>
+              <input type="date" class="form-control " id="wasteDate" name="wasteDate" [(ngModel)]="PreWasteData.wasteDate" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="wasteDiscription" class="form-label">Item Name</label>
+              <input type="text" class="form-control " id="wasteDiscription" name="wasteDiscription" [(ngModel)]="PreWasteData.wasteDiscription" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="productSpecification" class="form-label">Specification</label>
+              <input type="text" class="form-control " id="productSpecification" name="productSpecification" [(ngModel)]="PreWasteData.productSpecification" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-wasteUnit" class="form-label">Unit</label>
+              <input inputmode="none" type="text" class="form-control " id="popover-button-wasteUnit" name="wasteUnit" [(ngModel)]="PreWasteData.wasteUnit" required>
+              <ion-popover class="w-0" trigger="popover-button-wasteUnit" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of wasteUnit;" (click)="handlewasteUnit(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="wasteQuantity" class="form-label">Quantity</label>
+              <input type="number" class="form-control " id="wasteQuantity" name="wasteQuantity" [(ngModel)]="PreWasteData.wasteQuantity" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="open-modal-wasteGivenBy" class="form-label">Waste Given By</label>
+              <input inputmode="none" type="text" class="form-control " id="open-modal-wasteGivenBy" name="wasteGivenBy" [(ngModel)]="PreWasteData.wasteGivenBy" required>
+              <ion-modal #modal trigger="open-modal-wasteGivenBy" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchWasteForEmployee()" [(ngModel)]="employeeText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredDataForEmployee;" (click)="handlewasteGivenBy(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.firstName +" "+ i.lastName }}</h2>
+                          <p>{{i?.role}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <ion-popover class="w-0" trigger="popover-button-wasteGivenBy" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of wasteGivenBy;" (click)="handlewasteGivenBy(i)" lines="none">
+                        {{ i.firstName +" "+ i.lastName }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="open-modal-wasteRecievedBy" class="form-label">Waste Received By</label>
+              <input inputmode="none" type="text" class="form-control " id="open-modal-wasteRecievedBy" name="wasteRecievedBy" [(ngModel)]="PreWasteData.wasteRecievedBy" required>
+              <ion-modal #modal trigger="open-modal-wasteRecievedBy" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+                <ng-template>
+                  <ion-content>
+                    <ion-searchbar placeholder="Search" name="employeeText" (ionInput)="searchWasteForEmployee()" [(ngModel)]="employeeText" (click)="modal.setCurrentBreakpoint(0.175)"></ion-searchbar>
+                    <ion-list>
+                      <ion-item *ngFor="let i of filteredDataForEmployee;" (click)="handlewasteRecievedBy(i)">
+                        <ion-avatar slot="start">
+                          <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+                        </ion-avatar>
+                        <ion-label>
+                          <h2>{{ i.firstName +" "+ i.lastName }}</h2>
+                          <p>{{i?.role}}</p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              <ion-popover class="w-0" trigger="popover-button-wasteRecievedBy" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of wasteRecievedBy;" (click)="handlewasteRecievedBy(i)" lines="none">
+                        {{ i.firstName +" "+ i.lastName }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="popover-button-station" class="form-label">Station</label>
+              <input type="text" class="form-control " id="popover-button-station" name="station" [(ngModel)]="PreWasteData.station" required>
+              <ion-popover class="w-0" trigger="popover-button-station" [dismissOnSelect]="true">
+                <ng-template>
+                  <ion-content>
+                    <ion-list class="p-0">
+                      <ion-item *ngFor="let i of station;" (click)="handlestation(i)" lines="none">
+                        {{ i }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+            <span>Other</span>
+            <span class="p-1">
+            <ion-toggle aria-label="Success toggle" color="success" [checked]="true"></ion-toggle>
+        </span>
+          </ion-card-title>
+          <ion-card-subtitle>
+            Other info of waste item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="p-3">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="note" class="form-label">Note</label>
+              <textarea type="text" class="form-control " id="note" name="note" [(ngModel)]="PreWasteData.note" required></textarea>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please check a input or give the correct.
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+<!--  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="50000"
+    (didDismiss)="toastOpen(false)"
+    [buttons]="toastButtons"
+    position="middle"
+    layout="stacked"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>-->
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="toastOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+    ></ion-toast>
+</ion-content>

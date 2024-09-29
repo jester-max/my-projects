@@ -1,0 +1,73 @@
+
+<ion-header [translucent]="true">
+<ion-toolbar>
+    <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+
+      <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start" ></ion-back-button>
+      <ion-title></ion-title>
+
+    </div>
+</ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="bg"></div>
+
+  <div class="card bg-transparent shadow-none">
+    <div class="card__img card__precis align-items-normal h-auto" *ngIf="productDetails">
+      <img [src]="productDetails?.image" class="card-img-top w-75 h-auto" alt="...">
+    </div>
+    <div class="card-body">
+      <div class="d-block">
+        <h3 class="card-title d-flex align-items-center justify-content-between fw-bold">{{productDetails?.header}}</h3>
+
+      </div>
+      <h5>Description</h5>
+      <p class="card-text">{{ productDetails?.description }}</p>
+    </div>
+  </div>
+
+  <div class="box-head pt-1 p-3">
+    <h5 class="m-1">Box Size</h5>
+  </div>
+  <div class="px-3">
+    <ion-select label="Select Box Size" [(ngModel)]="size" name="size" (ionChange)="fetchProduceList()" label-placement="floating" fill="outline">
+      <ion-select-option *ngFor="let item of boxSizeDetails" [value]="item.boxSize">{{item.boxSize}} - &#8377;{{item.price}}</ion-select-option>
+    </ion-select>
+  </div>
+
+
+  <div class="box-head pt-1 p-3">
+    <h5 class="m-1">Frequency</h5>
+  </div>
+  <div class="px-3">
+    <ion-select label="Select Frequency" [(ngModel)]="frequency" name="frequency" label-placement="floating" fill="outline">
+      <ion-select-option value="Weekly">Weekly</ion-select-option>
+      <ion-select-option value="Twice a week">Twice a week</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="box-head pt-1 p-3">
+    <h5 class="m-1">Delivery Date</h5>
+  </div>
+  <div class="px-3">
+    <ion-select label="Select Delivery Date" [(ngModel)]="deliveryDate" name="deliveryDate"  label-placement="floating" fill="outline">
+      <ion-select-option *ngFor="let date of deliveryDates" [value]="date">{{date}}</ion-select-option>
+<!--      <ion-select-option value="banana">Sunday, July 14, 2024</ion-select-option>-->
+    </ion-select>
+  </div>
+
+  <div class="card border-0 m-2" style="max-width: 540px;">
+
+    <h4 style="color: rgba(54,67,29,0.56) " class="card-title">NEED HELP DECIDING?</h4>
+    <h2 >Compare Box Sizes</h2>
+
+    <p id="box-containt"  class="card-text ">Show Sample Box Content For Each Size <ion-icon name="chevron-down-circle-sharp" [routerLink]="['/create-bucket-regular']" [queryParams]="{header:productDetails.header}"></ion-icon></p>
+    </div>
+
+  <div class="card add-cart">
+    <div class="card-body">
+      <button type="button" class="btn btn-primary rounded-pill w-100 fw-bold" (click)="createBox()">Create Box </button>
+    </div>
+  </div>
+
+</ion-content>

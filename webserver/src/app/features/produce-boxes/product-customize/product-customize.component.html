@@ -1,0 +1,100 @@
+
+<div id="product-details" class="container mx-auto px-4">
+  <section class="bg-white dark:bg-gray-900">
+    <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+      <img class="w-full rounded-2xl dark:hidden static" src="{{card.image}}" alt="product image">
+      <div class="mt-2 md:mt-0">
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{{card.header}}</h2>
+        <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">{{card.description}}</p>
+        <form class="max-w-sm " *ngIf="bucketContent$ | async as bc ">
+          <label for="sizes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bucket Size</label>
+          <select id="sizes"  name="size" [(ngModel)]="selectedSize" (change)="onChangeSize($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose a Bucket Size</option>
+            <option *ngFor="let items of bc.data" [value]="items.boxSize">{{ items.boxSize }} - ₹{{items.price}}</option>
+          </select>
+          <label for="frequency" class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Frequency</label>
+          <select id="frequency" name="frequency" [(ngModel)]="frequency" (change)="onChangeFrequency($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose a Frequency</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Twice a week">Twice a week</option>
+          </select>
+          <div *ngIf="dateAvailable">
+            <label for="delivery-date" class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Delivery</label>
+            <select id="delivery-date" name="deliveryDate" [(ngModel)]="selectedDate" (change)="onChangeDate($event)"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option selected>Choose a delivery date</option>
+              <option *ngFor="let date of deliveryDate" [value]="date">{{date}}</option>
+            </select>
+          </div>
+          <app-check-location *ngIf="!dateAvailable"></app-check-location>
+          <a id="compare-sizes" (click)="toggleBoxContent = !toggleBoxContent" class=" inline-flex cursor-pointer mt-2 mb-2 float-right items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700" >
+            Compare Sizes
+            <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+            <button type="button"  (click)="createBox(card.image)" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg w-full dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">Create Box</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- box compare -->
+<div id="heading" class="text-center bg-lime-200  mx-auto px-4 py-4 flex flex-col gap-2 w-screen justify-center">
+<!--  <h2 class="italic mt-4 text-xl tracking-tight font-extrabold text-gray-900 dark:text-white">Decide which box suits you</h2>
+  <h2 class="text-2xl tracking-tight text-gray-900 dark:text-white">Compare Box Sizes</h2>
+
+  <h2 class="mb-4 text-lg tracking-tight cursor-pointer text-gray-900 dark:text-white" (click)="toggleBoxContent = !toggleBoxContent">
+    Show Box Content For Each Size
+    <i class="fa-solid ml-1 fa-circle-chevron-down" [class.fa-circle-chevron-up]="toggleBoxContent"></i>
+  </h2>-->
+
+  <h3 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">Decide which box suits you</h3>
+
+  <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">Compare Box Sizes</h1>
+
+  <p class="max-w-2xl mx-auto text-center cursor-pointer text-gray-500 dark:text-gray-300 hover:text-lime-500" (click)="toggleBoxContent = !toggleBoxContent">
+    Show Box Content For Each Size
+    <i class="fa-solid ml-1 fa-circle-chevron-down" [class.fa-circle-chevron-up]="toggleBoxContent"></i>
+  </p>
+</div>
+
+<section class="bg-lime-200 dark:bg-gray-900" *ngIf="bucketContent$ | async as items" [class.hidden]="!toggleBoxContent">
+  <div class="container px-6 py-8 mx-auto">
+    <div class="flex flex-col items-center justify-center space-y-6 md:items-start md:-mx-5 md:space-y-0 md:flex-row">
+      <div *ngFor="let produceItem of items.data" class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-96 bg-gray-50 dark:bg-gray-800">
+        <p class="py-2 text-sm text-center text-white uppercase bg-lime-500">SAMPLE BOX ITEMS :</p>
+        <div class="px-6 py-4">
+          <div class="text-center">
+            <p class="text-2xl font-semibold text-gray-800 dark:text-gray-100">{{ produceItem.boxSize }}</p>
+            <p class="mt-4 text-gray-500 dark:text-gray-300">Size of your box</p>
+<!--            <h4 class="mt-2 text-gray-600 line-through dark:text-gray-400">&#8377;2199</h4>-->
+            <h4 class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100">&#8377;{{produceItem.price}}</h4>
+            <p class="mt-4 text-gray-500 dark:text-gray-300">/{{produceItem.weight}} {{produceItem.unit}}</p>
+            <p class="mt-4 text-gray-500 dark:text-gray-300">Suitable for {{produceItem.people}} peoples</p>
+          </div>
+
+          <div class="mt-8 space-y-8">
+            <div *ngFor="let produce of produceItem.produceList" class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-dot text-lime-500" viewBox="0 0 16 16">
+                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+              </svg>
+
+              <span class="mx-4 text-gray-700 dark:text-gray-300">{{ produce.quantity }} {{produce.unit}} {{ produce.produce }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--<div class="bg-lime-200  mx-auto px-4 flex flex-row gap-8 w-screen sm:pl-0 sm:flex-wrap justify-center" *ngIf="bucketContent$ | async as items" [class.hidden]="!toggleBoxContent">
+  <ul *ngFor="let produceItem of items.data"  class="w-56 flex flex-col text-sm mt-8 mb-8 font-medium text-gray-900 bg-white shadow-xl border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full px-4 pb-0 py-2 border-gray-200 text-2xl font-extrabold rounded-t-lg dark:border-gray-600">{{ produceItem.boxSize }}</li>
+
+    <li class="w-full px-4 pt-0 py-2 border-gray-200 border-b-2 text-xs rounded-t-lg">SAMPLE BOX ITEMS :</li>
+
+    <li class="w-full px-4 py-2 border-gray-200 dark:border-gray-600" *ngFor="let produce of produceItem.produceList">{{ produce.quantity }} {{produce.unit}} {{ produce.produce }}</li>
+
+    <li class="w-full px-4 py-2 rounded-b-lg bg-lime-500 text-white mt-auto"><b>{{produceItem.weight}}</b> kg per box,<br> <b>{{produceItem.price}}</b> per delivery,<br> suitable for <b>{{produceItem.people}}</b></li>
+  </ul>
+</div>-->

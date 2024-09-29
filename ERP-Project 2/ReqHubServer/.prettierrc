@@ -1,0 +1,16 @@
+{
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "tabWidth": 2,
+  "semi": true,
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": ["views/**/*.ejs"],
+      "options": {
+        "parser": "html",
+        "semi": true
+      }
+    }
+  ]
+}

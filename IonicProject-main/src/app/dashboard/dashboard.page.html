@@ -1,0 +1,395 @@
+
+<ion-header [translucent]="true" *ngIf="visiblity === ''">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header [translucent]="true" *ngIf="visiblity === 'hidden'">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="stopScan()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Scanning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- tabs -->
+<ion-content  [style.visibility]="visiblity" [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="backdrop" class="back-drop"></div>
+
+  <div id="container">
+
+    <ion-card class="m-3 d-flex align-items-center inventory">
+      <ion-card-header class="p-0">
+        <ion-card-title>Inventory Summary</ion-card-title>
+        <ion-card-subtitle>Value of inventory</ion-card-subtitle>
+      </ion-card-header>
+      <ion-fab-button class="ms-auto filter" id="open-modal">
+        <ion-icon name="filter"></ion-icon>
+      </ion-fab-button>
+    </ion-card>
+
+    <ion-card class="m-3 d-flex align-items-center ion-justify-content-left gap-5 new-style">
+      <ion-card-header>
+        <div class="in-stock ps-2">
+        <ion-card-subtitle>Inventory Amount</ion-card-subtitle>
+        <ion-card-title class="fs-1">&#8377; {{inventoryValue?.totalIssueAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}}</ion-card-title>
+        </div>
+      </ion-card-header>
+<!--      <ion-card-header>-->
+<!--        <div class="opening-stock ps-2">-->
+<!--        <ion-card-subtitle>Opening Stock</ion-card-subtitle>-->
+<!--        <ion-card-title class="fs-6">{{Stock?.totalGoodsAmount.toFixed(1)}}</ion-card-title>-->
+<!--        </div>-->
+<!--      </ion-card-header>-->
+    </ion-card>
+
+    <!--<ion-card class="m-3">
+          <apx-chart
+            [chart]="areaOptions.chart"
+            [series]="areaOptions.series"
+            [stroke]="areaOptions.stroke"
+            [xaxis]="areaOptions.xaxis"
+            [title]="areaOptions.title"
+            [fill]="areaOptions.fill"
+            [tooltip]="areaOptions.tooltip"
+            [colors]="areaOptions.colors"
+            [subtitle]="areaOptions.subtitle"
+          >
+          </apx-chart>
+    </ion-card>-->
+
+    <ion-card class="m-3 d-flex align-items-center inventory">
+      <ion-card-header class="p-0">
+        <ion-card-title>Daily Usage Status</ion-card-title>
+        <ion-card-subtitle>Top daily usage inventory materials</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card class="m-3 new-style">
+      <apx-chart #chart
+        [series]="barOptions.series"
+        [chart]="barOptions.chart"
+        [dataLabels]="barOptions.dataLabels"
+        [plotOptions]="barOptions.plotOptions"
+        [yaxis]="barOptions.yaxis"
+        [xaxis]="barOptions.xaxis"
+        [fill]="barOptions.fill"
+        [title]="barOptions.title"
+      ></apx-chart>
+    </ion-card>
+
+    <ion-card class="m-3 d-flex align-items-center inventory">
+      <ion-card-header class="p-0">
+        <ion-card-title>
+          Inventory Status
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card class="m-3 new-style">
+      <ion-card-content>
+        <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [labels]="chartOptions.labels"
+          [responsive]="chartOptions.responsive"
+        ></apx-chart>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="m-3 d-flex align-items-center inventory">
+      <ion-card-header class="p-0">
+        <ion-card-title>Recently Updates</ion-card-title>
+      </ion-card-header>
+      <ion-fab-button class="ms-auto refresh" (click)="loader()">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-fab-button>
+    </ion-card>
+
+    <!--<ion-accordion-group expand="inset">
+      <ion-accordion value="first" class="mb-3">
+        <ion-card slot="header" class="m-0 d-flex align-items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-code-slash ms-3 p-2 issue" viewBox="0 0 16 16">
+        <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+      </svg>
+      <ion-card-header>
+        <ion-card-title>{{issueData}}</ion-card-title>
+        <ion-card-subtitle>Item issue for machine manufacturing.</ion-card-subtitle>
+      </ion-card-header>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </ion-card>
+        <div class="ion-padding" slot="content">First Content</div>
+      </ion-accordion>
+
+      <ion-accordion value="second" class="mb-3">
+        <ion-card slot="header" class="m-0 d-flex align-items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-body-text ms-3 p-2 waste" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5m0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+      </svg>
+      <ion-card-header>
+        <ion-card-title>{{wasteData}}</ion-card-title>
+        <ion-card-subtitle>Item wasted from machine manufacturing.</ion-card-subtitle>
+      </ion-card-header>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </ion-card>
+        <div class="ion-padding" slot="content">First Content</div>
+      </ion-accordion>
+
+      <ion-accordion value="third" class="mb-3">
+        <ion-card slot="header" class="m-0 d-flex align-items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-ban ms-3 p-2 mistake" viewBox="0 0 16 16">
+        <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+      </svg>
+      <ion-card-header>
+        <ion-card-title>{{mistakeData}}</ion-card-title>
+        <ion-card-subtitle>Happened mistakes during work.</ion-card-subtitle>
+      </ion-card-header>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </ion-card>
+        <div class="ion-padding" slot="content">First Content</div>
+      </ion-accordion>
+
+      <ion-accordion value="four" class="mb-3">
+        <ion-card slot="header" class="m-0 d-flex align-items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-calendar-range ms-3 p-2 time" viewBox="0 0 16 16">
+        <path d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1M1 9h4a1 1 0 0 1 0 2H1z"/>
+        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+      </svg>
+      <ion-card-header>
+        <ion-card-title>{{timeData}}</ion-card-title>
+        <ion-card-subtitle>Managed the time of employee.</ion-card-subtitle>
+      </ion-card-header>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </ion-card>
+        <div class="ion-padding" slot="content">First Content</div>
+      </ion-accordion>
+
+      &lt;!&ndash;<ion-accordion value="five" class="mb-3">
+        <ion-card slot="header" class="m-0 d-flex align-items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-check ms-3 p-2 attendence" viewBox="0 0 16 16">
+      <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+      <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+    </svg>
+      <ion-card-header>
+        <ion-card-title>0</ion-card-title>
+        <ion-card-subtitle>Counted the working days of employee.</ion-card-subtitle>
+      </ion-card-header>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </ion-card>
+        <div class="ion-padding" slot="content">First Content</div>
+      </ion-accordion>&ndash;&gt;
+    </ion-accordion-group>-->
+
+        <ion-card slot="header" class="m-3 d-flex align-items-center new-style">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-patch-plus ms-3 p-2 additem" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/>
+        <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/>
+      </svg>
+      <ion-card-header [routerLink]="'/get-item'">
+        <ion-card-title>{{Stock?.productData}}</ion-card-title>
+        <ion-card-subtitle>Line items added in the inventory.</ion-card-subtitle>
+      </ion-card-header>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+      </svg>
+    </ion-card>
+
+        <ion-card slot="header" class="m-3 d-flex align-items-center new-style">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-code-slash ms-3 p-2 issue" viewBox="0 0 16 16">
+            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+          </svg>
+          <ion-card-header [routerLink]="'/issue'">
+            <ion-card-title>{{Stock?.issueData}}</ion-card-title>
+            <ion-card-subtitle>Item issue for machine manufacturing.</ion-card-subtitle>
+          </ion-card-header>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </ion-card>
+
+        <ion-card slot="header" class="m-3 d-flex align-items-center new-style">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-body-text ms-3 p-2 waste" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5m0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          <ion-card-header [routerLink]="'/get-waste'">
+            <ion-card-title>{{Stock?.wasteData}}</ion-card-title>
+            <ion-card-subtitle>Item wasted from machine manufacturing.</ion-card-subtitle>
+          </ion-card-header>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </ion-card>
+
+        <ion-card slot="header" class="m-3 d-flex align-items-center new-style">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-ban ms-3 p-2 mistake" viewBox="0 0 16 16">
+            <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+          </svg>
+          <ion-card-header [routerLink]="'/get-mistake'">
+            <ion-card-title>{{Stock?.mistakeData}}</ion-card-title>
+            <ion-card-subtitle>Happened mistakes during work.</ion-card-subtitle>
+          </ion-card-header>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </ion-card>
+
+        <ion-card slot="header" class="m-3 mb-5 d-flex align-items-center new-style">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-calendar-range ms-3 p-2 time" viewBox="0 0 16 16">
+            <path d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1M1 9h4a1 1 0 0 1 0 2H1z"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+          </svg>
+          <ion-card-header [routerLink]="'/get-time'">
+            <ion-card-title>{{Stock?.timeData}}</ion-card-title>
+            <ion-card-subtitle>Managed the data of employee.</ion-card-subtitle>
+          </ion-card-header>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right me-2 ms-auto" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </ion-card>
+
+  </div>
+
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="showBotton(backdrop)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="showBotton(backdrop)" [routerLink]="['/create-item']" class="add-item" data-desc="Add Item">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="showBotton(backdrop)" [routerLink]="['/create-issue']" class="issue" data-desc="Issue">
+        <ion-icon name="code-working"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="showBotton(backdrop)" [routerLink]="['/create-waste']" class="waste" data-desc="Waste">
+        <ion-icon name="trash-bin"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="showBotton(backdrop)" [routerLink]="['/create-mistake']" class="mistake" data-desc="Mistake">
+        <ion-icon name="ban"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="showBotton(backdrop)" [routerLink]="['/create-time']" class="time" data-desc="Time">
+        <ion-icon name="timer"></ion-icon>
+      </ion-fab-button>
+<!--      <ion-fab-button (click)="showBotton(backdrop); startScan()" class="scan" data-desc="Scan">-->
+<!--        <ion-icon name="scan"></ion-icon>-->
+<!--      </ion-fab-button>-->
+    </ion-fab-list>
+  </ion-fab>
+
+  <!--<ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Update On Log's</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="light" (click)="modal.dismiss()">
+              <ion-icon class="fs-1" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-list>
+          <ion-item>
+            <ion-avatar class="issue" slot="start">
+              <ion-icon name="code-working"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>Issue</h2>
+              <p>When you give some item of store.</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar class="time" slot="start">
+              <ion-icon name="timer"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>Time</h2>
+              <p>How much time consumed in work.</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar class="waste" slot="start">
+              <ion-icon name="trash-bin"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>Waste</h2>
+              <p>What and how much item is waste.</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar class="mistake" slot="start">
+              <ion-icon name="ban"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>Mistake</h2>
+              <p>How many mistake is happens in work.</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>-->
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Apply Filter On Charts</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="light" (click)="modal.dismiss()">
+              <ion-icon class="fs-1" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <form #filter=ngForm (ngSubmit)="chartFiler(filter.value)" class="p-4" novalidate>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="fromDate" class="form-label">From Date</label>
+            <input type="date" class="form-control" id="fromDate" name="fromDate" [(ngModel)]="filters.fromDate" required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="toDate" class="form-label">To Date</label>
+            <input type="date" class="form-control" id="toDate" name="toDate" [(ngModel)]="filters.toDate" required>
+          </div>
+
+            <button type="submit" class="btn btn-primary w-100" (click)="modal.dismiss()">Submit</button>
+        </div>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>
+

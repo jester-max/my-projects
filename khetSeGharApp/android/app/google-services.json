@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "353518529858",
+    "project_id": "khetseghar-ca6d8",
+    "storage_bucket": "khetseghar-ca6d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353518529858:android:3c281141963a045ebbacdb",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvtqGayyp0D1npL5RQtUMLkiIwAuxvJyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

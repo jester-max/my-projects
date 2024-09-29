@@ -1,0 +1,19 @@
+export interface IAdminUser{
+  firstName:string,
+  lastName:string,
+  adminId?:string,
+  workEmail:string,
+  imageUrl:string,
+  online:string,
+  contact:string,
+  role:string
+  address:{
+    city:string,
+    zipCode:string,
+    village:string,
+    state:string,
+    region:string,
+    streetAddress:string,
+    district:string,
+  }
+}

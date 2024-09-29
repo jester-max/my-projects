@@ -1,0 +1,12 @@
+.pl-custom-padding{
+  padding-left: 6.5rem;
+}
+.pl-center-padding{
+  padding-left: 12rem;
+}
+
+@media (max-width: 640px) {
+  .pl-center-padding {
+    padding-left: 1rem;
+  }
+}

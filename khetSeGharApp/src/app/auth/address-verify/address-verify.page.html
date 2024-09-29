@@ -1,0 +1,79 @@
+<ion-header [translucent]="true" xmlns="http://www.w3.org/1999/html">
+<ion-toolbar>
+  <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+    <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start" ></ion-back-button>
+    <ion-title>Personal Info </ion-title>
+  </div>
+</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="addressDetails">
+  <ion-grid >
+    <div class="bg"></div>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="text" label="First Name" labelPlacement="stacked" fill="outline" placeholder="Enter your name" formControlName="firstName"></ion-input>
+        <ion-note *ngIf="addressDetails.get('firstName')?.invalid && addressDetails.get('firstName')?.touched">
+          <ion-note color="danger">enter valid name</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="text" label="Last Name" labelPlacement="stacked" fill="outline" placeholder="Enter your last name" formControlName="lastName"></ion-input>
+        <ion-note *ngIf="addressDetails.get('lastName')?.invalid && addressDetails.get('lastName')?.touched">
+          <ion-note color="danger">enter valid Last name</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="number" label="Contact" labelPlacement="stacked" fill="outline" placeholder="Enter your number" formControlName="contact"></ion-input>
+        <ion-note *ngIf="addressDetails.get('contact')?.invalid && addressDetails.get('contact')?.touched">
+          <ion-note color="danger">enter valid contact number</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input label="Street address" labelPlacement="stacked" fill="outline" placeholder="Enter your address" formControlName="streetAddress"></ion-input>
+        <ion-note *ngIf="addressDetails.get('streetAddress')?.invalid && addressDetails.get('streetAddress')?.touched">
+          <ion-note color="danger">enter valid address</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="text" label="City" labelPlacement="stacked" fill="outline" placeholder="Enter your city" formControlName="city"></ion-input>
+        <ion-note *ngIf="addressDetails.get('city')?.invalid && addressDetails.get('city')?.touched">
+          <ion-note color="danger">enter your city</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="text" label="State" labelPlacement="stacked" fill="outline" placeholder="Enter your state" formControlName="state"></ion-input>
+        <ion-note *ngIf="addressDetails.get('state')?.invalid && addressDetails.get('state')?.touched">
+          <ion-note color="danger">enter your state</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="number" label="Zip Code" labelPlacement="stacked" fill="outline" placeholder="Enter your zip code" formControlName="zipCode"></ion-input>
+        <ion-note *ngIf="addressDetails.get('zipCode')?.invalid && addressDetails.get('zipCode')?.touched">
+          <ion-note color="danger">enter valid zip code</ion-note>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  </form>
+</ion-content>
+<div class="card add-cart">
+  <div class="card-body">
+    <button type="button" class="btn btn-primary rounded-pill w-100 fw-bold" (click)="addressData()">NEXT</button>
+  </div>
+</div>
+

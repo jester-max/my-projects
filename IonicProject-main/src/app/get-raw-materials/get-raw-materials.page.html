@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Materials</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- refresh -->
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="container">
+
+    <!-- search -->
+
+    <div class="position-sticky top-0 z-1 bg-white">
+      <div class="d-flex">
+        <ion-searchbar (ionInput)="searchItem(searchText)" [(ngModel)]="searchText" name="searchText" show-clear-button="always" [debounce]="1000"></ion-searchbar>
+      </div>
+      <ion-list *ngIf="showList" class="position-absolute z-2 w-100 search-list">
+        <ion-item *ngFor="let result of results">
+          <ion-label (click)="oneSearch(result?.[filterWith])">{{result?.[filterWith]}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- pre-details -->
+
+    <ion-card *ngFor="let item of GetItemData; let i = index" class="new-style">
+      <ion-card-header class="pb-0" routerLink="/get-one-item/{{item.productId}}">
+        <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+          <div>
+            <div class="d-flex ion-align-items-center gap-2">
+              <ion-icon *ngIf="item?.varifyProductStatus === 'PENDING'" name="ellipse" color="warning"></ion-icon>
+              <ion-icon *ngIf="item?.varifyProductStatus === 'SUCCESS'" name="ellipse" color="success"></ion-icon>
+              <ion-icon *ngIf="item?.varifyProductStatus === 'REJECT'" name="ellipse" color="danger"></ion-icon>
+              <span>{{item.productName}}</span>
+            </div>
+          </div>
+        </ion-card-title>
+        <ion-card-subtitle class="m-0">
+          <span>{{item.productSpecification}}</span>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="p-0">
+        <ion-list>
+          <ion-item lines="none">
+            <ion-thumbnail slot="start">
+              <img id="open-custom-dialog-get-material-img_{{i}}" alt="Barcode image" [src]="item.barcodeImageWithHTTP!=='HTTP://192.168.251.29:3001/PUBLIC/ADDGOODS/NA'?item.barcodeImageWithHTTP:'https://ionicframework.com/docs/img/demos/thumbnail.svg'" width="350px" />
+              <ion-modal id="example-modal-img" #modalImg trigger="open-custom-dialog-get-material-img_{{i}}">
+                <ng-template>
+                  <div class="wrapper">
+                    <ion-toolbar>
+                      <ion-title>Barcode Image</ion-title>
+                      <ion-buttons slot="end">
+                        <ion-button (click)="modalImg.dismiss()">Close</ion-button>
+                      </ion-buttons>
+                    </ion-toolbar>
+                    <div class="d-grid ion-justify-content-center">
+                      <img [alt]="'Barcode Image Not Found'" [src]="item?.barcodeImageWithHTTP!=='HTTP://192.168.251.29:3001/PUBLIC/ADDGOODS/NA'?item?.barcodeImageWithHTTP:'https://ionicframework.com/docs/img/demos/thumbnail.svg'" width="350px">
+                    </div>
+                  </div>
+                </ng-template>
+              </ion-modal>
+            </ion-thumbnail>
+            <ion-card-subtitle>
+              <h3><b>DATE : {{item?.createdAt}}</b></h3>
+              <h3>INVENTORY ID : {{item?.inventoryID}}</h3>
+              <h3 [ngStyle]="{'color': (item?.productStock==0) ? 'red' : ''}"><b>IN QUANTITY : {{item?.productIn}} {{item.unit}}</b></h3>
+              <h3 [ngStyle]="{'color': (item?.productStock==0) ? 'red' : ''}"><b>OUT QUANTITY : {{item?.productOut}} {{item.unit}}</b></h3>
+              <h3 [ngStyle]="{'color': (item?.productStock==0) ? 'red' : ''}"><b>CURRENT QUANTITY : {{item?.productStock}} {{item.unit}}</b></h3>
+              <h3>LIMIT : {{item?.productLimit}}</h3>
+            </ion-card-subtitle>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+  <!--  pagination or scroll-->
+
+  <ion-infinite-scroll *ngIf="DateFilter" (ionInfinite)="paginateItem($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    (didDismiss)="setOpen(false)"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}">
+  </ion-toast>
+
+  <h6 *ngIf="GetItemData.length===0">DATA IS NOT AVAILABLE FROM {{fromDate}} TO {{toDate}} !</h6>
+</ion-content>

@@ -1,0 +1,43 @@
+<form *ngIf="create" #post="ngForm">
+  <div class="href-target" id="icons"></div>
+  <div *ngFor="let Data of data;  let j = index;" class="nice-form-group" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <div *ngIf="Data.key != '__v'">
+      <label>{{Data.key}}</label>
+    </div>
+    <div  *ngIf="Data.type === 'array'">
+      <div>
+        <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+          <div *ngFor="let Data2 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+            <div class="merge" *ngIf="Data2.key!==undefined">
+              <label class="custome">{{Data2.key}}</label>
+            </div>
+            <input *ngIf="Data2.key!==undefined" [type]="Data2.type" [(ngModel)]="getData[j].value[i].default" name="{{Data2.key}}_{{i}}">
+          </div>
+          <button mat-raised-button color="primary" style="width: 40%;" (click)="add(j)">+Add</button>
+          <button mat-raised-button color="accent" style="width: 40%;" (click)="remove(j)">-Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div  *ngIf="Data.relation === 'object'">
+      <div class="row g-3" style="justify-content: space-evenly; border: 1px solid #c0c4c9; border-radius: 10px; padding: 0 0 20px 0; margin: 10px 0;">
+        <div *ngFor="let Data3 of Data.value;  let i = index;" class="nice-form-group col-md-11">
+          <div class="merge" *ngIf="i != 0" >
+            <label class="custome">{{Data3.key}}</label>
+          </div>
+          <input *ngIf="i != 0" [type]="Data3.type" [(ngModel)]="Data3.default" name="{{Data3.key}}_{{i}}">
+        </div>
+      </div>
+    </div>
+    <input *ngIf="Data.relation === 'no' && Data.key != '__v'" [type]="Data.type" [(ngModel)]="getData[j].default" name="{{Data.key}}_{{j}}">
+  </div>
+
+  <details (click)="submit(post.value)">
+    <summary>
+      <div class="toggle-code">
+        Submit
+      </div>
+    </summary>
+  </details>
+</form>
+

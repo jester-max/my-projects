@@ -1,0 +1,230 @@
+
+<!--<div  id="card" class="col-md-3">-->
+<!--  <div class="card1">-->
+<!--    <img src="assets/icons/undraw_collection_re_4h7d%20(1).svg" alt="Icon" class="small-icon"/>-->
+<!--  </div>-->
+<!--  <div class="dates">-->
+<!--    <h1 style="font-weight: bold; margin-left: 12px">Total Collection Center</h1>-->
+<!--    <h1 style="margin-left: 30%; font-weight: bold; font-size: x-large;">{{ collCenterTotal }}</h1>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div id="card2" class="col-md-3">-->
+<!--  <div class="card1">-->
+<!--    <img src="assets/icons/undraw_open_source_-1-qxw.svg" alt="Icon" class="small-icon"/>-->
+<!--  </div>-->
+<!--  <div class="dates">-->
+<!--    <h1 style="font-weight: bold">Total Distribution Center</h1>-->
+<!--    <h1 style="margin-left: 30%; font-weight: bold; font-size: x-large;">200</h1>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<div id="card" class="col-md-3" (click)="toggleCollectionTable()">
+  <div class="card1">
+    <img src="assets/icons/undraw_collection_re_4h7d%20(1).svg" alt="Icon" class="small-icon"/>
+  </div>
+  <div class="dates">
+    <h1 style="font-weight: bold; margin-left: 12px">Total Collection Center</h1>
+    <h1 style="margin-left: 30%; font-weight: bold; font-size: x-large;">{{ collCenterTotal }}</h1>
+  </div>
+</div>
+
+<div id="card2" class="col-md-3" (click)="toggleDistributionTable()">
+  <div class="card1">
+    <img src="assets/icons/undraw_open_source_-1-qxw.svg" alt="Icon" class="small-icon"/>
+  </div>
+  <div class="dates">
+    <h1 style="font-weight: bold">Total Distribution Center</h1>
+    <h1 style="margin-left: 30%; font-weight: bold; font-size: x-large;">{{distributionTotal}}</h1>
+  </div>
+</div>
+
+
+
+<!--
+<div *ngIf="showCollectionTable">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>SN</th>
+      <th>Collection Center Name</th>
+      <th>Zip Code</th>
+      <th>Location</th>
+      <th>Contact Person</th>
+      <th>Contact Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let center of collectionCenterData; let i =index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ center.centerName }}</td>
+      <td>{{ center.zipCode }}</td>
+      <td>{{ center.location }}</td>
+      <td>{{ center.contactPerson }}</td>
+      <td>{{ center.contactNumber }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div *ngIf="showDistributionTable">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>SN</th>
+      <th>Distribution Center Name</th>
+      <th>Zip Code</th>
+      <th>Location</th>
+      <th>Contact Person</th>
+      <th>Contact Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let center of distributionCenterData; let i= index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ center.centerName }}</td>
+      <td>{{ center.zipCode }}</td>
+      <td>{{ center.location }}</td>
+      <td>{{ center.contactPerson }}</td>
+      <td>{{ center.contactNumber }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>-->
+
+
+<!--
+
+
+<div *ngIf="showCollectionTable" class="table-container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>SN</th>
+      <th>Collection Center Name</th>
+      <th>Zip Code</th>
+      <th>Location</th>
+      <th>Contact Person</th>
+      <th>Contact Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let center of collectionCenterData; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ center.centerName }}</td>
+      <td>{{ center.zipCode }}</td>
+      <td>{{ center.location }}</td>
+      <td>{{ center.contactPerson }}</td>
+      <td>{{ center.contactNumber }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="showDistributionTable" class="table-container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>SN</th>
+      <th>Distribution Center Name</th>
+      <th>Zip Code</th>
+      <th>Location</th>
+      <th>Contact Person</th>
+      <th>Contact Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let center of distributionCenterData; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ center.centerName }}</td>
+      <td>{{ center.zipCode }}</td>
+      <td>{{ center.location }}</td>
+      <td>{{ center.contactPerson }}</td>
+      <td>{{ center.contactNumber }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+-->
+
+
+<div class="table-responsive" *ngIf="showCollectionTable">
+
+  <table mat-table class="mat-table" [dataSource]="collectionCenterData" #scrollContainer (scroll)="onScroll()">
+
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="centerName">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.centerName }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="zipCode">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Zip Code </th>
+      <td mat-cell *matCellDef="let element"> {{ element.zipCode }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Location </th>
+      <td mat-cell *matCellDef="let element"> {{ element.location }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactPerson">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Contact Person </th>
+      <td mat-cell *matCellDef="let element"> {{ element.contactPerson }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactNumber">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Contact Number </th>
+      <td mat-cell *matCellDef="let element"> {{ element.contactNumber }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="sticky"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<div class="table-responsive" *ngIf="showDistributionTable">
+  <table mat-table class="mat-table" [dataSource]="distributionCenterData">
+
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="centerName">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.centerName }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="zipCode">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Zip Code </th>
+      <td mat-cell *matCellDef="let element"> {{ element.zipCode }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Location </th>
+      <td mat-cell *matCellDef="let element"> {{ element.location }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactPerson">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Contact Person </th>
+      <td mat-cell *matCellDef="let element"> {{ element.contactPerson }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactNumber">
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Contact Number </th>
+      <td mat-cell *matCellDef="let element"> {{ element.contactNumber }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="sticky"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

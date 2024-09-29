@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '~node_modules/flowbite/dist/flowbite.min.css';
+
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+
+.bg-full-image{
+  background: url("https://images.pexels.com/photos/96715/pexels-photo-96715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+}
+
+body{
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+}
+
+.main-container{
+  min-height: calc(100vh - 300px);
+}
+
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";

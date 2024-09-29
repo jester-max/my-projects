@@ -1,0 +1,255 @@
+
+
+
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent body overflow */
+}
+
+.agentBackground {
+  background-image: url('../../../../assets/images/vegetable.png');
+  background-size: cover;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.4); /* Light grey background with 90% opacity */
+
+}
+
+h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+form label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 0.5rem;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #7cbe1d;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+button:hover {
+  background-color: #65a30d;
+}
+/*
+button[disabled] {
+  background-color: #7cbe1d;
+}*/
+
+
+button[disabled] {
+  background-color: #ccc;
+}
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.success-message{
+  color: #100e0e;
+  font-size: 20px;
+  margin-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #7cbe1d;
+  padding: 15px 30px;
+  width: 20%;
+  text-align: center;
+  box-shadow: 0 10px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+
+.error-message {
+  color: red;
+}
+
+
+
+.image-selector {
+  position: relative;
+  //display: inline-block;
+  display: flex;
+  justify-content: center;
+}
+
+#image {
+  display: none;
+}
+
+.image-label {
+  display: block;
+}
+.image-preview {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #ddd;
+}
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*.camera-icon {
+  margin-top: 70px;
+  //margin-left: -1%;
+  //position: fixed;
+}*/
+
+.camera-icon {
+  margin-top: 4rem;
+  margin-left: -10px;
+  position: relative;
+  /* Adjust margin-top for responsive position */
+}
+
+
+.tooltip-container{
+  position: relative;
+ // box-shadow: rgba(220, 219, 219, 0.35) 0px 5px 15px;
+  //border-radius: 10px;
+}
+
+
+.tooltip-message {
+  background-color: #ffffff;
+  padding: 8px;
+  border: 1px solid #1d60f1;
+  //border-radius: 4px;
+  border-radius: 10px;
+  //box-shadow: 0px 2px 4px rgb(100, 91, 255);
+  z-index: 999;
+ // max-height: 140px; /* Set maximum height */
+ // overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+
+
+.message{
+  background-color: #ffffff;
+  padding: 18px;
+  border: 1px solid #1d60f1;
+  //border-radius: 4px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgb(29, 96, 241);
+  z-index: 999;
+  font-weight: bold;
+  //margin-left: 30px;
+}
+
+.tooltip-message span {
+  display: block;
+  //font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.tooltip-message ul {
+  list-style-type: none;
+
+  padding: 0;
+  margin: 0;
+}
+.password{
+  font-weight: bold;
+}
+.tooltip-message li {
+  margin-bottom: 4px;
+}
+
+.tooltip-message li::before {
+  content: "•"; /* Bullet circle icon */
+  margin-right: 8px;
+
+}
+.autoPro{
+  margin-right: 8px;
+}
+.tooltip-message button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  z-index: 9999;
+}
+/* Style for the eye icon */
+.bi {
+  font-size: 1.5rem; /* Adjust the size as needed */
+  cursor: pointer;
+}
+
+/* Style for hiding the eye icon */
+.bi.bi-eye-slash {
+  visibility: hidden;
+}
+
+/* Style for the show/hide button */
+.show-hide-btn[_ngcontent-ng-c4004613232] {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 13px;
+  top: 43%;
+  transform: translateY(-50%);
+}
+
+//link colour
+.login-link {
+  color: #000dff; /* Blue color for the link */
+  text-decoration: none; /* Remove underline */
+}
+
+.login-link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+// for scroller
+.form-container {
+  max-height: 900px;
+  overflow-y: auto
+}

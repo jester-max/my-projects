@@ -1,0 +1,227 @@
+/* home.page.scss */
+
+ion-header{
+  box-shadow: none !important;
+  background: #c8d1b7;
+}
+
+#bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(180deg, rgba(110, 134, 64, 0.77) 50%, transparent 110%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0%;
+  z-index: -1000000;
+  height: 240px;
+  border-bottom-right-radius: 65%;
+  border-bottom-left-radius: 65%;
+}
+
+
+#heading h2 {
+  font-style: italic;
+  margin-top: 1rem; /* mt-4 */
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 800; /* font-extrabold */
+  letter-spacing: -0.05em; /* tracking-tight */
+  color: #1a202c; /* text-gray-900 */
+}
+
+#heading h2.dark {
+  color: #fff; /* text-white */
+}
+
+#heading h2.mb-4 {
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+#heading h2.cursor-pointer {
+  cursor: pointer;
+}
+.card .bucket-body{
+  border-left: 1px solid gainsboro;
+}
+
+.bucket-body p{
+  font-size: 10px;
+}
+.CreateCard{
+  border-radius: 15px;
+}
+.fruit-img{
+  padding: 5px;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.box{
+  width: 40%;
+}
+.select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px; /* Adjust as necessary */
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-wrapper img {
+  width: 125px;
+  height: auto;
+  margin-bottom: 0px;
+}
+
+.bg-primary {
+  background-color: rgba(177, 200, 133, 0.77) !important;
+}
+.image-post{
+  width: 135px;
+  height: 135px;
+}
+.contant{
+color: #bc4545;
+  font-weight: bold;
+
+}
+.contant2{
+  color: rgba(71, 106, 3, 0.77);
+  font-weight: bold;
+
+}
+.font{
+font-size: medium;
+  color: #0d0d0d;
+}
+
+.add-cart{
+  background-color: #ffffff;
+  color: rgba(71, 106, 3, 0.77);
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 25px;
+}
+
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 25px;
+}
+
+.add-cart{
+  position: relative;
+  bottom: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.btn-primary {
+  color: #fff;
+  background-color: rgba(110, 134, 64, 0.768627451);
+  border-color: rgba(110, 134, 64, 0.768627451);
+}
+.bg-primary {
+  background-color: rgb(110 134 64 / 30%) !important;
+
+}
+
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 25px;
+}
+
+.card .bucket-body{
+  border-left: 1px solid gainsboro;
+}
+
+.bucket-body p{
+  font-size: 10px;
+}
+
+
+.box{
+  width: 40%;
+}
+
+
+/*-- LAYAOUT --*/
+.main {
+  padding: 2rem 0;
+}
+
+.bd-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 1200px;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+/*-- COMPONENT --*/
+.card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+  border:none;
+  background: rgb(235 239 226 / 77%);
+}
+
+.add-cart{
+  position: relative;
+  bottom: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.btn-primary {
+  color: #fff;
+  background-color: rgba(110, 134, 64, 0.768627451);
+  border-color: rgba(110, 134, 64, 0.768627451);
+}
+.bg-primary {
+  background-color: rgb(110 134 64 / 30%) !important;
+}
+
+.payment{
+  margin-left: 3px;
+}
+.icon{
+  margin-left: 2px;
+  fill: rgba(113, 142, 59, 0.77);
+}
+.cod{
+  margin-left: 2em;
+}

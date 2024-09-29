@@ -1,0 +1,33 @@
+<div class="container-fluid page">
+  <div class="page-box p-3 pb-0 pt-0 d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <mat-icon class="module-icon">sell</mat-icon> Sale
+<!--      <p class="m-0 ms-2 ps-2 fs-6 summary">A sales invoice is an accounting document that businesses issue to customers and clients to record sales transactions and request payment.</p>-->
+    </div>
+    <div class="fab-buttons d-flex">
+      <a class="click-btn btn-style904 create" routerLink="create-sale" routerLinkActive="active-btn" data-hover="Create">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                </svg>
+            </span>
+      </a>
+
+      <a class="click-btn btn-style904 display" routerLink="display-sale" routerLinkActive="active-btn" data-hover="Display">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cast" viewBox="0 0 16 16">
+                    <path d="m7.646 9.354-3.792 3.792a.5.5 0 0 0 .353.854h7.586a.5.5 0 0 0 .354-.854L8.354 9.354a.5.5 0 0 0-.708 0"/>
+                    <path d="M11.414 11H14.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-13a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h3.086l-1 1H1.5A1.5 1.5 0 0 1 0 10.5v-7A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v7a1.5 1.5 0 0 1-1.5 1.5h-2.086z"/>
+                </svg>
+            </span>
+      </a>
+    </div>
+  </div>
+  <div class="page-content shadow overflow-scroll position-relative">
+    <div class="page-content-data w-100 position-absolute">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

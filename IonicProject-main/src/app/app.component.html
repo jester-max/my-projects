@@ -1,0 +1,83 @@
+
+<!-- side bar-->
+<ion-app>
+    <ion-menu swipeGesture="false" menuId="main-menu" contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="user-list" class="d-flex align-items-center">
+          <img src="assets/Company%20logoBusiness%20logoBrand%20logo%20-%20Made%20with%20PosterMyWall%20(1).png">
+          <div>
+            <ion-list-header class="text-capitalize">{{GetLoginData?.username}}</ion-list-header>
+            <ion-note>{{GetLoginData?.email}}</ion-note>
+          </div>
+        </ion-list>
+        <ion-list id="inbox-list">
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/dashboard'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="color-filter"></ion-icon>
+              <ion-label>Dashboard</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" [routerLink]="['/get-item']">
+            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="code-download"></ion-icon>
+              <ion-label>Add Item</ion-label>
+              <ion-badge slot="end" color="warning">{{addItem?.data?.warningData}}</ion-badge>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" [routerLink]="['/issue']">
+            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="code-working"></ion-icon>
+              <ion-label>Issue</ion-label>
+              <ion-badge slot="end" color="warning">{{issueItem?.data?.warningData}}</ion-badge>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/get-waste'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="trash-bin"></ion-icon>
+              <ion-label>Waste</ion-label>
+              <ion-badge slot="end" color="warning">{{wasteItem?.data?.warningData}}</ion-badge>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/get-mistake'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="ban"></ion-icon>
+              <ion-label>Mistake</ion-label>
+              <ion-badge slot="end" color="warning">{{mistakeItem?.data?.warningData}}</ion-badge>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/get-time'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="timer"></ion-icon>
+              <ion-label>Time</ion-label>
+              <ion-badge slot="end" color="warning">{{timeItem?.data?.warningData}}</ion-badge>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/get-raw-materials'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="git-network-outline"></ion-icon>
+              <ion-label>Materials</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/get-tools'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="hammer-outline"></ion-icon>
+              <ion-label>Tools</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/get-payments'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="cash-outline"></ion-icon>
+              <ion-label>Payments</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" [routerLink]="'/settings'" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" name="settings"></ion-icon>
+              <ion-label>Settings</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

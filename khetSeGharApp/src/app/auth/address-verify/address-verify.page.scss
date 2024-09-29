@@ -1,0 +1,96 @@
+
+ion-header{
+  box-shadow: none !important;
+}
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(180deg, rgba(110, 134, 64, 0.77) 50%, transparent 110%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0%;
+  z-index: -1000000;
+  height: 250px;
+  border-bottom-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #6e8640c4;
+  border-color: #6e8640c4;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: rgba(110, 134, 64, 0.768627451);
+  border-color: rgba(110, 134, 64, 0.768627451);
+}
+.bg-primary {
+  background-color: rgb(110 134 64 / 30%) !important;
+}
+
+ion-row{
+  padding: 4px;
+}
+ion-grid{
+  padding: 1em;
+}
+ion-input{
+  --placeholder-color: #3c3535;
+}
+.sc-ion-input-md-h {
+
+  --highlight-color-focused: rgba(71, 106, 3, 0.77);
+  --highlight-color-invalid: var(--ion-color-danger, #c5000f);
+  --highlight-color: var(--highlight-color-focused);
+
+}
+////fghjkl////////////////////
+
+
+.card {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 25px;
+}
+.add-cart {
+  position: relative;
+  bottom: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 25px;
+}
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 25px;
+}
+.add-cart{
+  background-color: #ffffff;
+  color: rgba(71, 106, 3, 0.77);
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+
+}

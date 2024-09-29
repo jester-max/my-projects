@@ -1,0 +1,180 @@
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(180deg, rgba(110, 134, 64, 0.77) 50%, transparent 110%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0%;
+  z-index: -1000000;
+  height: 240px;
+  border-bottom-right-radius: 65%;
+  border-bottom-left-radius: 65%;
+}
+ion-item {
+  --padding-start: 0;
+}
+.card-position {
+  margin-top: 20px;
+}
+ion-header{
+  box-shadow: none !important;
+}
+
+ion-card {
+  position: relative;
+}
+
+
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 15px;
+
+}
+
+
+
+.card__preci{
+  display: block;
+
+  font-size: 12px;
+}
+
+.card__preci--before{
+  font-size: 18px;
+  font-weight: 600;
+  color: red;
+  margin-bottom: .25rem;
+}
+.main {
+  padding: 2rem 0;
+}
+.card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 15px;
+
+}
+
+a{
+  text-decoration: none;
+}
+
+.main {
+  padding: 2rem 0;
+}
+
+.bd-grid{
+  display: grid;
+  grid-template-columns:1fr 1fr;
+  max-width: 1200px;
+  //margin-left: 2.5rem;
+  //margin-right: 2.5rem;
+  //align-items: center;
+  gap: 1rem;
+}
+
+/*-- PAGES --*/
+.title-shop{
+  position: relative;
+  margin: 0 2.5rem;
+}
+
+.title-shop::after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 72px;
+  height: 2px;
+  background-color: black;
+  margin-left: .25rem;
+}
+
+/*-- COMPONENT --*/
+.card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*padding: 1.5rem 2rem;*/
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+  border:none;
+}
+
+.card__img{
+  width: 130px;
+  height: 140px;
+  transition: .5s;
+}
+
+.card__name{
+  position: absolute;
+  left: -25%;
+  top: 0;
+  width: 3.5rem;
+  height: 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  background-color: black;
+  color: #fff;
+  font-weight: bold;
+  transition: .5s;
+}
+
+.card__icon{
+  font-size: 1.5rem;
+  color: black;
+  top: -70%;
+  left: 5%;
+  position: relative;
+}
+
+.card__icon:hover{
+  color: red;
+}
+
+.card__precis{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: .5s;
+  //border-top:1px solid #888888;
+}
+
+.card__preci{
+  display: block;
+
+  font-size: 13px;
+}
+
+.card__preci--before{
+  font-size: 18px;
+  font-weight: 600;
+  color: red;
+  margin-bottom: .25rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card__bottom {
+  background-color: rgba(177, 200, 133, 0.77);
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  width: 100%;
+
+
+}

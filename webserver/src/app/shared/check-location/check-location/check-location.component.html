@@ -1,0 +1,131 @@
+<!--
+<section class="w-full bg-white dark:bg-gray-900" [ngClass]="locationService.checkRoute()">
+  <div class="container relative flex flex-col px-6 py-8 mx-auto lg:py-16 lg:px-6">
+    <section class="flex items-center flex-1">
+      <div class="flex flex-col w-full" *ngIf="!locationResult$">
+        <h1 class="text-4xl font-extrabold text-center lg:text-5xl 2xl:text-6xl">
+          <span class="text-transparent bg-gradient-to-br bg-clip-text from-teal-500 via-indigo-500 to-sky-500 dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500">
+            Check Whether
+          </span>
+
+          <span class="text-transparent bg-gradient-to-tr bg-clip-text from-blue-500 via-pink-500 to-red-500 dark:from-sky-300 dark:via-pink-300 dark:to-red-500">
+            We Deliver
+          </span>
+        </h1>
+
+        <p class="max-w-3xl mx-auto mt-6 text-lg text-center text-gray-700 dark:text-white md:text-xl">
+          Confirm the zip code of your area where we will deliver the produce for your home or office.
+        </p>
+
+        <form (ngSubmit)="checkLocation()" class="flex sm:mt-8 mt-8 flex-row justify-center space-y-0 w-full">
+          <input id="email" type="text" name="pincode" [(ngModel)]="pinCode" class="w-full max-w-md px-6 py-3 text-gray-700 bg-white border rounded-l-full rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" placeholder="Enter Zip Code" />
+
+          <button type="submit" class="px-6 py-3 text-sm font-medium uppercase tracking-wide rounded-r-full text-white transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none">
+            CHECK
+          </button>
+        </form>
+
+        <p class="mt-8 text-center text-gray-700 dark:text-white text-md md:text-xl">Sorry! At this time, delivery to your area isn't available.</p>
+
+      </div>
+
+      <div class="flex flex-col w-full" *ngIf="locationResult$ | async as locationFound ">
+        <div class="text-center" *ngIf="locationFound.available">
+        <h1 class="text-3xl font-extrabold text-center lg:text-5xl 2xl:text-6xl">
+          <span class="text-transparent bg-gradient-to-br bg-clip-text from-teal-500 via-indigo-500 to-sky-500 dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500">
+            Customizable Produce & Grocery Boxes
+          </span>
+        </h1>
+        <h1 class="text-3xl mt-5 font-extrabold text-center lg:text-5xl 2xl:text-6xl">
+          <span class="text-transparent bg-gradient-to-tr bg-clip-text from-blue-500 via-pink-500 to-red-500 dark:from-sky-300 dark:via-pink-300 dark:to-red-500">
+            FOR {{deliveryDate | uppercase}} DELIVERY
+          </span>
+        </h1>
+
+        <p class="max-w-3xl mx-auto mt-5 text-lg text-center text-gray-700 dark:text-white md:text-xl">
+          Get the fresh and organic produce on your box
+        </p>
+
+          <button class=" px-4 py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-lime-600 rounded-full hover:bg-lime-600 focus:outline-none focus:bg-lime-600">
+           Pick Your Box
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+-->
+
+
+<section class="bg-lime-200 w-screen dark:bg-gray-900" [ngClass]="locationService.checkRoute()">
+  <div class="py-8 px-4 mx-auto max-w-screen lg:py-16 lg:px-6">
+    <h2 class="mb-4 text-4xl tracking-tight text-center font-bold italic text-gray-900 dark:text-white">Check Whether We <span class="font-extrabold">Deliver</span> To You</h2>
+    <form class="max-w-md mx-auto" (ngSubmit)="checkLocation()" #locationForm="ngForm">
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center pl-4 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+        <input type="search" #zipcodeInput id="default-search" name="pincode" [(ngModel)]="pinCode" #pinCodeInput="ngModel" required [class.border-red-600]="pinCodeInput.invalid" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your zip code"  />
+        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CHECK</button>
+      </div>
+      <div *ngIf="pinCodeInput.invalid && (pinCodeInput.dirty || pinCodeInput.touched)" class="text-red-600 text-sm mt-1 ml-5">
+        <div *ngIf="pinCodeInput.errors?.['required']">
+          Zip code is required to search.
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="locationResult$ | async as locationFound " class="flex justify-center mt-6">
+    <div id="location-box" class="flex justify-center" *ngIf="locationFound.available"  >
+    <div class="max-w-sm flex flex-col p-6 bg-white border items-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" >
+      <a >
+        <h5 class="mb-2 text-2xl font-bold text-center tracking-tight text-gray-900 dark:text-white">Hurray!</h5>
+      </a>
+      <div *ngIf="locationService.checkRoute()" class="flex flex-col items-center">
+        <h2 class="mb-4 text-4xl tracking-tight text-center font-bold italic text-gray-900 dark:text-white"> We <span class="font-extrabold">Deliver</span> To Your Location</h2>
+        <a  (click)="refreshPage()" class="inline-flex items-center mt-3 font-medium text-red-600 cursor-pointer dark:text-primary-500 dark:hover:text-primary-700" >
+          Get Delivery Dates
+          <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+        </a>
+      </div>
+      <div class="text-center" *ngIf="!locationService.checkRoute()">
+        <blockquote class="text-2xl font-semibold italic text-center text-slate-900 ">
+          Get your Customized Box right away for
+          <span class="relative">
+            <span class="sm:none block absolute -inset-1 -skew-y-3 bg-red-600" aria-hidden="true"></span>
+            <span class="relative text-white">{{deliveryDate | uppercase}}</span>
+          </span>
+          delivery.
+        </blockquote>
+
+        <a routerLink="/choose/main" *ngIf="isFirstPage"  class="inline-flex items-center justify-center mt-4 px-3 py-2 text-sm font-medium text-center text-white bg-lime-600 rounded-full hover:bg-lime-500 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Pick Your Box
+        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
+      </div>
+
+      <a *ngIf="!isFirstPage" (click)="changeLocation()" class="inline-flex items-center mt-3 font-medium text-primary-600 cursor-pointer dark:text-primary-500 dark:hover:text-primary-700" >
+        Change Location
+        <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+      </a>
+    </div>
+
+
+    </div>
+
+      <div class="p-4 mt-3 bg-white max-w-md border  items-center border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" *ngIf="!locationFound.available" >
+        <h5 class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">Sorry! At this time, delivery to your area isn't available.</h5>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="" [routerLink]="['/issue']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Item Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+      <ion-button id="popover-button">
+        <ion-icon  name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+      <ion-popover class="w-0" trigger="popover-button" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list id="present-alert" class="p-0">
+              <ion-item lines="none" [button]="true" [detail]="false"><ion-icon class="me-2 fs-4" color="danger" name="trash"></ion-icon>Delete</ion-item>
+            </ion-list>
+            <ion-alert
+              trigger="present-alert"
+              subHeader="You can not undo this action. Are you sure you want to delete this item."
+              [buttons]="alertButtons"
+            ></ion-alert>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="m-0 first-detail">
+    <ion-card-header class="first-detail-header p-0">
+      <ion-card-title class="d-flex ion-align-items-center ion-justify-content-center">
+        <!--                <img class="w-100" src="assets/HPGPR01.jpg" />-->
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-header class="first-detail-header">
+      <ion-card-title class="d-flex ion-align-items-center ion-justify-content-between">
+        <div class="d-block">
+          <div class="d-flex ion-align-items-center gap-2 mb-3">
+            <ion-icon *ngIf="GetOneIssueData?.varifyProductStatus === 'PENDING'" name="ellipse" color="warning"></ion-icon>
+            <ion-icon *ngIf="GetOneIssueData?.varifyProductStatus === 'SUCCESS'" name="ellipse" color="success"></ion-icon>
+            <ion-icon *ngIf="GetOneIssueData?.varifyProductStatus === 'REJECT'" name="ellipse" color="danger"></ion-icon>
+            <span>{{GetOneIssueData?.issueProduct}}</span>
+          </div>
+
+          <div class="mb-3 purchase-info">
+            <p class="m-0">Specification</p>
+            <span>{{GetOneIssueData?.productSpecification}}</span>
+          </div>
+
+          <div class="mb-3 purchase-info">
+            <p class="m-0">Issue Id</p>
+            <span>{{GetOneIssueData?.issueId}}</span>
+          </div>
+        </div>
+        <img id="open-custom-dialog-get-one-issue-img" class="w-25" [alt]="'Goods Image'" [src]="GetOneIssueData?.goodImages" />
+        <ion-modal id="example-modal-img" #modalImg trigger="open-custom-dialog-get-one-issue-img">
+          <ng-template>
+            <div class="wrapper">
+              <ion-toolbar>
+                <ion-title>Issue Image</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modalImg.dismiss()">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <div class="d-grid ion-justify-content-center">
+                <img [alt]="'Goods Image Not Found'" [src]="GetOneIssueData?.goodImages" width="280px">
+              </div>
+            </div>
+          </ng-template>
+        </ion-modal>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="p-0">
+      <ion-card class="m-0 mb-2 mt-2 other-details">
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center gap-2">
+            <ion-icon name="grid"></ion-icon>
+            More Information
+          </ion-card-title>
+          <ion-card-subtitle>
+            More Information about the item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="pt-0 d-flex gap-5">
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Product Name
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.purpose}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Unit ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.productUnitID}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Quantity
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.issueQuantity}} {{GetOneIssueData?.issueUnit}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Issue Date
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.productIssueDate}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Issue By
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.issueBy}}
+            </ion-card-subtitle>
+          </div>
+          <div>
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Product ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.productID}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Batch ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.productBatch}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Item Type
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.type}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Inventory ID
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.inventoryID}}
+            </ion-card-subtitle>
+
+            <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+              Received By
+            </ion-card-subtitle>
+            <ion-card-subtitle class="pt-1">
+              {{GetOneIssueData?.receivedBy}}
+            </ion-card-subtitle>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="m-0 mb-2 mt-2 other-details">
+        <ion-card-header class="pb-0">
+          <ion-card-title class="d-flex ion-align-items-center gap-2">
+            <ion-icon name="bandage"></ion-icon>
+            Note
+          </ion-card-title>
+          <ion-card-subtitle>
+            Note about the item.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="pt-0">
+          <ion-card-subtitle class="fw-bold fs-6 ion-color-dark pt-3">
+            {{GetOneIssueData?.note}}
+          </ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="message"
+    [duration]="3000"
+    position="bottom"
+    icon="{{icon}}"
+    class="{{class}}"
+  ></ion-toast>
+</ion-content>

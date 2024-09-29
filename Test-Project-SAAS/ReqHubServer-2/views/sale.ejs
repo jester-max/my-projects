@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background-color: #eeeeee;
+        }
+        #bodyID{
+            alignment: center;
+        }
+
+
+        /*logo*/
+        .idImage{
+            padding: 30px;
+            position: relative;
+            bottom: 0;
+            right: 0;
+            opacity: 0.2;
+            margin-right: 320px;
+            margin-left: 110px;
+            width: 900px;
+            height: 990px;
+            margin-top: 200px;
+        }
+
+        table, th, td {
+            border:1px solid black;
+            margin-top: -1220px;
+            border-collapse: collapse;
+        }
+        #section{
+            margin-top: -1500px;
+        }
+        h1{
+            margin-left: 450px;
+            font-size: xx-large;
+            margin-top: 10px;
+        }
+        body.solid {
+
+            height: 1200px;
+            width: 1040px;
+            margin-top: 5rem;
+            margin-left: 20px;
+        }
+
+
+    </style>
+</head>
+<body class="solid" id="bodyID">
+<h1>Tax Invoice</h1>
+
+
+<img class="idImage" /><br />
+<table style="width:110%">
+    <!--
+    Seller Info
+    -->
+    <tr>
+        <td style="height:160px;width:800px" colspan="11" >
+            <img  style="margin-left: 40px; margin-top: 8px; max-width: 134px" src="<%=data.sellerInfo.companyLogo%>"/>
+            <div style="margin-left: 320px;margin-top: -120px;color: dodgerblue;font-size: 30px;"><%=data.sellerInfo.sellerName%></div>
+            <div style="margin-left: 420px;margin-top: 1px;color: black;font-size: 25px;">GST NO: <%=data.sellerInfo.GSTSeller%></div>
+            <div style="margin-left: 200px;margin-top: -2px;font-size: 20px;"> <%=data.sellerInfo.streetAddSeller%>, Teh. <%=data.sellerInfo.tehSeller%>, <%=data.sellerInfo.distSeller%>, <%=data.sellerInfo.stateSeller%> ,  <%=data.sellerInfo.pinSeller%>, <%=data.sellerInfo.countrySeller%></div>
+            <div style="margin-left: 290px;margin-top: 1px;font-size: 20px;">Mob:<%=data.sellerInfo.mobNum%>,<%=data.sellerInfo.mobNum1%>,<%=data.sellerInfo.mobNum2%> Email:<%=data.sellerInfo.emailSeller%></div>
+            <div style="margin-left: 260px;margin-top: 2px;font-size: 20px;">Head Off:<%=data.sellerInfo.headOffice%></div>
+        </td>
+    </tr>
+    <!--
+       Seller Info finish
+       -->
+
+    <!--
+       Buyer's Info
+       -->
+    <tr>
+        <th colspan="5" style="width: 230px;font-size: 20px" >Buyer's</th>
+        <th colspan="6"></th>
+
+    </tr>
+    <tr style="font-size: 22px;">
+        <td rowspan="10" colspan="5" >
+            <% data.custmerInfo.forEach((item)=>{%>
+            <div style="margin-left: 10px"><b>Customer:-&nbsp;<%=item.CustmerName%></b></div>
+            <div style="margin-left: 10px"><b>GST:-</b>&nbsp;<%=item.GST%></div>
+            <div style="margin-left: 10px"><b>Email:-</b>&nbsp;<%=item.email%> </div>
+            <div style="margin-left: 10px"><b>Mobile:-</b>&nbsp;<%=item.mobile%></div>
+            <div style="margin-left: 10px"><b>Address:-</b>&nbsp;<%=item.streetAdd%></div>
+            <div style="margin-left: 10px"><b>Pin Code:-</b>&nbsp;<%=item.pin%></div>
+            <div style="margin-left: 10px"><b>City:-</b>&nbsp;<%=item.city%> </div>
+            <div style="margin-left: 10px"><b>StateCode:-</b>&nbsp;<%=item.stateCode%> </div>
+            <div style="margin-left: 10px"><b>State:-</b>&nbsp;<%=item.state%>, <%=item.country%></div>
+            <%});%>
+        </td>
+        <td colspan="2">Invoice No</td>
+        <td colspan="4">Date</td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2"><b><%=data.invoiceNumber%></b></td>
+        <td colspan="4"><b><%=data.newCurrentDate%></b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2">Delivery Note</td>
+        <td colspan="4">Delivery Date</td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2"><b><%=data.transit.deliveryNote%></b></td>
+        <td colspan="4"><b><%=data.transit.newCurrentDate%></b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2">Buyer's Order No</td>
+        <td colspan="4">Date</td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2"><b><%=data.transit.buyerOrder%></b></td>
+        <td colspan="4"><b><%=data.transit.newCurrentDate%></b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2">Dispatched Through</td>
+        <td colspan="4">Vehicle No</td>
+
+
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2"><b><%=data.transit.transitName%></b></td>
+        <td colspan="4"><b><%=data.transit.vehicleNO%></b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2">Transport No</td>
+        <td colspan="4">Transport Date</td>
+
+
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="2"><b><%=data.transit.TransportNo%></b></td>
+        <td colspan="4"><b><%=data.transit.newCurrentDate%></b></td>
+    </tr>
+    <!--
+      Buyer's Info
+      -->
+
+
+    <tr style="font-size: 22px">
+        <td style="width: 40px;text-align: center"><b>S NO</b></td>
+        <td colspan="4" style="width: 400px;text-align: center"><b>Description of Goods</b></td>
+        <td style="text-align: center"><b>HSN CODE</b></td>
+        <td style="text-align: center"><b>Quantity</b></td>
+        <td style="text-align: center"><b>Rate</b></td>
+        <td colspan="3" style="text-align: center"><b>Amount</b></td>
+
+    </tr>
+    <% for(var i=0; i<data.productDetails.length; i++) {%>
+    <tr style="font-size: 22px">
+        <td style="text-align: center;width: 90px;"><%=i+1%></td>
+        <td colspan="4" style="text-align: left"><%=data.productDetails[i].productName%></td>
+        <td style="text-align: center;width: 120px;"><%=data.productDetails[i].HSNCode%></td>
+        <td style="text-align: center;width: 120px;"><%=data.productDetails[i].productQuantity%> <%=data.productDetails[i].productUnit%></td>
+
+        <td style="text-align: center;width: 120px;"><%=data.productDetails[i].productRate%></td>
+        <td colspan="3" style="text-align: center;width: 120px"><%=data.productDetails[i].productAmount%></td>
+    </tr>
+    <%};%>
+    <%if (data.productDetails.length<=5){%>
+        <% for(var i=data.productDetails.length; i<=7; i++) {%>
+        <tr style="font-size: 22px">
+            <td style="text-align: center;width: 90px;"><%=i+1%></td>
+            <td colspan="4" style="text-align: left"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td colspan="3" style="text-align: center"></td>
+        </tr>
+        <%};%>
+    <%};%>
+
+    <tr style="font-size: 22px">
+        <td colspan="4">&nbsp; </td>
+        <td colspan="4"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taxable Value</b></td>
+
+        <td colspan="4" style="text-align: center"><b>Rs      <%=data.textableValueUpdate%> </b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="10">&nbsp;Taxable Amount in Word :<b><%=data.textableWord%> Rupees Only.</b></td>
+    </tr>
+    <tr style="font-size: 22px;">
+        <td style="alignment: center"> &nbsp;HSN No</td>
+        <td style="text-align: center;width:150px">Amount</td>
+        <td style="text-align: center;width: 80px;">CGST</td>
+        <td style="text-align: center;width: 100px;">Value CGST</td>
+        <td style="text-align: center;width: 100px;"> SGST</td>
+        <td style="text-align: center;width: 100px;">SGST Value</td>
+        <td style="text-align: center;width: 100px;">IGST</td>
+        <td style="text-align: center;width: 100px;">Value IGST </td>
+        <td colspan="3" style="text-align: center;">Tax Amount</td>
+
+    </tr>
+
+    <% for(var i=0; i<data.productDetails.length; i++) {%>
+    <tr style="font-size: 22px">
+        <td colspan="1">&nbsp;&nbsp;&nbsp;<%=data.productDetails[i].HSNCode%></td>
+        <td style="text-align: center"><%=data.productDetails[i].productAmount%></td>
+        <td style="text-align: center"><%=data.productDetails[i].CGST%> %</td>
+        <td style="text-align: center"><%=(data.productDetails[i].productAmount*data.productDetails[i].CGST/100).toFixed(2)%></td>
+        <td style="text-align: center"><%=data.productDetails[i].SGST%> %</td>
+        <td style="text-align: center"><%=(data.productDetails[i].productAmount*data.productDetails[i].SGST/100).toFixed(2)%></td>
+        <td style="text-align: center"><%=data.productDetails[i].IGST%> %</td>
+        <td style="text-align: center"><%=(data.productDetails[i].productAmount*data.productDetails[i].IGST/100).toFixed(2)%></td>
+        <td  colspan="3" style="text-align: center"><%=((data.productDetails[i].productAmount*data.productDetails[i].CGST/100)+(data.productDetails[i].productAmount*data.productDetails[i].SGST/100)+(data.productDetails[i].productAmount*data.productDetails[i].IGST/100)).toFixed(2)%>&nbsp;&nbsp;&nbsp;</td>
+
+    </tr>
+    <%};%>
+    </tr>
+    <tr style="font-size: 22px">
+
+        <td colspan="4">&nbsp; </td>
+        <td colspan="4"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoice Value</b></td>
+
+        <td colspan="4" style="text-align: center"><b>Rs  <%
+
+                        %>
+                <%=data.invoiceValueUpdate%> </b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="10">&nbsp;Total Amount in Word:<b><%=data.invoiceWord%> Rupees Only.</b></td>
+    </tr>
+
+    <tr style="font-size: 22px">
+        <td colspan="4">&nbsp;<b>Company Bank Details :</b></td>
+        <td colspan="6">&nbsp;<b>Terms & Conditions :</b></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="4">&nbsp;Bank Name : <%=data.sellerInfo.bankName%></td>
+        <td colspan="6">&nbsp;<%=data.TermsAndConditions[0].condition%></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="4">&nbsp;A/C NO :  <%=data.sellerInfo.AccountNum%></td>
+        <td colspan="6">&nbsp;<%=data.TermsAndConditions[1].condition%></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="4">&nbsp;Branch Name:  <%=data.sellerInfo.branchName%></td>
+        <td colspan="6">&nbsp;<%=data.TermsAndConditions[2].condition%></td>
+    </tr>
+    <tr style="font-size: 22px">
+        <td colspan="4">&nbsp;IFSC CODE :  <%=data.sellerInfo.ifsCode%></td>
+        <td colspan="6">&nbsp;<%=data.TermsAndConditions[3].condition%></td>
+    </tr>
+    <!--
+    -->
+
+    <tr style="height: 8rem" style="font-size: 30rem">
+        <td rowspan="4" colspan="10">
+            &nbsp;Prepared &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Verify By    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Authorised Signature
+        </td>
+    </tr>
+    <tr>
+    </tr>
+</table>
+</body>
+</html>

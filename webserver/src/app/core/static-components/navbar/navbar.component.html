@@ -1,0 +1,125 @@
+<div class="sticky top-0 z-50">
+<nav class="custom-box-shadow bg-white  border-gray-200 dark:bg-gray-900 ">
+
+  <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 sm:justify-center">
+    <a href="http://localhost:4200" class="flex items-center rtl:space-x-reverse rounded-full bg-amber-300 p-1 pr-3 mr-1">
+      <img src="assets/images/Company%20logoBusiness%20logoBrand%20logo%20-%20Made%20with%20PosterMyWall%20(1).png" class="h-10" alt="company Logo" />
+      <span class="self-center font-sans font-serif text-2xl sm:text-lg font-semibold whitespace-nowrap dark:text-white text-black ml-1">KhetSeGhar</span>
+    </a>
+    <div class="flex items-center rtl:space-x-reverse" *ngIf="!mainAuth.isLoggedIn()">
+      <!--<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+      </svg>
+      <span class="focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium text-1xl px-2.5 py-2.5 text-center ml-0">Login</span>-->
+      <button type="button" routerLink="/action/signup" class="text-white bg-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg dark:shadow-lg font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2">Signup</button>
+      <button type="button" routerLink="/action/login" class="text-white bg-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg dark:shadow-lg font-medium rounded-full text-sm px-5 py-2.5 text-center">Login</button>
+    </div>
+
+
+
+
+    <!--<div id="profile" *ngIf="(currentUser$ | async) as currentUser" >
+    <div (click)="isOpenDropdown = !isOpenDropdown" class="flex items-center gap-4 sm:gap-2" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
+      <img src="assets/images/avatar-1577909_1280.png" alt="profile_placeholder" class="w-10 h-10 rounded-full sm:w-8 sm:h-8">
+      <div class="font-medium text-black dark:text-white truncate sm:font-small">
+        <div class="truncate">{{currentUser.email}}</div>
+        <div class="text-sm truncate text-gray-500 dark:text-gray-400"> Joined on {{ currentUser.createdAt | customDate }}</div>
+      </div>
+    </div>
+    &lt;!&ndash; Dropdown menu &ndash;&gt;
+    <div *ngIf="isOpenDropdown" id="userDropdown"  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+      <div class="px-4 py-3 text-sm text-black dark:text-white">
+        <div >Bonnie Green</div>
+        <div class="font-medium truncate">aditya</div>
+      </div>
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cart</a>
+        </li>
+      </ul>
+      <div class="py-1">
+        <a (click)="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+      </div>
+    </div>
+  </div>-->
+
+
+
+
+    <div class="relative inline-block text-left sm:mt-3" *ngIf="(currentUser$ | async) as currentUser">
+      <div (click)="isOpenDropdown = !isOpenDropdown" class="flex items-center gap-4 sm:gap-2 cursor-pointer" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start">
+        <img src="assets/images/avatar-1577909_1280.png" alt="profile_placeholder" class="w-10 h-10 rounded-full sm:w-8 sm:h-8">
+        <div class="font-medium text-black dark:text-white truncate sm:font-small">
+          <div class="truncate">{{currentUser.email}}</div>
+          <div class="text-sm truncate text-gray-500 dark:text-gray-400"> Joined on {{ currentUser.createdAt | customDate }}</div>
+        </div>
+      </div>
+      <div *ngIf="isOpenDropdown" class="dropdown-menu absolute d-none right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+        <div class="py-1" role="none">
+          <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+          <a class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle mr-3" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+            Profile
+          </a>
+        </div>
+        <div class="py-1" role="none">
+          <a routerLink="/product/checkout" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-basket mr-3" viewBox="0 0 16 16">
+              <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5"/>
+            </svg>
+            My Cart
+          </a>
+          <a routerLink="/product/orders" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-seam mr-3" viewBox="0 0 16 16">
+              <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z"/>
+            </svg>
+            My Orders
+          </a>
+<!--          <a routerLink="/product/user-boxes" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-3">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-boxes mr-3" viewBox="0 0 16 16">-->
+<!--              <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434zM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567zM7.5 9.933l-2.75 1.571v3.134l2.75-1.571zm1 3.134 2.75 1.571v-3.134L8.5 9.933zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567zm2.242-2.433V3.504L8.5 5.076V8.21zM7.5 8.21V5.076L4.75 3.504v3.134zM5.258 2.643 8 4.21l2.742-1.567L8 1.076zM15 9.933l-2.75 1.571v3.134L15 13.067zM3.75 14.638v-3.134L1 9.933v3.134z"/>-->
+<!--            </svg>-->
+<!--            My Boxes-->
+<!--          </a>-->
+        </div>
+        <div class="py-1" role="none">
+          <a (click)="logout()" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right mr-3" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+            </svg>
+            LogOut
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<nav class="bg-lime-600 dark:bg-gray-700 sticky top-0">
+  <div class="max-w-screen-xl px-4 py-3 mx-auto">
+    <div class="flex items-center justify-center">
+      <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+        <li>
+          <a routerLink="/" class="text-white  cursor-pointer  dark:text-white hover:underline " aria-current="page">Home</a>
+        </li>
+        <li>
+          <a  class="text-white  cursor-pointer dark:text-white hover:underline ">About Us</a>
+        </li>
+        <li>
+          <a  class="text-white cursor-pointer  dark:text-white hover:underline ">Team</a>
+        </li>
+        <li>
+          <a routerLink="/choose/main"  class="text-white cursor-pointer  dark:text-white hover:underline ">Choose a Box</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</div>

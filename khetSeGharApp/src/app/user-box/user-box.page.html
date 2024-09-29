@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+  <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+    <ion-back-button defaultHref="" (click)="navCtrl.back()" slot="start" ></ion-back-button>
+    <ion-title> Box Details</ion-title>
+  </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <div class="bg"></div>
+  <div *ngIf="userBox.length > 0">
+    <div *ngFor="let box of userBox">
+  <ion-card >
+    <div class="image-container">
+      <img class="image-post" alt="Project Image" [src]="box.boxImg"/>
+    </div>
+    <p class="type mt-2 fw-bold ms-3 leading-7" > {{box.boxType}}</p>
+    <div>
+    <p class="font ms-3 "><span class="heading fw-bold">Box Size:</span> {{box.boxSize}}</p>
+    <p class="font ms-3"><span class="heading fw-bold">Weight:</span> {{box.weight}} {{box.unit}}</p>
+    <p class="font ms-3"><span class="heading fw-bold">Delivery Date:</span> {{box.deliveryDate}}</p>
+    <p class="font ms-3"><span class="heading fw-bold">Price:</span> &#8377; {{box.price}}</p>
+    </div>
+    <ng-container *ngIf="box.boxItem?.length > 0; else noItems">
+      <div class="button-container">
+        <button type="button" class="btn btn-primary" (click)="showItems(box.bId)">Show Box Items</button>
+      </div>
+    </ng-container>
+
+    <ng-template #noItems>
+      <ion-card class="item text-center fw-bold p-3 leading-7 "> There are no items in this box right now.</ion-card>
+    </ng-template>
+  </ion-card>
+
+
+  </div>
+  </div>
+
+</ion-content>

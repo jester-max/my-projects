@@ -1,0 +1,98 @@
+<body>
+<div class="login-root">
+  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
+            <h3 class="padding-bottom--15">Sign In as -</h3>
+            <div class="field">
+              <div class="form-check root-user" (click)="NevigateToRootUser()">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Root User
+                </label>
+              </div>
+              <div class="form-check user">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  IAM User
+                  <span>User within an account that performs daily tasks.</span>
+                </label>
+              </div>
+            </div>
+
+            <form id="stripe-login" #SignInUserInfo="ngForm" ngNativeValidate>
+              <div class="field padding-bottom--24">
+                <label for="accountName">Account Name</label>
+                <span>Used for account recovery and some administrative functions</span>
+                <input ngModel id="accountName" type="text" name="accountName" required>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="userName">Username</label>
+                <span>Used for account recovery and some administrative functions</span>
+                <input ngModel id="userName" type="text" name="userName" required>
+              </div>
+              <div class="field padding-bottom--24">
+                <label for="password">Password</label>
+                <span>Enter the password for your account.</span>
+                <div class="d-flex justify-content-end align-items-center">
+                  <input class="pe-sm-5" ngModel id="password" type="password" name="password">
+                  <span id="icon-password" class="position-absolute m-0 mx-3" (click)="showHidePassword()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                  </svg>
+                </span>
+                </div>
+              </div>
+              <div class="field padding-bottom--24">
+                <input type="submit" name="submit" value="Submit">
+              </div>
+
+              <div class="reset-pass">
+                <a><u>Forgot your password?</u></a>
+              </div>
+
+              <div class="grid--50-50">
+                <hr>
+                <a>or</a>
+                <hr>
+              </div>
+
+              <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+                <label>
+                  <a> By continuing, you agree to the Customer Agreement or other agreement for our services, and the Privacy Notice.</a>
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--        <div class="footer-link padding-top&#45;&#45;24">-->
+        <!--          <span>Don't have an account? <a href="">Sign up</a></span>-->
+        <!--          <div class="listing padding-top&#45;&#45;24 padding-bottom&#45;&#45;24 flex-flex center-center">-->
+        <!--            <span><a href="#">© Stackfindover</a></span>-->
+        <!--            <span><a href="#">Contact</a></span>-->
+        <!--            <span><a href="#">Privacy & terms</a></span>-->
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+  <div class="side-img">
+    <div class="field padding-bottom--24">
+      <input class="w-50 mb-3" type="submit" name="submit" value="Create a new Account" (click)="NevigateToSignUp()">
+      <img class="O1nZl" src="assets/undraw_secure_login_pdn4.svg" alt="Background" data-testid="right-side-asset">
+    </div>
+  </div>
+</div>
+<div class="field">
+  <a class="ssolink mt-1">
+    <select>
+      <option selected>English</option>
+      <option>Hindi</option>
+    </select>
+  </a>
+  <a class="ssolink mt-1"><u>Terms of Use Privacy Policy</u></a>
+</div>
+</body>

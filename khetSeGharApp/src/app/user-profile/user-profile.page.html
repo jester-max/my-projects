@@ -1,0 +1,109 @@
+<ion-header>
+<ion-toolbar>
+  <div class="p-1 d-flex gap-1 align-items-center justify-content-between">
+
+    <ion-back-button defaultHref="home-panel" slot="start" ></ion-back-button>
+    <ion-title>Profile</ion-title>
+
+  </div>
+</ion-toolbar>
+</ion-header>
+<ion-content >
+  <div class="bg"></div>
+  <div style="margin-left: 45%">
+    <div class="profile">
+      <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+      </svg>
+    </div>
+  </div>
+  <p class="mb-0 fw-bold ion-text-center"> {{userData?.firstName}} {{userData?.lastName}}</p>
+  <p class="mb-0 ion-text-center"> {{userData?.email}}</p>
+  <p class="ion-text-center "><ion-icon name="call-outline" *ngIf="userData"></ion-icon>{{ userData?.contact }}</p>
+
+
+  <ion-card size="12" size-lg="6" class="relative pl-custom-padding" class="card border-0 m-2 p-2" style="max-width: 540px;" routerLink="/orders">
+    <ion-item lines="none">
+      <ion-col size="auto" class="m-0 modal-head" >
+        <div class="fruit-img text-bg-dark border-0 shadow-none bg-primary">
+         <img src="assets/box_9499162.png">
+        </div>
+      </ion-col>
+      <ion-label class="ion-text-wrap">
+        <p class="ion-text-base ion-font-semibold leading-7 text-gray-900 ms-3 " style="font-weight: bold"> My Orders</p>
+        <p class="ms-3"> Order information</p>
+      </ion-label>
+      <ion-icon  slot="end" name="chevron-forward-sharp" routerLink="/orders" ></ion-icon>
+
+    </ion-item>
+
+  </ion-card>
+<!--  <ion-card size="12" size-lg="6" class="relative pl-custom-padding" class="card border-0 m-2 p-2" style="max-width: 540px;" >-->
+<!--    <ion-item lines="none">-->
+<!--      <ion-col size="auto" class="m-0 modal-head" >-->
+<!--        <div class="fruit-img text-bg-dark border-0 shadow-none bg-primary">-->
+<!--          <ion-icon name="logo-bitbucket" class="large-icon"></ion-icon>-->
+<!--        </div>-->
+<!--      </ion-col>-->
+<!--      <ion-label class="ion-text-wrap">-->
+<!--        <p class="ion-text-base ion-font-semibold leading-7 text-gray-900 ms-3 " style="font-weight: bold"> My Box</p>-->
+<!--        <p class="ms-3"> Box information</p>-->
+<!--      </ion-label>-->
+<!--      <ion-icon  slot="end" name="chevron-forward-sharp" routerLink="/user-box/:id" ></ion-icon>-->
+<!--    </ion-item>-->
+<!--  </ion-card>-->
+
+  <ion-card size="12" size-lg="6" class="relative pl-custom-padding" class="card border-0 m-2 p-2" style="max-width: 540px;" >
+    <ion-item lines="none">
+      <ion-col size="auto" class="m-0 modal-head" >
+        <div class="fruit-img text-bg-dark border-0 shadow-none bg-primary">
+          <img src="assets/address-location_11100707.png">
+        </div>
+      </ion-col>
+      <ion-label class="ion-text-wrap">
+        <p class="ion-text-base ion-font-semibold leading-7 text-gray-900 ms-3 " style="font-weight: bold"> Address</p>
+        <p class="ms-3"> Yor delivary location</p>
+      </ion-label>
+      <ion-icon  slot="end" name="chevron-forward-sharp" routerLink="/user-address-details"></ion-icon>
+
+    </ion-item>
+  </ion-card>
+  <ion-card size="12" size-lg="6" class="relative pl-custom-padding" class="card border-0 m-2 p-2" style="max-width: 540px;" >
+    <ion-item lines="none">
+      <ion-col size="auto" class="m-0 modal-head" >
+        <div class="fruit-img text-bg-dark border-0 shadow-none bg-primary">
+          <img src="assets/user-lock_11271977.png">
+        </div>
+      </ion-col>
+      <ion-label class="ion-text-wrap">
+        <p class="ion-text-base ion-font-semibold leading-7 text-gray-900 ms-3 " style="font-weight: bold">Privacy & Security</p>
+        <p class="ms-3">Your account Privacy</p>
+      </ion-label>
+      <ion-icon  slot="end" name="chevron-forward-sharp"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card size="12" size-lg="6" class="relative pl-custom-padding" class="card border-0 m-2 p-2" style="max-width: 540px;" >
+    <ion-item lines="none">
+      <ion-col size="auto" class="m-0 modal-head" >
+        <div class="fruit-img text-bg-dark border-0 shadow-none bg-primary">
+          <img src="assets/logout_12080365.png">
+        </div>
+      </ion-col>
+      <ion-label class="ion-text-wrap">
+        <p class="ion-text-base ion-font-semibold leading-7 text-gray-900 ms-3 " style="font-weight: bold">Logout</p>
+        <p class="ms-3"> Logout your account</p>
+      </ion-label>
+      <ion-icon  slot="end" name="chevron-forward-sharp" detail="false" id="logout-alert" (click)="closeDiv()" (mousedown)="presentAlert()">
+
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path fill="#a7da7d" d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"/></svg>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;  <ion-label>dfghj</ion-label>
+
+      </ion-icon>
+    </ion-item>
+  </ion-card>
+
+</ion-content>
